@@ -32,7 +32,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     link: link,
   });
 
-
+//Remember to add the s when merging
+const getAllPost = gql`
+  query {
+    getAllPost {
+      id
+      title
+      description
+    }
+  }`
+  
+client.query(
+  {query: getAllPost}
+).then((result) => console.log(result));
 
 function App() {
 
