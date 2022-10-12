@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+:root {
+    --secondary-color: #404040;
+    --third-color: #E0E0E1;
+    --header-size: 72px;
+    --white-secondary: #FAFAFA;
+    --text-color: #505050;
+    --blue-color: #523EE8;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.sideBar {
+    height: calc(100vh - var(--header-size));
+    width: fit-content;
+    position: relative;
+    border: 1px solid var(--third-color);
+}
+
+.sideBarHeader, .sideBarSubHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.closeIcon {
+    margin-right: 40px;
+}
+
+.sideBarHeader {
+    border-bottom: 1px solid var(--third-color);
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.sideBarHeader h3, .closeIcon {
+    font-size: 15px;
+}
+
+.sideBarHeader h3, .sideBarSubHeader h5 {
+    margin-left: 40px;
+}
+
+.sideBarSubHeader button {
+    background-color: var(--blue-color);
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+    border: none;
+    margin-right: 40px;
+}
+
+
+.sideBarCategoryCheckBox, .sideBarCategoryRange {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--third-color);
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 20px 0px;
+}
+
+.sideBarMain h5 {
+    color: var(--text-color);
+    font-size: 13px;
+}
+
+.sideBarCategoryChoiceCheckBox {
+    margin-top: 9px;
+}
+
+.sideBarCategoryChoiceCheckBox label {
+    margin-left: 9px;
+}
+
+.sideBarCategoryChoiceCheckBox input {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+.sideBarCategoryChoiceCheckBox input:checked ~ .checkmark {
+    background-color: var(--blue-color);
+  }
+
+.sideBarCategoryChoiceCheckBox span {
+    float: right;
+}
+
+
+.sideBarCategoryCheckBox h5 {
+    margin-bottom: 10px;
+}
+
+.sideBarCategoryRange {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sideBarCategoryRange input {
+    margin-top: 9px;
+    width: 100%;
+}
+
+.filterIcon {
+    font-size: 30px;
+    padding: 20px;
+}
+
+
+

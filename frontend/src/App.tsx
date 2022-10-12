@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Frontpage from './Components/Frontpage';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, HttpLink, from } from '@apollo/client';
 import {onError} from '@apollo/client/link/error';
 
@@ -32,14 +33,14 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   });
 
 
+
 function App() {
 
   return (
     <ApolloProvider client={client}>
-      <div>
-        <h1>My first Apollo app 🚀</h1>
-      </div>
+        <Frontpage />
     </ApolloProvider>
+
   );
 }
 
