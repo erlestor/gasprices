@@ -5,7 +5,7 @@ export const GET_ALL_POSTS = gql`
         getAllPosts {
             id
             title
-            content
+            description
         }
     }
 `;
