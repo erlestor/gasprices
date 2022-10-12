@@ -3,7 +3,10 @@
 :root {
     --secondary-color: #404040;
     --third-color: #E0E0E1;
+    --header-size: 72px;
     --white-secondary: #FAFAFA;
+    --text-color: #505050;
+    --blue-color: #523EE8;
 }
 
 * {
@@ -24,6 +27,42 @@
     margin-left: 40px;
 }
 
+.header h5 {
+    margin-right: 80px;
+    color: var(--blue-color);
+    cursor: pointer;
+}
+
+.linkNewElement {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.headerText,.headerLink {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.headerText {
+    margin-left: 40px;
+    font-size: 18px;
+}
+
+.headerLink {
+    margin-right: 80px;
+    color: red;
+    font-size: 15px;
+}
+
+.headerLink a:visited {
+    font-size: 40px;
+}
+@media only screen and (max-width: 800px) {
+
+    .header h5 {
+        margin-right: 4 0px;
+    }
+  }
 
 
 

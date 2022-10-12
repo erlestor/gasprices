@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+:root {
+    --secondary-color: #404040;
+    --third-color: #E0E0E1;
+    --header-size: 72px;
+    --white-secondary: #FAFAFA;
+    --text-color: #505050;
+    --blue-color: #523EE8;
+}
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 2px);
+    height: calc(100vh - 120px); 
+    margin-top: 50px;
+}
+
+.elementForm {
+    width: 600px;
+    height: 630px;
+}
+
+.elementForm form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+    margin-top: 20px;
+}
+
+.elementForm h3 {
+    font-size: 25px;
+    color: var(--text-color);
+}
+
+.formHeaderText {
+    width: 100%;
+    padding: 15px 0px;
+    border-bottom: 1px solid var(--third-color);
+}
+
+.elementForm form label,input,select,textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.elementForm input,select,textarea {
+    padding: 10px 0px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.elementForm input:focus,textarea:focus,select:focus {
+    outline: none !important;
+    border: 2px solid var(--blue-color);
+}
+
+.elementForm textarea {
+    height: 100px;
+}
+
+.submit {
+    margin-top: 20px;
+    background-color: var(--blue-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+} 
+
+.radioButton {
+    margin-top: 10px;
+}
+
+.radioLabel {
+    margin-left: 10px;
+    width: 95% !important;
+    font-size: 14px;
+    margin-top: 8.5px;
+}
+
+@media only screen and (max-width: 800px) {
+    .elementForm {
+        width: 400px;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    .elementForm {
+        width: 300px;
+    }
+  }

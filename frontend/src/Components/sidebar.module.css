@@ -116,6 +116,7 @@
 .filterIcon {
     font-size: 30px;
     padding: 20px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 700px) {
