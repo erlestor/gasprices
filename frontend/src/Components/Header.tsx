@@ -8,10 +8,6 @@ export default function Header() {
             <div>
                 <h3>Headername</h3>
             </div>
-            <div>
-                <input type="text" placeholder="Search..."></input>
-                <BsSearch className={styles.searchIcon}/>
-            </div>
         </div>
     );
 }

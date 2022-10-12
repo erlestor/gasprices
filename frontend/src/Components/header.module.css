@@ -13,6 +13,8 @@
 .header {
     display: flex;
     justify-content: space-between;
+    flex-basis: 300px;
+    width: 100%;
     align-items: center;
     height: 70px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
@@ -20,45 +22,6 @@
 
 .header h3 {
     margin-left: 40px;
-}
-
-.header input {
-    width: 280px;
-    height: 30px;
-    border-radius: 0px;
-    border: 1px solid var(--third-color)
-}
-
-.header input:focus {
-    outline: none;
-}
-
-.header input::placeholder {
-    padding: 0px 10px;
-}
-
-.searchIcon {
-    margin-right: 40px;
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 8.5px 8px;
-    vertical-align: middle;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-@media only screen and (max-width: 600px) {
-    .header input {
-        width: 180px;
-    }
-    
-    .header h3 {
-        margin-left: 10px;
-    }
-
-    .searchIcon {
-        margin-right: 10px;
-    }
 }
 
 

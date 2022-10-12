@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+}
+
+@media only screen and (max-width: 800px) {
+    .sidebar {
+        position: absolute;
+        z-index: 3;
+    }
+  }

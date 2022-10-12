@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from './maincontent.module.css'
-
+import { BsSearch } from "react-icons/bs";
 
 export default function MainContent() {
     return (
         <div className={styles.main}>
-            <h3>KDSOD</h3>
-            <p>HEI</p>
+            <div className ={styles.searchDiv}>
+                <input type="text" placeholder="Search..."></input>
+                <BsSearch className={styles.searchIcon}/>
+            </div>
         </div>
     );
 }

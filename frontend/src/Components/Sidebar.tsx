@@ -25,7 +25,12 @@ export default function SideBar({ collapsed }: SidebarProps) {
     }
 
   return (
-    <div className={styles.sideBar}>
+    <div className={styles.sideBar}
+        style={{
+            width: menuCollapse ? 'fit-content' : '280px',
+            minWidth: menuCollapse ? '0px' : '280px'
+        }}
+    >
     {menuCollapse 
      ? <BsFilterLeft className={styles.filterIcon} onClick={showMenu}/>
      : 
