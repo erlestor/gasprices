@@ -1,10 +1,17 @@
-type Post {
+type GasStation {
   id: ID!
-  title: String!
-  description: String
-  price: Int
+  name: String!
+  city: String!
+  latestPrice: GasPrice
+  prices: [GasPrice]
+}
+
+type GasPrice {
+  id: ID!
+  price: Float!
+  createdAt: Int!
 }
 
 type Query {
-  getAllPosts(maxPrice: Int): [Post]
+  gasStations(maxPrice: Int): [GasStation]
 }
