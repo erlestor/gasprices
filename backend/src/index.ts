@@ -1,64 +1,65 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { readFileSync } from "fs";
+import { GasPrice, GasStation, Resolvers } from "./generated/graphql";
 
-const Posts = [
+const testPosts: GasStation[] = [
   {
-    id: 1,
-    title: "Used car",
-    description: "I am selling my used car",
-  }, 
-  {
-    id: 2,
-    title: "Used bike",
-    description: "I am selling my used bike",
+    id: "1",
+    name: "Nardo Esso",
+    city: "Trondheim",
   },
   {
-    id: 3,
-    title: "Used scooter",
-    description: "I am selling my used scooter",
-  }
+    id: "2",
+    name: "Nardo Shell",
+    city: "Trondheim",
+  },
+  {
+    id: "3",
+    name: "Nardo Circle K",
+    city: "Trondheim",
+  },
 ];
 
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
-const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+const testPrices: {[key: string]: GasPrice[]} = {
+  "1": [
+    {
+      id: "1",
+      price: 12.5,
+      createdAt: new Date().getTime(),
+    },
+    {
+      id: "2",
+      price: 10.1,
+      createdAt: new Date().getTime(),
+    },
+  ],
+};
 
-  # This "Post" type defines the queryable fields for every Post in our data source.
-  type Post {
-    id: ID!
-    title: String!
-    description: String
-  }
-
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "Posts" query returns an array of zero or more Posts (defined above).
-  type Query {
-    getAllPost: [Post]
-  }
-`;
-
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
-    getAllPost: () => Posts,
+    gasStations: (_, args) => {
+      return testPosts;
+    },
+  },
+  GasStation: {
+    prices: (parent, args) => {
+      return testPrices[parent.id];
+    },
+    latestPrice: (parent, args) => {
+      return testPrices[parent.id][0];
+    }
   },
 };
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
+const typeDefs = readFileSync("./schema.graphql", { encoding: "utf-8" });
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 
-// Passing an ApolloServer instance to the `startStandaloneServer` function:
-//  1. creates an Express app
-//  2. installs your ApolloServer instance as middleware
-//  3. prepares your app to handle incoming requests
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
 });
 
-console.log(`🚀  Server ready at: ${url}`);
+console.log(`🚀 Server ready at: ${url}`);

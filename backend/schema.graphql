@@ -1,0 +1,17 @@
+type GasStation {
+  id: ID!
+  name: String!
+  city: String!
+  latestPrice: GasPrice
+  prices: [GasPrice]
+}
+
+type GasPrice {
+  id: ID!
+  price: Float!
+  createdAt: Int!
+}
+
+type Query {
+  gasStations(maxPrice: Int): [GasStation]
+}
