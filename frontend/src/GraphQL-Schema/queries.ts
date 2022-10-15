@@ -1,11 +1,24 @@
 import {gql} from '@apollo/client';
 
-export const GET_ALL_POSTS = gql`
+export const getGasStations = gql`
     query { 
-        getAllPosts {
+        gasStations {
             id
-            title
-            description
+            name
+            city
+            latestPrice
         }
     }
 `;
+
+export const getGasStation = gql`
+    query gasStation($id: ID!) {
+        gasStation(id: $id) {
+            id
+            name
+            city
+            latestPrice
+        }
+    }
+`;
+
