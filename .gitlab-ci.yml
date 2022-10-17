@@ -1,0 +1,11 @@
+image: node:latest
+
+stages:
+  - formating
+
+format-check:
+  stage: formating
+  script:
+    - cd frontend
+    - npm install
+    - npm run prettier-check
