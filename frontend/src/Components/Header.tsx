@@ -21,7 +21,7 @@ export default function Header() {
     return (
         <div className={styles.header}>
             <Link to="/" style={headernameLink}>Headername</Link>
-            <Link to="/newElement" style={newElemementLink}>Ny annonse</Link>
+            <Link to="/addItem" style={newElemementLink}>Ny annonse</Link>
         </div>
     );
 }

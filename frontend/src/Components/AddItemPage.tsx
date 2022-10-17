@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from './Header';
-import NewElementMain from './NewElementMain'
+import AddItem from './AddItem'
 
-export default function NewElement() {
+export default function AddItemPage() {
 
 
   return (
     <div>
       <Header />
-      <NewElementMain />
+      <AddItem />
     </div>
   );
 }

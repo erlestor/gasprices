@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
 :root {
     --secondary-color: #404040;
     --third-color: #E0E0E1;
@@ -10,7 +8,7 @@
 }
 
 * {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 .wrapper {

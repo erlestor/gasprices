@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './newelementmain.module.css'
+import styles from './additem.module.css'
 
 export default function NewElementMain() {
 
@@ -38,7 +38,7 @@ export default function NewElementMain() {
                     <input className={styles.radioButton} type="radio" id="used"
                     name="state" value="used"/>
                 </div>
-                <label className={styles.radioLabel} htmlFor="used">Brukt</label>
+                <label className={styles.radioLabel} htmlFor="used">Brukt</label>   
                 <label htmlFor='description'>Beskrivelse</label> 
                 <textarea id="description" name="description"></textarea>
                 <input className={styles.submit} type="submit" value="Submit"></input>
