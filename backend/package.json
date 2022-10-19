@@ -16,14 +16,16 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.0.0",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "mongodb": "^4.10.0",
+    "mongoose": "^6.6.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.6",
     "@graphql-codegen/typescript": "2.7.4",
+    "@graphql-codegen/typescript-mongodb": "2.4.4",
     "@graphql-codegen/typescript-resolvers": "2.7.4",
     "@types/node": "^18.8.4",
-    "typescript": "^4.8.4",
-    "@graphql-codegen/typescript-mongodb": "2.4.4"
+    "typescript": "^4.8.4"
   }
 }
