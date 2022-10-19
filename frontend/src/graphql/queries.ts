@@ -7,6 +7,7 @@ export const getGasStations = gql`
             name
             city
             latestPrice
+            prices
         }
     }
 `;
@@ -18,7 +19,10 @@ export const getGasStation = gql`
             name
             city
             latestPrice
+            prices
         }
     }
 `;
+
+
 

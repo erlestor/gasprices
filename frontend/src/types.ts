@@ -2,7 +2,7 @@
 export interface GasPrice {
     id: string;
     price: number;
-    createdAt: string;
+    createdAt?: string;
 }
 
 export interface GasStation {
