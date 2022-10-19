@@ -23,7 +23,7 @@ export const ADD_GAS_STATION = gql`
 `;
 
 export const CREATE_GAS_PRICE = gql`
-  mutation create_gas_price( $gasStation: ID!, $price: Float!) {
+  mutation create_gas_price($gasStation: ID!, $price: Float!) {
     createGasPrice(gasStation: $gasStation, price: $price) {
       id
     }
