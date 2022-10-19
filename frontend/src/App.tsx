@@ -1,26 +1,21 @@
 import React from "react";
-import logo from "./logo.svg";
+import ReactDOM from "react-dom/client";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Frontpage from "./Components/Frontpage";
+import AddItemPage from "./Components/AddItemPage";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Frontpage />} />
+        <Route path="/addItem" element={<AddItemPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
+//litt usikker på utropstegnet
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+root.render(<App />);
