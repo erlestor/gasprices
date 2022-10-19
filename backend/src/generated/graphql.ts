@@ -4,6 +4,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,7 +16,7 @@ export type Scalars = {
 
 export type GasPrice = {
   __typename?: 'GasPrice';
-  createdAt: Scalars['Int'];
+  createdAt?: Maybe<Scalars['Float']>;
   id: Scalars['ID'];
   price: Scalars['Float'];
 };
@@ -24,9 +25,27 @@ export type GasStation = {
   __typename?: 'GasStation';
   city: Scalars['String'];
   id: Scalars['ID'];
-  latestPrice?: Maybe<GasPrice>;
+  latestPrice?: Maybe<Scalars['Float']>;
   name: Scalars['String'];
   prices?: Maybe<Array<Maybe<GasPrice>>>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createGasPrice: GasPrice;
+  createGasStation: GasStation;
+};
+
+
+export type MutationCreateGasPriceArgs = {
+  gasStation: Scalars['ID'];
+  price: Scalars['Float'];
+};
+
+
+export type MutationCreateGasStationArgs = {
+  city: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Query = {
@@ -36,7 +55,10 @@ export type Query = {
 
 
 export type QueryGasStationsArgs = {
-  maxPrice?: InputMaybe<Scalars['Int']>;
+  city?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  maxPrice?: InputMaybe<Scalars['Float']>;
+  minPrice?: InputMaybe<Scalars['Float']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -115,6 +137,7 @@ export type ResolversTypes = ResolversObject<{
   GasStation: ResolverTypeWrapper<GasStation>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 }>;
@@ -127,12 +150,13 @@ export type ResolversParentTypes = ResolversObject<{
   GasStation: GasStation;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  Mutation: {};
   Query: {};
   String: Scalars['String'];
 }>;
 
 export type GasPriceResolvers<ContextType = any, ParentType extends ResolversParentTypes['GasPrice'] = ResolversParentTypes['GasPrice']> = ResolversObject<{
-  createdAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -141,10 +165,15 @@ export type GasPriceResolvers<ContextType = any, ParentType extends ResolversPar
 export type GasStationResolvers<ContextType = any, ParentType extends ResolversParentTypes['GasStation'] = ResolversParentTypes['GasStation']> = ResolversObject<{
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  latestPrice?: Resolver<Maybe<ResolversTypes['GasPrice']>, ParentType, ContextType>;
+  latestPrice?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   prices?: Resolver<Maybe<Array<Maybe<ResolversTypes['GasPrice']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createGasPrice?: Resolver<ResolversTypes['GasPrice'], ParentType, ContextType, RequireFields<MutationCreateGasPriceArgs, 'gasStation' | 'price'>>;
+  createGasStation?: Resolver<ResolversTypes['GasStation'], ParentType, ContextType, RequireFields<MutationCreateGasStationArgs, 'city' | 'name'>>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
@@ -154,6 +183,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 export type Resolvers<ContextType = any> = ResolversObject<{
   GasPrice?: GasPriceResolvers<ContextType>;
   GasStation?: GasStationResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 }>;
 
