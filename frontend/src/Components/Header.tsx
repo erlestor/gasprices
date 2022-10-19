@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './header.module.css';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styles from "./header.module.css";
+import { Link } from "react-router-dom";
 
 const headernameLink = {
   marginLeft: "40px",
