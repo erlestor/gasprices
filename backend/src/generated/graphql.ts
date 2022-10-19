@@ -25,6 +25,7 @@ export type GasStation = {
   __typename?: 'GasStation';
   city: Scalars['String'];
   id: Scalars['ID'];
+  latestPrice?: Maybe<Scalars['Float']>;
   name: Scalars['String'];
   prices?: Maybe<Array<Maybe<GasPrice>>>;
 };
@@ -54,7 +55,10 @@ export type Query = {
 
 
 export type QueryGasStationsArgs = {
-  maxPrice?: InputMaybe<Scalars['Int']>;
+  city?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  maxPrice?: InputMaybe<Scalars['Float']>;
+  minPrice?: InputMaybe<Scalars['Float']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -161,6 +165,7 @@ export type GasPriceResolvers<ContextType = any, ParentType extends ResolversPar
 export type GasStationResolvers<ContextType = any, ParentType extends ResolversParentTypes['GasStation'] = ResolversParentTypes['GasStation']> = ResolversObject<{
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  latestPrice?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   prices?: Resolver<Maybe<Array<Maybe<ResolversTypes['GasPrice']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
