@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npm run codegen && tsc",
+    "postinstall": "npm run compile",
+    "start": "npm run compile && node ./dist/index.js",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.0.0",
+    "graphql": "^16.6.0",
+    "mongodb": "^4.10.0",
+    "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.13.6",
+    "@graphql-codegen/typescript": "2.7.4",
+    "@graphql-codegen/typescript-mongodb": "2.4.4",
+    "@graphql-codegen/typescript-resolvers": "2.7.4",
+    "@types/node": "^18.8.4",
+    "typescript": "^4.8.4"
+  }
+}

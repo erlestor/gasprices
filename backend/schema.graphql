@@ -1,0 +1,22 @@
+type GasStation {
+  id: ID!
+  name: String!
+  city: String!
+  #latestPrice: GasPrice
+  prices: [GasPrice]
+}
+
+type GasPrice {
+  id: ID!
+  price: Float!
+  createdAt: Float
+}
+
+type Query {
+  gasStations(maxPrice: Int): [GasStation]
+}
+
+type Mutation {
+  createGasStation(name: String!, city: String!): GasStation!
+  createGasPrice(gasStation: ID!, price: Float!): GasPrice!
+}
