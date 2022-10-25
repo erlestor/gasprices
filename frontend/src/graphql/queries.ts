@@ -1,18 +1,18 @@
 import { gql } from "@apollo/client";
 
 export const GET_GAS_STATIONS = gql`
-query getGasStations {
+  query getGasStations {
     gasStations {
       id
       name
       city
-        prices {
-          id
-          price
-        }
+      prices {
+        id
+        price
+      }
     }
   }
-`;  
+`;
 
 export const getGasStation = gql`
   query gasStation($id: ID!) {
