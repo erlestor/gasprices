@@ -2,7 +2,6 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { readFileSync } from "fs";
 import mongoose from "mongoose";
-import { Resolvers } from "./generated/graphql";
 
 const GasStationModel = mongoose.model(
   "GasStation",
@@ -22,10 +21,10 @@ const GasPriceModel = mongoose.model(
   })
 );
 
-const resolvers: Resolvers = {
+const resolvers = {
   Query: {
     gasStations: async (_, args) => {
-      const { maxPrice, minPrice, city, limit, sortBy, nameSearch } = args as any;
+      const { maxPrice, minPrice, city, limit, sortBy, nameSearch } = args;
       const priceQuery = {
         ...(maxPrice && { $lte: maxPrice }),
         ...(minPrice && { $gte: minPrice }),
@@ -52,10 +51,11 @@ const resolvers: Resolvers = {
     },
     createGasPrice: async (_, args) => {
       const { gasStation } = args;
+      // TODO: make it a transaction
       const gasPrice = new GasPriceModel(args);
-      const savedGasPrice = await gasPrice.save();
+      await gasPrice.save();
       // update latest price on GasStation
-      await GasStationModel.updateOne(
+      return GasStationModel.updateOne(
         {
           _id: gasStation,
         },
@@ -63,7 +63,6 @@ const resolvers: Resolvers = {
           latestPrice: gasPrice.price,
         }
       );
-      return savedGasPrice as any;
     },
   },
 };
