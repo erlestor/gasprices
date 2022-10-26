@@ -45,7 +45,7 @@
 .mainContent {
   display: grid;
   margin: 0 50px;
-  grid-template-columns: repeat( auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   justify-items: stretch;
   gap: 1rem;
 }
@@ -136,7 +136,7 @@
 }
 @media only screen and (max-width: 550px) {
   .mainContent {
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   .cardPrice {
