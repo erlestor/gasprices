@@ -1,59 +1,42 @@
-import React, { useEffect, useState } from "react";
+import { useReactiveVar } from "@apollo/client";
+import React, { useState } from "react";
+import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
+import { filterStateVar, resetFilterState } from "../../state/filterState";
 import styles from "./sidebar.module.css";
-import { BsFilterLeft } from "react-icons/bs";
-import { BsCaretLeftFill } from "react-icons/bs";
 
-type SidebarProps = {
-  collapsed: boolean;
-  priceSliderValue: number;
-  setPriceSliderValue: (val: number) => void;
-  cities: string[];
-  setCities: (cities: string[]) => void;
-};
-
-export default function SideBar({
-  collapsed,
-  priceSliderValue,
-  setPriceSliderValue,
-  cities,
-  setCities,
-}: SidebarProps) {
+export default function SideBar({ collapsed }: { collapsed: boolean }) {
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
-
-  useEffect(() => {
-    console.log(cities);
-  }, [cities]);
+  const filterState = useReactiveVar(filterStateVar);
 
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setPriceSliderValue(event.target.valueAsNumber);
+    filterStateVar({
+      ...filterStateVar(),
+      maxPrice: parseInt(event.target.value),
+    });
   };
-
-  function closeMenu() {
-    setMenuCollapse(true);
-  }
-
-  function showMenu() {
-    setMenuCollapse(false);
-  }
 
   const handleCityChange = (e: any) => {
     const checked = e.target.checked;
     const city = e.target.name;
 
     if (checked) {
-      setCities([...cities, city]);
+      filterStateVar({
+        ...filterStateVar(),
+        cities: [...filterStateVar().cities, city],
+      });
       return;
     }
 
-    const newCities = cities.filter((c) => c !== city);
-    setCities(newCities);
+    filterStateVar({
+      ...filterStateVar(),
+      cities: filterStateVar().cities.filter((c) => c !== city),
+    });
   };
 
   const clearFilter = () => {
-    setCities([]);
-    setPriceSliderValue(25);
+    resetFilterState();
   };
 
   return (
@@ -65,10 +48,16 @@ export default function SideBar({
       }}
     >
       {menuCollapse ? (
-        <BsFilterLeft className={styles.filterIcon} onClick={showMenu} />
+        <BsFilterLeft
+          className={styles.filterIcon}
+          onClick={() => setMenuCollapse(false)}
+        />
       ) : (
         <div className={styles.sideBarWrapper}>
-          <div onClick={closeMenu} className={styles.sideBarHeader}>
+          <div
+            onClick={() => setMenuCollapse(true)}
+            className={styles.sideBarHeader}
+          >
             <h3>Filters</h3>
             <BsCaretLeftFill className={styles.closeIcon} />
           </div>
@@ -79,66 +68,45 @@ export default function SideBar({
           <div className={styles.sideBarMain}>
             <div className={styles.sideBarCategoryCheckBox}>
               <h5>By</h5>
-              <div className={styles.sideBarCategoryChoiceCheckBox}>
-                <input
-                  type="checkbox"
-                  id="Oslo"
-                  name="Oslo"
-                  onChange={handleCityChange}
-                />
-                <label htmlFor="Oslo">Oslo</label>
-                <span>1502</span>
-              </div>
-              <div className={styles.sideBarCategoryChoiceCheckBox}>
-                <input
-                  type="checkbox"
-                  id="Trondheim"
-                  name="Trondheim"
-                  onChange={handleCityChange}
-                />
-                <label htmlFor="Trondheim">Trondheim</label>
-                <span>301</span>
-              </div>
-              <div className={styles.sideBarCategoryChoiceCheckBox}>
-                <input
-                  type="checkbox"
-                  id="test"
-                  name="test"
-                  onChange={handleCityChange}
-                />
-                <label htmlFor="test">Test</label>
-                <span>152</span>
-              </div>
+
+              {cities.map((city) => (
+                <div key={city} className={styles.sideBarCategoryChoiceCheckBox}>
+                  <input
+                    type="checkbox"
+                    name={city}
+                    checked={filterState.cities.includes(city)}
+                    onChange={handleCityChange}
+                  />
+                  <label htmlFor={city}>{city}</label>
+                </div>
+              ))}
             </div>
             <div className={styles.sideBarCategoryRange}>
               <h5>Maks pris</h5>
-              <span>{priceSliderValue} kr</span>
+              <span>{filterState.maxPrice} kr</span>
               <input
                 type="range"
                 id="price"
                 name="price"
                 min="0"
                 max="100"
-                value={priceSliderValue}
+                value={filterState.maxPrice}
                 onChange={handlePriceSliderChange}
               />
             </div>
-            {/* <div className={styles.sideBarCategoryCheckBox}>
-              <h5>Kjøp eller leie</h5>
-              <div className={styles.sideBarCategoryChoiceCheckBox}>
-                <input type="checkbox" id="kjope" name="kjope" />
-                <label htmlFor="kjope">Kjøpe</label>
-                <span>52</span>
-              </div>
-              <div className={styles.sideBarCategoryChoiceCheckBox}>
-                <input type="checkbox" id="leie" name="leie" />
-                <label htmlFor="leie">Leie</label>
-                <span>15</span>
-              </div>
-            </div> */}
           </div>
         </div>
       )}
     </div>
   );
 }
+
+// TODO: fetch cities from backend
+const cities = [
+  "Oslo",
+  "Trondheim",
+  "Bergen",
+  "Stavanger",
+  "Kristiansand",
+  "Tromsø",
+];

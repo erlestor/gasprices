@@ -8,10 +8,6 @@ export default function Frontpage() {
   const mql = window.matchMedia("(max-width: 1150px)");
   const [viewMatch, setViewMatch] = useState(mql.matches);
 
-  // probably cleaner to use context
-  const [priceSliderValue, setPriceSliderValue] = useState(25);
-  const [cities, setCities] = useState<string[]>([]);
-
   useEffect(() => {
     function handleResize() {
       setViewMatch(mql.matches);
@@ -27,13 +23,9 @@ export default function Frontpage() {
         <div className={styles.sidebar}>
           <Sidebar
             collapsed={viewMatch}
-            priceSliderValue={priceSliderValue}
-            setPriceSliderValue={setPriceSliderValue}
-            cities={cities}
-            setCities={setCities}
           />
         </div>
-        <MainContent cities={cities} priceSliderValue={priceSliderValue} />
+        <MainContent />
       </div>
     </>
   );
