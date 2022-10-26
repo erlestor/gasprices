@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import styles from "./maincontent.module.css"
-import { BsSearch } from "react-icons/bs"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { useQuery, useReactiveVar } from "@apollo/client"
 import GasStationC from "../gasStation/GasStation"
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql"
 import { GasStation, GetGasStationsData } from "../../graphql/types"
-import { debounce } from "../../service/debounce"
 import { filterStateVar } from "../../state/filterState"
 import { SearchInputEl } from "./searchInputEl"
 
@@ -29,7 +27,7 @@ export default function MainContent() {
 
   useEffect(() => {
     refetch()
-  }, [filterState])
+  }, [filterState, refetch])
 
   function loadMoreData() {
     fetchMore({
