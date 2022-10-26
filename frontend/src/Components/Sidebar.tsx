@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./sidebar.module.css";
 import { BsFilterLeft } from "react-icons/bs";
 import { BsCaretLeftFill } from "react-icons/bs";
@@ -10,6 +10,7 @@ type SidebarProps = {
 export default function SideBar({ collapsed }: SidebarProps) {
   const [priceSliderValue, setPriceSliderValue] = useState(400);
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -25,12 +26,32 @@ export default function SideBar({ collapsed }: SidebarProps) {
     setMenuCollapse(false);
   }
 
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+
+  function calcHeaderOffset() {
+    if(scrollPosition > 70) {
+      return "0px";
+    }
+    else {
+      const pos = 70-scrollPosition;
+      return pos + "px";
+    }
+  }
+
   return (
     <div
       className={styles.sideBar}
       style={{
         width: menuCollapse ? "fit-content" : "280px",
         minWidth: menuCollapse ? "0px" : "280px",
+        top: calcHeaderOffset()
       }}
     >
       {menuCollapse ? (
