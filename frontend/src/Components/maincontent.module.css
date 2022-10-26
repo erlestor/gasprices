@@ -1,7 +1,8 @@
 .main {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  width: calc(100% - 40px);
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .searchDiv {
@@ -30,6 +31,10 @@
   vertical-align: middle;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
+}
+
+.gasStationEl {
+  display: block;
 }
 
 @media only screen and (max-width: 1000px) {

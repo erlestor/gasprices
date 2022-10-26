@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./additem.module.css";
-import { CREATE_GAS_PRICE } from "../graphql/mutations";
 import { useMutation } from "@apollo/client";
+import { CREATE_GAS_PRICE } from "../graphql/mutations.graphql";
 
 export default function AddItem() {
   const [price, setPrice] = React.useState<number | null>(null);
