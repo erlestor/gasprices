@@ -39,7 +39,7 @@ const client = new ApolloClient({
         fields: {
           gasStations: {
             keyArgs: false,
-            merge(existing: [], incoming: [], { args: { skip = 0 }}: any) {
+            merge(existing: [], incoming: [], { args: { skip = 0 } }: any) {
               // Slicing is necessary because the existing data is
               // immutable, and frozen in development.
               const merged = existing ? existing.slice(0) : [];
