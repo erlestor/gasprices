@@ -116,8 +116,8 @@
 }
 
 .filterIcon {
-  font-size: 30px;
-  padding: 20px;
+  font-size: 25px;
+  padding: 15px;
   cursor: pointer;
 }
 
@@ -132,3 +132,11 @@
     z-index: 10;
   }
 }
+
+@media only screen and (max-width: 550px) {
+  .filterIcon {
+    font-size: 20px;
+    padding: 10px;
+  }
+}
+
