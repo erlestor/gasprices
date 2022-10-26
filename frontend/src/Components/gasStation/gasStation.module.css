@@ -1,0 +1,9 @@
+.stationCard {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 400px;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  color: #303030;
+  font-weight: normal;
+}
