@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Frontpage from "./Components/Frontpage";
+import Frontpage from "./Components/frontpage/Frontpage";
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,7 +10,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddItemPage from "./Components/AddItemPage";
+import AddItemPage from "./Components/addItem/AddItemPage";
 
 //Error handling from the Apollo docs: Advanced Error Handling
 //https://www.apollographql.com/docs/react/data/error-handling/

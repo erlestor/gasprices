@@ -1,0 +1,14 @@
+.searchDiv {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.searchIcon {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 7px 8px;
+  vertical-align: middle;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}

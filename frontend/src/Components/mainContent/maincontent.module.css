@@ -1,14 +1,8 @@
 .main {
-  width: calc(100% - 40px);
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.searchDiv {
-  margin-top: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .main input {
@@ -22,15 +16,6 @@
 
 .main input:focus {
   outline: none;
-}
-
-.searchIcon {
-  background-color: var(--secondary-color);
-  color: white;
-  padding: 7px 8px;
-  vertical-align: middle;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
 }
 
 .gasStationEl {
@@ -53,4 +38,15 @@
   .main input {
     width: 200px;
   }
+}
+
+.stationsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loadingIcon {
+  width: 30px;
+  height: 30px;
 }
