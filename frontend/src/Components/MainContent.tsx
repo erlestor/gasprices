@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { GET_GAS_STATIONS } from "../graphql/queries.graphql";
-import { GasStation, GetGasStationsData } from "../graphql/types";
+import { GetGasStationsData } from "../graphql/types";
 import styles from "./maincontent.module.css";
 
 export default function MainContent() {
