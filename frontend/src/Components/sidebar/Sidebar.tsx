@@ -1,43 +1,48 @@
-import { useReactiveVar } from "@apollo/client";
-import React, { useState } from "react";
-import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
-import { filterStateVar, resetFilterState } from "../../state/filterState";
-import styles from "./sidebar.module.css";
+import { useReactiveVar } from "@apollo/client"
+import React, { useState } from "react"
+import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs"
+import { filterStateVar, resetFilterState } from "../../state/filterState"
+import { debounce } from "../../service/debounce"
+import styles from "./sidebar.module.css"
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
-  const [menuCollapse, setMenuCollapse] = useState(collapsed);
-  const filterState = useReactiveVar(filterStateVar);
+  const [menuCollapse, setMenuCollapse] = useState(collapsed)
+  const [sliderVal, setSliderVal] = useState<number | undefined>(undefined)
+  const filterState = useReactiveVar(filterStateVar)
 
-  const handlePriceSliderChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const updateDebouncePrice = debounce((price: number) => {
     filterStateVar({
       ...filterStateVar(),
-      maxPrice: parseInt(event.target.value),
-    });
-  };
+      maxPrice: price,
+    })
+  }, 1000)
+
+  const handlePriceSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderVal(parseInt(event.target.value))
+    updateDebouncePrice(parseInt(event.target.value))
+  }
 
   const handleCityChange = (e: any) => {
-    const checked = e.target.checked;
-    const city = e.target.name;
+    const checked = e.target.checked
+    const city = e.target.name
 
     if (checked) {
       filterStateVar({
         ...filterStateVar(),
         cities: [...filterStateVar().cities, city],
-      });
-      return;
+      })
+      return
     }
 
     filterStateVar({
       ...filterStateVar(),
-      cities: filterStateVar().cities.filter((c) => c !== city),
-    });
-  };
+      cities: filterStateVar().cities.filter(c => c !== city),
+    })
+  }
 
   const clearFilter = () => {
-    resetFilterState();
-  };
+    resetFilterState()
+  }
 
   return (
     <div
@@ -48,16 +53,10 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
       }}
     >
       {menuCollapse ? (
-        <BsFilterLeft
-          className={styles.filterIcon}
-          onClick={() => setMenuCollapse(false)}
-        />
+        <BsFilterLeft className={styles.filterIcon} onClick={() => setMenuCollapse(false)} />
       ) : (
         <div className={styles.sideBarWrapper}>
-          <div
-            onClick={() => setMenuCollapse(true)}
-            className={styles.sideBarHeader}
-          >
+          <div onClick={() => setMenuCollapse(true)} className={styles.sideBarHeader}>
             <h3>Filters</h3>
             <BsCaretLeftFill className={styles.closeIcon} />
           </div>
@@ -69,11 +68,8 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
             <div className={styles.sideBarCategoryCheckBox}>
               <h5>By</h5>
 
-              {cities.map((city) => (
-                <div
-                  key={city}
-                  className={styles.sideBarCategoryChoiceCheckBox}
-                >
+              {cities.map(city => (
+                <div key={city} className={styles.sideBarCategoryChoiceCheckBox}>
                   <input
                     type="checkbox"
                     name={city}
@@ -86,14 +82,14 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
             </div>
             <div className={styles.sideBarCategoryRange}>
               <h5>Maks pris</h5>
-              <span>{filterState.maxPrice} kr</span>
+              <span>{sliderVal} kr</span>
               <input
                 type="range"
                 id="price"
                 name="price"
                 min="0"
                 max="100"
-                value={filterState.maxPrice}
+                value={sliderVal}
                 onChange={handlePriceSliderChange}
               />
             </div>
@@ -101,15 +97,8 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 // TODO: fetch cities from backend
-const cities = [
-  "Oslo",
-  "Trondheim",
-  "Bergen",
-  "Stavanger",
-  "Kristiansand",
-  "Tromsø",
-];
+const cities = ["Oslo", "Trondheim", "Bergen", "Stavanger", "Kristiansand", "Tromsø"]
