@@ -8,4 +8,4 @@ format-check:
   script:
     - cd frontend
     - npm install
-    - npm run prettier-check
+    - npm run prettier:check

@@ -2,29 +2,12 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { readFileSync } from "fs";
 import mongoose from "mongoose";
-
-const GasStationModel = mongoose.model(
-  "GasStation",
-  new mongoose.Schema({
-    name: { type: String, required: true },
-    city: { type: String, required: true },
-    latestPrice: { type: Number, required: true },
-  })
-);
-
-const GasPriceModel = mongoose.model(
-  "GasPrice",
-  new mongoose.Schema({
-    gasStation: { type: mongoose.Schema.Types.ObjectId, ref: "GasStation" },
-    price: { type: Number, required: true },
-    createdAt: { type: Date, default: Date.now },
-  })
-);
+import { GasStationModel, GasPriceModel } from "./dbService";
 
 const resolvers = {
   Query: {
     gasStations: async (_, args) => {
-      const { maxPrice, minPrice, city, limit, sortBy, nameSearch } = args;
+      const { maxPrice, minPrice, city, limit, sortBy, nameSearch, skip } = args;
       const priceQuery = {
         ...(maxPrice && { $lte: maxPrice }),
         ...(minPrice && { $gte: minPrice }),
@@ -36,6 +19,7 @@ const resolvers = {
       };
       return GasStationModel.find(query)
         .sort({ [sortBy]: "asc" })
+        .skip(skip)
         .limit(limit) as any;
     },
   },
@@ -73,11 +57,15 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const connectionString = "mongodb://admin:admin@it2810-41.idi.ntnu.no:27017/";
-await mongoose.connect(connectionString);
+async function startServer() {
+  const connectionString = "mongodb://admin:admin@it2810-41.idi.ntnu.no:27017/";
+  await mongoose.connect(connectionString);
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-});
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+  });
 
-console.log(`🚀 Server ready at: ${url}`);
+  console.log(`🚀 Server ready at: ${url}`);
+}
+
+startServer();

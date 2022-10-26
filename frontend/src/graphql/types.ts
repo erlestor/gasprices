@@ -8,6 +8,10 @@ export interface GasStation {
   id: string;
   name: string;
   city: string;
-  latestPrice?: GasPrice;
+  latestPrice?: number;
   prices?: GasPrice[];
+}
+
+export interface GetGasStationsData {
+  gasStations: GasStation[];
 }
