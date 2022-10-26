@@ -2,13 +2,13 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { readFileSync } from "fs";
 import mongoose from "mongoose";
-import { Resolvers } from "./generated/graphql";
 
 const GasStationModel = mongoose.model(
   "GasStation",
   new mongoose.Schema({
     name: { type: String, required: true },
     city: { type: String, required: true },
+    latestPrice: { type: Number, required: true },
   })
 );
 
@@ -21,21 +21,28 @@ const GasPriceModel = mongoose.model(
   })
 );
 
-const resolvers: Resolvers = {
+const resolvers = {
   Query: {
     gasStations: async (_, args) => {
-      return GasStationModel.find() as any;
+      const { maxPrice, minPrice, city, limit, sortBy, nameSearch } = args;
+      const priceQuery = {
+        ...(maxPrice && { $lte: maxPrice }),
+        ...(minPrice && { $gte: minPrice }),
+      };
+      const query = {
+        ...(city && { city }),
+        ...(Object.keys(priceQuery).length && { latestPrice: priceQuery }),
+        ...(nameSearch && { name: { $regex: nameSearch, $options: "i" } }),
+      };
+      return GasStationModel.find(query)
+        .sort({ [sortBy]: "asc" })
+        .limit(limit) as any;
     },
   },
   GasStation: {
     prices: async (parent, args) => {
       return GasPriceModel.find({ gasStation: parent.id }) as any;
     },
-    // latestPrice: (parent, args) => {
-    //   return GasPriceModel.findOne({ gasStation: parent.id }).sort({
-    //     createdAt: -1,
-    //   }) as any;
-    // },
   },
   Mutation: {
     createGasStation: async (_, args) => {
@@ -43,8 +50,19 @@ const resolvers: Resolvers = {
       return gasStation.save() as any;
     },
     createGasPrice: async (_, args) => {
+      const { gasStation } = args;
+      // TODO: make it a transaction
       const gasPrice = new GasPriceModel(args);
-      return gasPrice.save() as any;
+      await gasPrice.save();
+      // update latest price on GasStation
+      return GasStationModel.updateOne(
+        {
+          _id: gasStation,
+        },
+        {
+          latestPrice: gasPrice.price,
+        }
+      );
     },
   },
 };
