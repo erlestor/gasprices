@@ -1,7 +1,8 @@
 .main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   width: 100%;
+  margin-top: 20px;
 }
 
 .searchDiv {
@@ -48,4 +49,10 @@
   .main input {
     width: 200px;
   }
+}
+
+.stationsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
