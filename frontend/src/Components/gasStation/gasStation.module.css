@@ -7,7 +7,20 @@
   color: #303030;
 }
 
-.stationCard h2 {
+.stationCardHeader {
   font-weight: normal;
   margin-bottom: 10px;
+}
+
+.pumpIcon {
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.fuelContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
 }
