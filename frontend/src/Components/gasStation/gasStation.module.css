@@ -1,5 +1,5 @@
 .stationCard {
-  border: 1px solid black;
+  border: 2px solid grey;
   border-radius: 10px;
   width: 400px;
   margin: 10px 0 10px 0;
@@ -9,4 +9,5 @@
 
 .stationCard h2 {
   font-weight: normal;
+  margin-bottom: 10px;
 }
