@@ -2,7 +2,7 @@ type GasStation {
   id: ID!
   name: String!
   city: String!
-  #latestPrice: GasPrice
+  latestPrice: Float
   prices: [GasPrice]
 }
 
@@ -13,7 +13,7 @@ type GasPrice {
 }
 
 type Query {
-  gasStations(maxPrice: Int): [GasStation]
+  gasStations(maxPrice: Float, minPrice: Float, city: String, limit: Int, skip: Int, sortBy: String, nameSearch: String): [GasStation]
 }
 
 type Mutation {

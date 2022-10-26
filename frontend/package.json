@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.7.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@testing-library/jest-dom": "^5.16.5",
@@ -25,8 +26,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier-check": "prettier --check \"src/**/*.{tsx,ts,css}\"",
-    "prettier-write": "prettier --write \"src/**/*.{tsx,ts,css}\""
+    "prettier:check": "prettier --check \"src/**/*.{tsx,ts,css}\"",
+    "prettier:write": "prettier --write \"src/**/*.{tsx,ts,css}\"",
+    "gen:types": "npx apollo client:codegen --target typescript --inludes **/*.graphql.ts --excludes **/__generated__/**"
   },
   "eslintConfig": {
     "extends": [
