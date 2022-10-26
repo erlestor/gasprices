@@ -15,7 +15,7 @@ function getDefaultFilterState(): FilterOptions {
 }
 
 export function resetFilterState() {
-    filterStateVar(getDefaultFilterState());
+  filterStateVar(getDefaultFilterState());
 }
 
 export const filterStateVar = makeVar<FilterOptions>(getDefaultFilterState());

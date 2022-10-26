@@ -4,12 +4,11 @@ import { debounce } from "./debounce";
 import styles from "./searchInputEl.module.css";
 
 export function SearchInputEl() {
-
   const updateDebounceText = debounce((text: string) => {
     filterStateVar({
-        ...filterStateVar(),
-        nameSearch: text,
-    })
+      ...filterStateVar(),
+      nameSearch: text,
+    });
   }, 300);
 
   const handleSearchElChange = (e: any) => {

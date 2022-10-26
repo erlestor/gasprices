@@ -21,9 +21,7 @@ export default function Frontpage() {
       <Header />
       <div className={styles.wrapper}>
         <div className={styles.sidebar}>
-          <Sidebar
-            collapsed={viewMatch}
-          />
+          <Sidebar collapsed={viewMatch} />
         </div>
         <MainContent />
       </div>

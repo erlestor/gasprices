@@ -70,7 +70,10 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
               <h5>By</h5>
 
               {cities.map((city) => (
-                <div key={city} className={styles.sideBarCategoryChoiceCheckBox}>
+                <div
+                  key={city}
+                  className={styles.sideBarCategoryChoiceCheckBox}
+                >
                   <input
                     type="checkbox"
                     name={city}

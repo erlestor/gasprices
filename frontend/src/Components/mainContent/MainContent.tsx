@@ -11,13 +11,11 @@ import { filterStateVar } from "../../state/filterState";
 import { SearchInputEl } from "./searchInputEl";
 
 export default function MainContent() {
-
   const filterState = useReactiveVar(filterStateVar);
   console.log(filterState);
 
-  const { error, loading, data, fetchMore, refetch } = useQuery<GetGasStationsData>(
-    GET_GAS_STATIONS,
-    {
+  const { error, loading, data, fetchMore, refetch } =
+    useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
         city: filterState.cities[0],
         maxPrice: filterState.maxPrice,
@@ -25,8 +23,7 @@ export default function MainContent() {
         limit: 12,
         sortBy: "latestPrice",
       },
-    }
-  );
+    });
 
   useEffect(() => {
     refetch();
@@ -46,7 +43,7 @@ export default function MainContent() {
 
   return (
     <div className={styles.main}>
-      <SearchInputEl/>
+      <SearchInputEl />
       <div className={styles.stationsContainer}>
         {loading ? (
           <AiOutlineLoading3Quarters className={styles.loadingIcon} />
