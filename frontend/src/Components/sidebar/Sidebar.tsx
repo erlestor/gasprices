@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react"
-import styles from "./sidebar.module.css"
-import { BsFilterLeft } from "react-icons/bs"
-import { BsCaretLeftFill } from "react-icons/bs"
+import React, { useEffect, useState } from "react";
+import styles from "./sidebar.module.css";
+import { BsFilterLeft } from "react-icons/bs";
+import { BsCaretLeftFill } from "react-icons/bs";
 
 type SidebarProps = {
-  collapsed: boolean
-  priceSliderValue: number
-  setPriceSliderValue: (val: number) => void
-  cities: string[]
-  setCities: (cities: string[]) => void
-}
+  collapsed: boolean;
+  priceSliderValue: number;
+  setPriceSliderValue: (val: number) => void;
+  cities: string[];
+  setCities: (cities: string[]) => void;
+};
 
 export default function SideBar({
   collapsed,
@@ -18,43 +18,43 @@ export default function SideBar({
   cities,
   setCities,
 }: SidebarProps) {
-  const [menuCollapse, setMenuCollapse] = useState(collapsed)
+  const [menuCollapse, setMenuCollapse] = useState(collapsed);
 
   useEffect(() => {
-    console.log(cities)
-  }, [cities])
+    console.log(cities);
+  }, [cities]);
 
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setPriceSliderValue(event.target.valueAsNumber)
-  }
+    setPriceSliderValue(event.target.valueAsNumber);
+  };
 
   function closeMenu() {
-    setMenuCollapse(true)
+    setMenuCollapse(true);
   }
 
   function showMenu() {
-    setMenuCollapse(false)
+    setMenuCollapse(false);
   }
 
   const handleCityChange = (e: any) => {
-    const checked = e.target.checked
-    const city = e.target.name
+    const checked = e.target.checked;
+    const city = e.target.name;
 
     if (checked) {
-      setCities([...cities, city])
-      return
+      setCities([...cities, city]);
+      return;
     }
 
-    const newCities = cities.filter((c) => c !== city)
-    setCities(newCities)
-  }
+    const newCities = cities.filter((c) => c !== city);
+    setCities(newCities);
+  };
 
   const clearFilter = () => {
-    setCities([])
-    setPriceSliderValue(25)
-  }
+    setCities([]);
+    setPriceSliderValue(25);
+  };
 
   return (
     <div
@@ -140,5 +140,5 @@ export default function SideBar({
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -1,20 +1,20 @@
-import { useState } from "react"
-import styles from "./maincontent.module.css"
-import { BsSearch } from "react-icons/bs"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import { useQuery } from "@apollo/client"
-import { GET_GAS_STATIONS } from "../../graphql/queries"
-import { GasStation } from "../../types"
-import GasStationC from "../gasStation/GasStation"
+import { useState } from "react";
+import styles from "./maincontent.module.css";
+import { BsSearch } from "react-icons/bs";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useQuery } from "@apollo/client";
+import GasStationC from "../gasStation/GasStation";
+import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
+import { GasStation } from "../../graphql/types";
 
 type Props = {
-  cities: string[]
-  priceSliderValue: number
-}
+  cities: string[];
+  priceSliderValue: number;
+};
 
 export default function MainContent({ cities, priceSliderValue }: Props) {
-  const [searchText, setSearchText] = useState("")
-  const [debounceText, setDebounceText] = useState("")
+  const [searchText, setSearchText] = useState("");
+  const [debounceText, setDebounceText] = useState("");
 
   const { error, loading, data } = useQuery(GET_GAS_STATIONS, {
     variables: {
@@ -24,27 +24,27 @@ export default function MainContent({ cities, priceSliderValue }: Props) {
       limit: 100,
       sortBy: "name",
     },
-  })
+  });
 
   const debounce = (cb: any, delay = 1000) => {
-    let timeout: NodeJS.Timeout
+    let timeout: NodeJS.Timeout;
 
     return (...args: any) => {
-      clearTimeout(timeout)
+      clearTimeout(timeout);
       timeout = setTimeout(() => {
-        cb(...args)
-      }, delay)
-    }
-  }
+        cb(...args);
+      }, delay);
+    };
+  };
 
   const updateDebounceText = debounce((text: string) => {
-    setDebounceText(text)
-  }, 500)
+    setDebounceText(text);
+  }, 500);
 
   const handleSearchChange = (e: any) => {
-    setSearchText(e.target.value)
-    updateDebounceText(e.target.value)
-  }
+    setSearchText(e.target.value);
+    updateDebounceText(e.target.value);
+  };
 
   return (
     <div className={styles.main}>
@@ -71,5 +71,5 @@ export default function MainContent({ cities, priceSliderValue }: Props) {
         )}
       </div>
     </div>
-  )
+  );
 }

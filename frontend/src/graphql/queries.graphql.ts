@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 export const GET_GAS_STATIONS = gql`
   query getGasStations(
@@ -6,7 +6,8 @@ export const GET_GAS_STATIONS = gql`
     $minPrice: Float
     $city: String
     $limit: Int
-    $sortyBy: String
+    $skip: Int
+    $sortBy: String
     $nameSearch: String
   ) {
     gasStations(
@@ -14,7 +15,8 @@ export const GET_GAS_STATIONS = gql`
       minPrice: $minPrice
       city: $city
       limit: $limit
-      sortyBy: $sortyBy
+      skip: $skip
+      sortBy: $sortBy
       nameSearch: $nameSearch
     ) {
       id
@@ -27,7 +29,7 @@ export const GET_GAS_STATIONS = gql`
       }
     }
   }
-`
+`;
 
 export const getGasStation = gql`
   query gasStation($id: ID!) {
@@ -39,4 +41,4 @@ export const getGasStation = gql`
       prices
     }
   }
-`
+`;

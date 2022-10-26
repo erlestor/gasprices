@@ -1,10 +1,10 @@
-import { FC } from "react"
-import styles from "./gasStation.module.css"
-import { GasStation } from "../../types"
-import { FaGasPump } from "react-icons/fa"
+import { FC } from "react";
+import styles from "./gasStation.module.css";
+import { FaGasPump } from "react-icons/fa";
+import { GasStation } from "../../graphql/types";
 
 interface Props {
-  station: GasStation
+  station: GasStation;
 }
 
 const GasStationC: FC<Props> = ({ station }) => {
@@ -22,7 +22,7 @@ const GasStationC: FC<Props> = ({ station }) => {
         </h3>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GasStationC
+export default GasStationC;
