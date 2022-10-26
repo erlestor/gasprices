@@ -49,8 +49,6 @@ export default function SideBar({ collapsed }: SidebarProps) {
     <div
       className={styles.sideBar}
       style={{
-        width: menuCollapse ? "fit-content" : "280px",
-        minWidth: menuCollapse ? "0px" : "280px",
         top: calcHeaderOffset()
       }}
     >
