@@ -1,6 +1,7 @@
 import { useState } from "react"
 import styles from "./maincontent.module.css"
 import { BsSearch } from "react-icons/bs"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { useQuery } from "@apollo/client"
 import { GET_GAS_STATIONS } from "../../graphql/queries"
 import { GasStation } from "../../types"
@@ -20,6 +21,8 @@ export default function MainContent({ cities, priceSliderValue }: Props) {
       city: cities[0],
       maxPrice: priceSliderValue,
       nameSearch: debounceText,
+      limit: 100,
+      sortBy: "name",
     },
   })
 
@@ -56,11 +59,16 @@ export default function MainContent({ cities, priceSliderValue }: Props) {
           <BsSearch className={styles.searchIcon} />
         </div>
       </div>
+
       <div className={styles.stationsContainer}>
-        {data &&
+        {loading ? (
+          <AiOutlineLoading3Quarters className={styles.loadingIcon} />
+        ) : (
+          data &&
           data.gasStations.map((station: GasStation, stationIdx: number) => (
             <GasStationC key={stationIdx} station={station} />
-          ))}
+          ))
+        )}
       </div>
     </div>
   )
