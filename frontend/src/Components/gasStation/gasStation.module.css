@@ -5,5 +5,8 @@
   margin: 10px 0 10px 0;
   padding: 10px;
   color: #303030;
+}
+
+.stationCard h2 {
   font-weight: normal;
 }
