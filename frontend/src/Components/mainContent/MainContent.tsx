@@ -1,20 +1,19 @@
-import { useEffect } from "react"
-import styles from "./maincontent.module.css"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import { useQuery, useReactiveVar } from "@apollo/client"
-import GasStationC from "../gasStation/GasStation"
-import { GET_GAS_STATIONS } from "../../graphql/queries.graphql"
-import { GasStation, GetGasStationsData } from "../../graphql/types"
-import { filterStateVar } from "../../state/filterState"
-import { SearchInputEl } from "./searchInputEl"
+import { useEffect } from "react";
+import styles from "./maincontent.module.css";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useQuery, useReactiveVar } from "@apollo/client";
+import GasStationC from "../gasStation/GasStation";
+import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
+import { GasStation, GetGasStationsData } from "../../graphql/types";
+import { filterStateVar } from "../../state/filterState";
+import { SearchInputEl } from "./searchInputEl";
 
 export default function MainContent() {
-  const filterState = useReactiveVar(filterStateVar)
-  console.log(filterState)
+  const filterState = useReactiveVar(filterStateVar);
+  console.log(filterState);
 
-  const { error, loading, data, fetchMore, refetch } = useQuery<GetGasStationsData>(
-    GET_GAS_STATIONS,
-    {
+  const { error, loading, data, fetchMore, refetch } =
+    useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
         city: filterState.cities[0],
         maxPrice: filterState.maxPrice,
@@ -22,23 +21,22 @@ export default function MainContent() {
         limit: 12,
         sortBy: "latestPrice",
       },
-    }
-  )
+    });
 
   useEffect(() => {
-    refetch()
-  }, [filterState, refetch])
+    refetch();
+  }, [filterState, refetch]);
 
   function loadMoreData() {
     fetchMore({
       variables: {
         skip: data?.gasStations.length,
       },
-    })
+    });
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>
+    return <div>Error: {error.message}</div>;
   }
 
   return (
@@ -56,5 +54,5 @@ export default function MainContent() {
       </div>
       <button onClick={loadMoreData}>Last mer</button>
     </div>
-  )
+  );
 }
