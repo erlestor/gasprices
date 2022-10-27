@@ -8,13 +8,16 @@ import Header from "../header/Header"
 import styles from "./gasStationPage.module.css"
 
 export function GasStationPage() {
-  const { id } = useParams()
+  const { id } = useParams();
 
-  const { error, loading, data } = useQuery<GetGasStationData>(GET_GAS_STATION, {
-    variables: {
-      id: id,
-    },
-  })
+  const { error, loading, data } = useQuery<GetGasStationData>(
+    GET_GAS_STATION,
+    {
+      variables: {
+        id: id,
+      },
+    }
+  );
 
   return (
     <div>
@@ -25,5 +28,5 @@ export function GasStationPage() {
       </div>
       <AddItem stationName={data?.gasStation.name} id={data?.gasStation.id} />
     </div>
-  )
+  );
 }
