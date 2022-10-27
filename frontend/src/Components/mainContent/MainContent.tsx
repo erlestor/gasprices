@@ -7,6 +7,7 @@ import styles from "./maincontent.module.css";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
 import { GasStation, GetGasStationsData } from "../../graphql/types";
 import { filterStateVar } from "../../state/filterState";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
@@ -46,6 +47,13 @@ export default function MainContent() {
         <BsSearch className={styles.searchIcon} />
       </div>
       <div className={styles.mainContent}>
+        <InfiniteScroll
+          next={loadMoreData}
+          hasMore={false}
+          children={undefined}
+          loader={undefined}
+          dataLength={0}
+        />
         {data && data.gasStations.map((gasStation) => gasStationEl(gasStation))}
       </div>
       <button onClick={loadMoreData}>Last mer</button>
