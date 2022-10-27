@@ -1,7 +1,7 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
-import circleK from "../Images/circleK.png";
+import circleK from "../../Images/circleK.png";
 import styles from "./maincontent.module.css";
 
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
@@ -53,6 +53,13 @@ export default function MainContent() {
   );
 }
 
+function formatPrice(number: number | undefined): string {
+  if (!number) {
+    return "Ingen pris";
+  }
+  return number.toFixed(2);
+}
+
 function gasStationEl(gasStation: GasStation) {
   return (
     <div className={styles.cardStyle}>
@@ -65,11 +72,13 @@ function gasStationEl(gasStation: GasStation) {
       </div>
       <div className={styles.cardInformation}>
         <div className={styles.cardAreaDiv}>
-          <span className={styles.cardBrand}>Cirkle K</span>
-          <span className={styles.cardArea}>Nidarvoll</span>
+          <span className={styles.cardBrand}>{gasStation.name}</span>
+          <span className={styles.cardArea}>{gasStation.city}</span>
         </div>
         <div className={styles.cardPriceDiv}>
-          <span className={styles.cardPrice}>18.87 kr</span>
+          <span className={styles.cardPrice}>
+            {formatPrice(gasStation.latestPrice)}
+          </span>
         </div>
       </div>
     </div>
