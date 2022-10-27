@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+import Header from "../header/Header";
 import AddItem from "./AddItem";
 
 export default function AddItemPage() {

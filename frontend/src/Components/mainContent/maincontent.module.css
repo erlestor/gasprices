@@ -8,16 +8,10 @@
 }
 
 .main {
-  width: 100%;
-  background-color: var(--white-secondary);
-}
-
-.searchDiv {
-  margin-top: 20px;
-  margin-bottom: 80px;
   display: flex;
-  justify-content: center;
-  width: 99.5%;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .main input {
@@ -166,4 +160,15 @@
   .main input {
     width: 200px;
   }
+}
+
+.stationsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loadingIcon {
+  width: 30px;
+  height: 30px;
 }

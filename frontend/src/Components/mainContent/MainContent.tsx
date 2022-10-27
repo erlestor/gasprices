@@ -1,27 +1,31 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import circleK from "../Images/circleK.png";
-import { GET_GAS_STATIONS } from "../graphql/queries.graphql";
-import { GasStation, GetGasStationsData } from "../graphql/types";
 import styles from "./maincontent.module.css";
 
+import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
+import { GasStation, GetGasStationsData } from "../../graphql/types";
+import { filterStateVar } from "../../state/filterState";
+
 export default function MainContent() {
-  const { error, loading, data, fetchMore } = useQuery<GetGasStationsData>(
-    GET_GAS_STATIONS,
-    {
+  const filterState = useReactiveVar(filterStateVar);
+  console.log(filterState);
+
+  const { error, loading, data, fetchMore, refetch } =
+    useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
+        city: filterState.cities[0],
+        maxPrice: filterState.maxPrice,
+        nameSearch: filterState.nameSearch,
+        limit: 12,
         sortBy: "latestPrice",
-        limit: 10,
       },
-    }
-  );
+    });
 
   useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-  }, [data]);
+    refetch();
+  }, [filterState]);
 
   function loadMoreData() {
     fetchMore({
@@ -29,10 +33,6 @@ export default function MainContent() {
         skip: data?.gasStations.length,
       },
     });
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
   }
 
   if (error) {

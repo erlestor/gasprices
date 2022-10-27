@@ -56,9 +56,10 @@
   background-color: var(--blue-color);
   cursor: pointer;
   color: white;
-  padding: 5px;
+  padding: 7px;
   border: none;
   margin-right: 40px;
+  border-radius: 5px;
 }
 
 .sideBarCategoryCheckBox,
