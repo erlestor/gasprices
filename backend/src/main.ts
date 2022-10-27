@@ -28,8 +28,7 @@ const resolvers = {
         ...(id && { id_: id }),
       }
       console.log(query)
-      console.log(GasStationModel.find(query))
-      return GasStationModel.find(query) as any
+      return GasStationModel.findById(id)
     },
   },
   GasStation: {
