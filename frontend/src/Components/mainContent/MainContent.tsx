@@ -2,11 +2,15 @@ import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import circleK from "../../Images/circleK.png";
+import esso from "../../Images/esso.png";
+import shell from "../../Images/shell.jpg";
+import unoX from "../../Images/uno-x.png";
 import styles from "./maincontent.module.css";
 
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
 import { GasStation, GetGasStationsData } from "../../graphql/types";
 import { filterStateVar } from "../../state/filterState";
+import { NOTFOUND } from "dns";
 
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
@@ -66,7 +70,7 @@ function gasStationEl(gasStation: GasStation) {
       <div className={styles.imageDiv}>
         <img
           className={styles.cardStyleImage}
-          src={circleK}
+          src={findImage(gasStation.name)}
           alt="CirkleK logo"
         />
       </div>
@@ -83,4 +87,20 @@ function gasStationEl(gasStation: GasStation) {
       </div>
     </div>
   );
+}
+
+function findImage(brandName: string): string | undefined {
+  if(brandName == "Esso") {
+    return esso
+  }
+  else if(brandName == "Shell") {
+    return shell
+  }
+  else if(brandName == "Circle K") {
+    return circleK
+  }
+  else if(brandName == "Uno-X") {
+    return unoX
+  }
+  return shell
 }
