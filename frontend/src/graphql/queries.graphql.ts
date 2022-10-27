@@ -32,7 +32,7 @@ export const GET_GAS_STATIONS = gql`
 `
 
 export const GET_GAS_STATION = gql`
-  query gasStation($id: ID!) {
+  query getGasStation($id: ID!) {
     gasStation(id: $id) {
       id
       name
