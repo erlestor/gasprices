@@ -1,19 +1,17 @@
-import React from "react";
-import "./App.css";
-import Frontpage from "./Components/frontpage/Frontpage";
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
-  HttpLink,
   from,
+  HttpLink,
+  InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Frontpage from "./Components/frontpage/Frontpage";
 import { GasStationPage } from "./Components/gasStationPage/GasStationPage";
 
-//Error handling from the Apollo docs: Advanced Error Handling
-//https://www.apollographql.com/docs/react/data/error-handling/
+// Error handling from the Apollo docs: Advanced Error Handling
+// https://www.apollographql.com/docs/react/data/error-handling/
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>

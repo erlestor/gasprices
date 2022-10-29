@@ -17,5 +17,5 @@ export interface GetGasStationsData {
 }
 
 export interface GetGasStationData {
-  gasStation: GasStation
+  gasStation: GasStation;
 }

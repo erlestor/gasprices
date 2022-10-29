@@ -1,18 +1,19 @@
-import { useMutation } from "@apollo/client"
-import React from "react"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql"
-import styles from "./additem.module.css"
+import { useMutation } from "@apollo/client";
+import React from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql";
+import styles from "./additem.module.css";
 
 type Props = {
-  stationName: string
-  id: string
-}
+  stationName: string;
+  id: string;
+};
 
-export default function AddItem({stationName, id}: Props) {
-  const [price, setPrice] = React.useState<number | null>(null)
+export default function AddItem({ stationName, id }: Props) {
+  const [price, setPrice] = React.useState<number | null>(null);
 
-  const [createGasPrice, { data, loading, error }] = useMutation(CREATE_GAS_PRICE)
+  const [createGasPrice, { data, loading, error }] =
+    useMutation(CREATE_GAS_PRICE);
 
   const addGasPrice = () => {
     createGasPrice({
@@ -20,17 +21,17 @@ export default function AddItem({stationName, id}: Props) {
         gasStation: id,
         price: price,
       },
-    })
+    });
     if (error) {
-      console.log(error)
+      console.log(error);
     }
     if (loading) {
-      return <AiOutlineLoading3Quarters />
+      return <AiOutlineLoading3Quarters />;
     }
-  }
+  };
 
-  console.log(id)
-  console.log(typeof id)
+  console.log(id);
+  console.log(typeof id);
 
   return (
     <div className={styles.wrapper}>
@@ -40,9 +41,9 @@ export default function AddItem({stationName, id}: Props) {
         </div>
 
         <form
-          onSubmit={e => {
-            e.preventDefault()
-            addGasPrice()
+          onSubmit={(e) => {
+            e.preventDefault();
+            addGasPrice();
           }}
         >
           <label htmlFor="price">Pris (kr)</label>
@@ -51,11 +52,11 @@ export default function AddItem({stationName, id}: Props) {
             name="price"
             type="number"
             value={price ?? ""}
-            onChange={event => setPrice(parseFloat(event.target.value))}
+            onChange={(event) => setPrice(parseFloat(event.target.value))}
           ></input>
           <input className={styles.submit} type="submit" value="Submit"></input>
         </form>
       </div>
     </div>
-  )
+  );
 }
