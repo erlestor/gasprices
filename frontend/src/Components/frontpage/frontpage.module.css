@@ -2,9 +2,10 @@
   display: flex;
 }
 
-@media only screen and (max-width: 800px) {
-  .sidebar {
-    position: absolute;
-    z-index: 3;
-  }
+.sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  height: 100vh;
+  z-index: 3;
 }
