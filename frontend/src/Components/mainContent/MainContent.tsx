@@ -6,7 +6,7 @@ import { useQuery, useReactiveVar } from "@apollo/client";
 import GasStationC from "../gasStation/GasStation";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
 import { GasStation, GetGasStationsData } from "../../graphql/types";
-import { debounce } from "./debounce";
+import { debounce } from "../../service/debounce";
 import { filterStateVar } from "../../state/filterState";
 import { SearchInputEl } from "./searchInputEl";
 
