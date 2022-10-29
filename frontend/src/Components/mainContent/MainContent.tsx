@@ -60,7 +60,9 @@ export default function MainContent() {
           dataLength={data.gasStations.length}
           endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
         />
-      ) : (<AiOutlineLoading3Quarters size={20} />)}
+      ) : (
+        <AiOutlineLoading3Quarters size={20} />
+      )}
     </div>
   );
 }
@@ -75,26 +77,26 @@ function formatPrice(number: number | undefined): string {
 function gasStationEl(gasStation: GasStation) {
   return (
     <Link to={`/station/${gasStation.id}`} className={styles.cardLink}>
-    <div key={gasStation.id} className={styles.cardStyle}>
-      <div className={styles.imageDiv}>
-        <img
-          className={styles.cardStyleImage}
-          src={circleK}
-          alt="CirkleK logo"
-        />
-      </div>
-      <div className={styles.cardInformation}>
-        <div className={styles.cardAreaDiv}>
-          <span className={styles.cardBrand}>{gasStation.name}</span>
-          <span className={styles.cardArea}>{gasStation.city}</span>
+      <div key={gasStation.id} className={styles.cardStyle}>
+        <div className={styles.imageDiv}>
+          <img
+            className={styles.cardStyleImage}
+            src={circleK}
+            alt="CirkleK logo"
+          />
         </div>
-        <div className={styles.cardPriceDiv}>
-          <span className={styles.cardPrice}>
-            {formatPrice(gasStation.latestPrice)}
-          </span>
+        <div className={styles.cardInformation}>
+          <div className={styles.cardAreaDiv}>
+            <span className={styles.cardBrand}>{gasStation.name}</span>
+            <span className={styles.cardArea}>{gasStation.city}</span>
+          </div>
+          <div className={styles.cardPriceDiv}>
+            <span className={styles.cardPrice}>
+              {formatPrice(gasStation.latestPrice)}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
     </Link>
   );
 }

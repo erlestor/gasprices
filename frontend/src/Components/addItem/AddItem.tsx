@@ -5,8 +5,8 @@ import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql";
 import styles from "./additem.module.css";
 
 type Props = {
-  id: string
-  refetch: (variables: {id: string}) => void
+  id: string;
+  refetch: (variables: { id: string }) => void;
 };
 
 export default function AddItem({ id, refetch }: Props) {
@@ -28,8 +28,8 @@ export default function AddItem({ id, refetch }: Props) {
     if (loading) {
       return <AiOutlineLoading3Quarters />;
     }
-    refetch({id: id})
-    setPrice(null)
+    refetch({ id: id });
+    setPrice(null);
   };
 
   return (
