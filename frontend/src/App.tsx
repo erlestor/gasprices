@@ -3,7 +3,6 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import AddItemPage from "./Components/addItem/AddItemPage";
 import Frontpage from "./Components/frontpage/Frontpage";
 import { GasStationPage } from "./Components/gasStationPage/GasStationPage";

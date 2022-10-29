@@ -1,29 +1,15 @@
-import React from "react"
-import styles from "./header.module.css"
-import { Link } from "react-router-dom"
-
-const headernameLink = {
-  marginLeft: "40px",
-  textDecoration: "none",
-  color: "black",
-  fontSize: "18px",
-}
-
-const newElemementLink = {
-  marginRight: "40px",
-  textDecoration: "none",
-  color: "blue",
-}
+import React from "react";
+import styles from "./header.module.css";
+import { Link } from "react-router-dom";
+import { FaGasPump } from "react-icons/fa";
 
 export default function Header() {
   return (
-    <div className={styles.header}>
-      <Link to="/" style={headernameLink}>
-        Headername
+    <header className={styles.header}>
+      <FaGasPump className={styles.pumpIcon} />
+      <Link to="/" className={styles.headerNameLink}>
+        DrivstoffNettsiden
       </Link>
-      <Link to="/addItem" style={newElemementLink}>
-        Ny annonse
-      </Link>
-    </div>
-  )
+    </header>
+  );
 }

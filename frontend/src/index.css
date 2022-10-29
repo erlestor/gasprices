@@ -1,3 +1,12 @@
+:root {
+  --secondary-color: #404040;
+  --third-color: #e0e0e1;
+  --header-size: 72px;
+  --white-secondary: #fafafa;
+  --text-color: #505050;
+  --blue-color: #523ee8;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
