@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import {
   Area,
   AreaChart,
@@ -8,52 +8,47 @@ import {
   YAxis,
   Tooltip,
   Legend,
-} from "recharts";
-import {
-  Datapoint,
-  GetGasStationData,
-  GasStation,
-  GasPrice,
-} from "../../types";
+} from "recharts"
+import { Datapoint, GetGasStationData, GasPrice } from "../../types"
 
 type Props = {
-  data: GetGasStationData | undefined;
-};
+  data: GetGasStationData | undefined
+}
 
 const PricesGraph = ({ data }: Props) => {
-  const [graphData, setGraphData] = useState<Datapoint[]>([]);
-  const color = "#523EE8";
+  const color = "#523EE8"
 
-  useEffect(() => {
-    if (!data) return;
-    getGraphData(data!);
-  }, [data]);
+  const formatDate = (date: Date) => {
+    return (
+      "" +
+      date.getDate() +
+      "/" +
+      (date.getMonth() + 1) +
+      "/" +
+      date.getFullYear()
+    )
+  }
 
   const getGraphData = (data: GetGasStationData) => {
-    const graphData: Datapoint[] = [];
-    const prices = data.gasStation.prices!;
+    const graphData: Datapoint[] = []
+    const prices = data.gasStation.prices!
 
     prices.forEach((price: GasPrice) => {
-      const date = new Date(price.createdAt);
-      const formattedDate =
-        "" +
-        date.getDate() +
-        "/" +
-        (date.getMonth() + 1) +
-        "/" +
-        date.getFullYear();
+      const date = new Date(price.createdAt)
+      const formattedDate = formatDate(date)
+
       graphData.push({
         name: formattedDate,
         price: parseFloat(price.price.toFixed(2)),
-      });
-    });
+      })
+    })
 
-    setGraphData(graphData);
-  };
+    return graphData
+  }
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <AreaChart data={graphData} margin={{ left: -35 }}>
+      <AreaChart data={getGraphData(data!)} margin={{ left: -35 }}>
         <defs>
           <linearGradient id={color} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={color} stopOpacity={1} />
@@ -74,7 +69,7 @@ const PricesGraph = ({ data }: Props) => {
         />
       </AreaChart>
     </ResponsiveContainer>
-  );
-};
+  )
+}
 
-export default PricesGraph;
+export default PricesGraph
