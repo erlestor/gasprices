@@ -69,6 +69,7 @@ describe("add new gas price to gas station", () => {
       const lastPrice = parseFloat(el.text())
       cy.get('#price').type((lastPrice + 1).toString())
       cy.get('.additem_submit__7EaR7').click()
+      cy.contains((lastPrice + 1).toString())
       cy.get('#lastPriceText').then(el => {
         expect(parseFloat(el.text())).to.equal(lastPrice + 1)
       })
