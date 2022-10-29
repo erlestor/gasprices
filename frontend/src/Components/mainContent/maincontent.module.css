@@ -13,6 +13,8 @@
   text-align: center;
   width: 100%;
   margin-top: 40px;
+  margin: 0px 80px;
+  margin-top: 40px;
 }
 
 .main input {
@@ -31,8 +33,8 @@
 .filterDiv {
   display: flex;
   justify-content: space-between;
-  margin: 0px 80px;
   margin-bottom: 40px;
+  width: 100%;  
 }
 .searchIcon {
   background-color: var(--secondary-color);
@@ -45,7 +47,6 @@
 
 .mainContent {
   display: grid;
-  margin: 0 80px;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   justify-items: stretch;
   gap: 1rem;
@@ -132,27 +133,21 @@
     flex-wrap: wrap;
   }
 
-  .searchDiv {
-    width: 100%;
-  }
   .main input {
     width: calc(100% - 35px);
-  }
-
-  .filters {
-    width: 100%;
   }
 }
 
 @media only screen and (max-width: 800px) {
   .main {
-    margin-left: 57px;
+    margin-left: 137px;
   }
 }
 
 @media only screen and (max-width: 550px) {
   .main {
-    margin-left: 40px;
+    margin-left: 60px;
+    margin-right: 20px;
   }
   .mainContent {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -168,19 +163,12 @@
 
   .cardArea {
     font-size: 12px;
-  }
-
-  .mainContent {
-    margin: 0px 20px;
-  }
+  } 
 
   .main {
     width: 100%;
   }
 
-  .filterDiv {
-    margin: 0px 20px 30px 20px;
-  }
 }
 
 .stationsContainer {

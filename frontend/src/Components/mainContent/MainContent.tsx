@@ -50,8 +50,10 @@ export default function MainContent() {
 
   return (
     <div className={styles.main}>
-      <SearchInputEl />
-      <Filter />
+      <div className={styles.filterDiv}>
+        <SearchInputEl />
+        <Filter />
+      </div>
       {data && (
         <InfiniteScroll
           className={styles.mainContent}
