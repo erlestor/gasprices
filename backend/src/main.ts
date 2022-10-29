@@ -27,7 +27,6 @@ const resolvers = {
       const query = {
         ...(id && { id_: id }),
       }
-      console.log(query)
       return GasStationModel.findById(id)
     },
   },
@@ -46,8 +45,9 @@ const resolvers = {
       // TODO: make it a transaction
       const gasPrice = new GasPriceModel(args)
       await gasPrice.save()
+      
       // update latest price on GasStation
-      return GasStationModel.updateOne(
+      await GasStationModel.updateOne(
         {
           _id: gasStation,
         },
@@ -55,6 +55,7 @@ const resolvers = {
           latestPrice: gasPrice.price,
         }
       )
+      return gasPrice
     },
   },
 }

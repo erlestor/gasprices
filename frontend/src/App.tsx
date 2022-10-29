@@ -10,7 +10,6 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddItemPage from "./Components/addItem/AddItemPage";
 import { GasStationPage } from "./Components/gasStationPage/GasStationPage";
 
 //Error handling from the Apollo docs: Advanced Error Handling
@@ -63,7 +62,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Frontpage />} />
-          <Route path="/addItem" element={<AddItemPage />} />
           <Route path="/station/:id" element={<GasStationPage />} />
         </Routes>
       </BrowserRouter>

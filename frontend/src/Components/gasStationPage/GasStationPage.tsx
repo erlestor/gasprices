@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useMutation, useQuery } from "@apollo/client"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { useParams } from "react-router-dom"
@@ -26,7 +27,7 @@ export function GasStationPage() {
         <h1>{error && error.message}</h1>
         <h1> {loading && <AiOutlineLoading3Quarters />}</h1>
       </div>
-      <AddItem stationName={data?.gasStation.name} id={data?.gasStation.id} />
+      {data && data?.gasStation && <AddItem stationName={data?.gasStation.name} id={data?.gasStation.id} />}
     </div>
   );
 }

@@ -21,9 +21,6 @@ export default function Header() {
       <Link to="/" style={headernameLink}>
         Headername
       </Link>
-      <Link to="/addItem" style={newElemementLink}>
-        Ny annonse
-      </Link>
     </div>
   )
 }
