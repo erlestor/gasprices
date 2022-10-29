@@ -7,7 +7,6 @@ import styles from "./sidebar.module.css";
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
-  const [sliderVal, setSliderVal] = useState<number | undefined>(undefined);
   const filterState = useReactiveVar(filterStateVar);
 
   const updateDebouncePrice = debounce((price: number) => {
@@ -15,31 +14,25 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
       ...filterStateVar(),
       maxPrice: price,
     });
-  }, 1000);
+  }, 100);
 
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSliderVal(parseInt(event.target.value));
-    updateDebouncePrice(parseInt(event.target.value));
+    updateDebouncePrice(parseFloat(event.target.value));
   };
 
-  const handleCityChange = (e: any) => {
+  const handleCityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const checked = e.target.checked;
-    const city = e.target.name;
+    const city = e.target.value;
 
     if (checked) {
       filterStateVar({
         ...filterStateVar(),
-        cities: [...filterStateVar().cities, city],
+        city,
       });
       return;
     }
-
-    filterStateVar({
-      ...filterStateVar(),
-      cities: filterStateVar().cities.filter((c) => c !== city),
-    });
   };
 
   const clearFilter = () => {
@@ -82,9 +75,11 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                   className={styles.sideBarCategoryChoiceCheckBox}
                 >
                   <input
-                    type="checkbox"
-                    name={city}
-                    checked={filterState.cities.includes(city)}
+                    type="radio"
+                    id={city}
+                    name="cities"
+                    value={city}
+                    checked={filterState.city == city}
                     onChange={handleCityChange}
                   />
                   <label htmlFor={city}>{city}</label>
@@ -93,14 +88,14 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
             </div>
             <div className={styles.sideBarCategoryRange}>
               <h5>Maks pris</h5>
-              <span>{sliderVal} kr</span>
+              <span>{filterState.maxPrice} kr</span>
               <input
                 type="range"
                 id="price"
                 name="price"
-                min="0"
-                max="100"
-                value={sliderVal}
+                min="10"
+                max="30"
+                step={0.1}
                 onChange={handlePriceSliderChange}
               />
             </div>
