@@ -84,7 +84,11 @@ function formatPrice(number: number | undefined): string {
 
 function gasStationEl(gasStation: GasStation) {
   return (
-    <Link key={gasStation.id} to={`/station/${gasStation.id}`} className={styles.cardLink}>
+    <Link
+      key={gasStation.id}
+      to={`/station/${gasStation.id}`}
+      className={styles.cardLink}
+    >
       <div className={styles.cardStyle}>
         <div className={styles.imageDiv}>
           <img
