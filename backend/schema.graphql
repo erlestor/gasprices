@@ -20,6 +20,7 @@ type Query {
     limit: Int
     skip: Int
     sortBy: String
+    sortDirection: String
     nameSearch: String
   ): [GasStation]
   gasStation(id: ID!): GasStation

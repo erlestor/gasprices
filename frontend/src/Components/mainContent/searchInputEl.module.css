@@ -1,5 +1,4 @@
 .searchDiv {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -7,8 +6,14 @@
 .searchIcon {
   background-color: var(--secondary-color);
   color: white;
-  padding: 7px 8px;
+  padding: 10.7px 9px;
   vertical-align: middle;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+  .searchDiv {
+    width: 100%;
+  }
 }

@@ -2,7 +2,11 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 import circleK from "../../Images/circleK.png";
+import esso from "../../Images/esso.png";
+import shell from "../../Images/shell.jpg";
+import unoX from "../../Images/uno-x.png";
 import styles from "./maincontent.module.css";
+import Filter from "./filterEl";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
@@ -20,11 +24,12 @@ export default function MainContent() {
   const { error, loading, data, fetchMore, refetch } =
     useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
-        city: filterState.cities[0],
+        city: filterState.city,
         maxPrice: filterState.maxPrice,
         nameSearch: filterState.nameSearch,
+        sortBy: filterState.sortBy,
+        sortDirection: filterState.sortDirection,
         limit,
-        sortBy: "latestPrice",
       },
     });
 
@@ -47,7 +52,10 @@ export default function MainContent() {
 
   return (
     <div className={styles.main}>
-      <SearchInputEl />
+      <div className={styles.filterDiv}>
+        <SearchInputEl />
+        <Filter />
+      </div>
       {data ? (
         <InfiniteScroll
           className={styles.mainContent}
@@ -81,8 +89,8 @@ function gasStationEl(gasStation: GasStation) {
         <div className={styles.imageDiv}>
           <img
             className={styles.cardStyleImage}
-            src={circleK}
-            alt="CirkleK logo"
+            src={findImage(gasStation.name)}
+            alt={gasStation.name + " logo"}
           />
         </div>
         <div className={styles.cardInformation}>
@@ -99,4 +107,17 @@ function gasStationEl(gasStation: GasStation) {
       </div>
     </Link>
   );
+}
+
+function findImage(brandName: string): string | undefined {
+  if (brandName == "Esso") {
+    return esso;
+  } else if (brandName == "Shell") {
+    return shell;
+  } else if (brandName == "Circle K") {
+    return circleK;
+  } else if (brandName == "Uno-X") {
+    return unoX;
+  }
+  return shell;
 }
