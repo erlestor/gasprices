@@ -48,6 +48,10 @@ export default function MainContent() {
     return <div>Error: {error.message}</div>;
   }
 
+  if (loading) {
+    return <div id="#mainContentLoading">Loading...</div>;
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.filterDiv}>
