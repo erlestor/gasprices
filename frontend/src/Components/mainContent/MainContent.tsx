@@ -1,3 +1,4 @@
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 import circleK from "../../Images/circleK.png";
@@ -9,10 +10,11 @@ import Filter from "./filterEl";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
-import { GasStation, GetGasStationsData } from "../../graphql/types";
+import { GasStation, GetGasStationsData } from "../../types";
 import { hasMoreVar, limit } from "../../state/endlessScrollState";
 import { filterStateVar } from "../../state/filterState";
 import { SearchInputEl } from "./searchInputEl";
+import { Link } from "react-router-dom";
 
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
@@ -34,7 +36,7 @@ export default function MainContent() {
   useEffect(() => {
     refetch();
     hasMoreVar(true);
-  }, [filterState]);
+  }, [filterState, refetch]);
 
   function loadMoreData() {
     fetchMore({
@@ -58,7 +60,7 @@ export default function MainContent() {
         <SearchInputEl />
         <Filter />
       </div>
-      {data && (
+      {data ? (
         <InfiniteScroll
           className={styles.mainContent}
           next={loadMoreData}
@@ -70,6 +72,8 @@ export default function MainContent() {
           dataLength={data.gasStations.length}
           endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
         />
+      ) : (
+        <AiOutlineLoading3Quarters size={20} />
       )}
     </main>
   );
@@ -84,26 +88,32 @@ function formatPrice(number: number | undefined): string {
 
 function gasStationEl(gasStation: GasStation) {
   return (
-    <div key={gasStation.id} className={styles.cardStyle}>
-      <div className={styles.imageDiv}>
-        <img
-          className={styles.cardStyleImage}
-          src={findImage(gasStation.name)}
-          alt="CirkleK logo"
-        />
-      </div>
-      <div className={styles.cardInformation}>
-        <div className={styles.cardAreaDiv}>
-          <span className={styles.cardBrand}>{gasStation.name}</span>
-          <span className={styles.cardArea}>{gasStation.city}</span>
+    <Link
+      key={gasStation.id}
+      to={`/station/${gasStation.id}`}
+      className={styles.cardLink}
+    >
+      <div className={styles.cardStyle}>
+        <div className={styles.imageDiv}>
+          <img
+            className={styles.cardStyleImage}
+            src={findImage(gasStation.name)}
+            alt={gasStation.name + " logo"}
+          />
         </div>
-        <div className={styles.cardPriceDiv}>
-          <span className={styles.cardPrice}>
-            {formatPrice(gasStation.latestPrice)}
-          </span>
+        <div className={styles.cardInformation}>
+          <div className={styles.cardAreaDiv}>
+            <span className={styles.cardBrand}>{gasStation.name}</span>
+            <span className={styles.cardArea}>{gasStation.city}</span>
+          </div>
+          <div className={styles.cardPriceDiv}>
+            <span className={styles.cardPrice}>
+              {formatPrice(gasStation.latestPrice)}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

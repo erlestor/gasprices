@@ -1,0 +1,56 @@
+.stationPageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  padding: 50px 100px 50px 100px;
+}
+
+.backButton {
+  justify-content: left;
+  margin-bottom: 20px;
+  border: none;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 16px;
+}
+
+.backButtonLink {
+  width: 10%;
+}
+
+.gasStationName {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.gasStationCityHeader {
+  font-weight: normal;
+  font-size: 30px;
+  font-weight: normal;
+  padding-bottom: 50px;
+  color: rgb(114, 111, 111);
+}
+
+.registeredPricesHeader {
+  font-size: 25px;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 450px) {
+  .gasStationName {
+    font-size: 50px;
+  }
+  .gasStationCityHeader {
+    font-size: 20px;
+  }
+  .stationPageContainer {
+    padding: 50px 20px 50px 20px;
+  }
+}

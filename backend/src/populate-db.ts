@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { GasStationModel } from "./dbService";
+import { GasPriceModel, GasStationModel } from "./dbService";
 
 async function populateDb() {
   const connectionString = "mongodb://admin:admin@it2810-41.idi.ntnu.no:27017/";
@@ -27,7 +27,21 @@ async function populateDb() {
       city: pick(cities),
       latestPrice: 17 + Math.random() * 10,
     });
-    await gasStation.save();
+    const doc = await gasStation.save();
+    const prices = [];
+    for (let j = 0; j < 2 + 5 * Math.random(); j++) {
+      const gasPrice = new GasPriceModel({
+        gasStation: doc._id,
+        createdAt: new Date().getTime() - 1000 * 60 * 60 * 24 * j,
+        price: 17 + Math.random() * 10,
+      });
+      await gasPrice.save();
+      prices.push(
+        gasPrice
+      );
+    }
+    // update latest price
+    gasStation.updateOne({ latestPrice: prices[0].price });
   }
 }
 populateDb();

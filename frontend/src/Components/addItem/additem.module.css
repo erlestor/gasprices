@@ -1,27 +1,15 @@
-:root {
-  --secondary-color: #404040;
-  --third-color: #e0e0e1;
-  --header-size: 72px;
-  --white-secondary: #fafafa;
-  --text-color: #505050;
-  --blue-color: #523ee8;
-}
-
 * {
   font-family: Arial, sans-serif;
 }
 
 .wrapper {
   display: flex;
-  justify-content: center;
-  width: calc(100% - 2px);
-  height: calc(100vh - 120px);
+  justify-content: left;
   margin-top: 50px;
 }
 
 .elementForm {
   width: 600px;
-  height: 630px;
 }
 
 .elementForm form {
@@ -42,7 +30,6 @@
 .formHeaderText {
   width: 100%;
   padding: 15px 0px;
-  border-bottom: 1px solid var(--third-color);
 }
 
 .elementForm form label,
