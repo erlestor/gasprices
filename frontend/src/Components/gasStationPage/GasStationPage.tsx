@@ -15,7 +15,7 @@ export function GasStationPage() {
     GET_GAS_STATION,
     {
       variables: {
-        id: id,
+        id,
       },
     }
   );

@@ -1,20 +1,20 @@
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useQuery, useReactiveVar } from "@apollo/client";
-import { useEffect } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import circleK from "../../Images/circleK.png";
 import esso from "../../Images/esso.png";
 import shell from "../../Images/shell.jpg";
 import unoX from "../../Images/uno-x.png";
-import styles from "./maincontent.module.css";
 import Filter from "./filterEl";
+import styles from "./maincontent.module.css";
 
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
-import { GasStation, GetGasStationsData } from "../../types";
 import { hasMoreVar, limit } from "../../state/endlessScrollState";
 import { filterStateVar } from "../../state/filterState";
+import { GasStation, GetGasStationsData } from "../../types";
 import { SearchInputEl } from "./searchInputEl";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
@@ -34,9 +34,8 @@ export default function MainContent() {
     });
 
   useEffect(() => {
-    refetch();
     hasMoreVar(true);
-  }, [filterState, refetch]);
+  }, [filterState]);
 
   function loadMoreData() {
     fetchMore({
@@ -119,13 +118,13 @@ function gasStationEl(gasStation: GasStation) {
 }
 
 function findImage(brandName: string): string | undefined {
-  if (brandName == "Esso") {
+  if (brandName === "Esso") {
     return esso;
-  } else if (brandName == "Shell") {
+  } else if (brandName === "Shell") {
     return shell;
-  } else if (brandName == "Circle K") {
+  } else if (brandName === "Circle K") {
     return circleK;
-  } else if (brandName == "Uno-X") {
+  } else if (brandName === "Uno-X") {
     return unoX;
   }
   return shell;

@@ -37,7 +37,13 @@ const client = new ApolloClient({
       Query: {
         fields: {
           gasStations: {
-            keyArgs: false,
+            keyArgs: [
+              "city",
+              "maxPrice",
+              "nameSearch",
+              "sortBy",
+              "sortDirection",
+            ],
             merge(existing: [], incoming: [], { args: { skip = 0 } }: any) {
               // if number of items is less than limit, there are no more items to fetch
               if (incoming.length < limit) {
