@@ -39,7 +39,6 @@
 .formHeaderText {
   width: 100%;
   padding: 15px 0px;
-  border-bottom: 1px solid var(--third-color);
 }
 
 .elementForm form label,

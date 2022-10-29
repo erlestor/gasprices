@@ -33,7 +33,7 @@ export default function AddItem({ id }: Props) {
     <div className={styles.wrapper}>
       <div className={styles.elementForm}>
         <div className={styles.formHeaderText}>
-          <h3>Legg til ny pris til stasjonen</h3>
+          <h3>Rapporter prisendring</h3>
         </div>
 
         <form
@@ -42,13 +42,14 @@ export default function AddItem({ id }: Props) {
             addGasPrice();
           }}
         >
-          <label htmlFor="price">Pris (kr)</label>
+          <label htmlFor="price">Pris (kr/L)</label>
           <input
             id="price"
             name="price"
             type="number"
             value={price ?? ""}
             onChange={(event) => setPrice(parseFloat(event.target.value))}
+            placeholder="ny pris"
           ></input>
           <input
             className={styles.submit}

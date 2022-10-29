@@ -1,3 +1,12 @@
+:root {
+  --secondary-color: #404040;
+  --third-color: #e0e0e1;
+  --header-size: 72px;
+  --white-secondary: #fafafa;
+  --text-color: #505050;
+  --blue-color: #523ee8;
+}
+
 .stationPageContainer {
   display: flex;
   flex-direction: column;
@@ -38,9 +47,9 @@
 }
 
 .registeredPricesHeader {
-  font-size: 30px;
-  font-weight: bold;
-  padding-bottom: 20px;
+  font-size: 25px;
+  color: var(--text-color);
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 450px) {
