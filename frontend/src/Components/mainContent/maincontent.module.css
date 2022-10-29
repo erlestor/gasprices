@@ -43,7 +43,6 @@
   cursor: pointer;
 }
 
-
 .mainContent {
   display: grid;
   margin: 0 80px;
@@ -151,7 +150,6 @@
   }
 }
 
-
 @media only screen and (max-width: 550px) {
   .main {
     margin-left: 40px;
@@ -184,7 +182,6 @@
     margin: 0px 20px 30px 20px;
   }
 }
-
 
 .stationsContainer {
   display: flex;

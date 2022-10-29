@@ -70,7 +70,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                   className={styles.sideBarCategoryChoiceCheckBox}
                 >
                   <input
-                    type="radio" 
+                    type="radio"
                     id={city}
                     name="cities"
                     value={city}

@@ -6,7 +6,7 @@ import esso from "../../Images/esso.png";
 import shell from "../../Images/shell.jpg";
 import unoX from "../../Images/uno-x.png";
 import styles from "./maincontent.module.css";
-import Filter from "./filterEl"
+import Filter from "./filterEl";
 
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
 import { GasStation, GetGasStationsData } from "../../graphql/types";
@@ -25,7 +25,7 @@ export default function MainContent() {
         nameSearch: filterState.nameSearch,
         limit: 12,
         sortBy: filterState.sortBy,
-        sortDirection: filterState.sortDirection
+        sortDirection: filterState.sortDirection,
       },
     });
 
@@ -51,8 +51,8 @@ export default function MainContent() {
         <div className={styles.searchDiv}>
           <input type="text" placeholder="Search..."></input>
           <BsSearch className={styles.searchIcon} />
-          </div>
-          <Filter />
+        </div>
+        <Filter />
       </div>
       <div className={styles.mainContent}>
         {data && data.gasStations.map((gasStation) => gasStationEl(gasStation))}

@@ -14,7 +14,7 @@ function getDefaultFilterState(): FilterOptions {
     maxPrice: 30,
     nameSearch: "",
     sortBy: "latestPrice",
-    sortDirection: "ASC"
+    sortDirection: "ASC",
   };
 }
 
