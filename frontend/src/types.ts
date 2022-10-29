@@ -1,7 +1,7 @@
 export interface GasPrice {
   id: string;
   price: number;
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface GasStation {
@@ -18,4 +18,9 @@ export interface GetGasStationsData {
 
 export interface GetGasStationData {
   gasStation: GasStation;
+}
+
+export interface Datapoint {
+  name: string;
+  [key: string]: any;
 }

@@ -41,6 +41,7 @@ export const GET_GAS_STATION = gql`
       prices {
         id
         price
+        createdAt
       }
     }
   }

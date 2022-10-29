@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./gasStation.module.css";
 import { FaGasPump } from "react-icons/fa";
-import { GasStation } from "../../graphql/types";
+import { GasStation } from "../../types";
 import { Link } from "react-router-dom";
 
 interface Props {

@@ -5,11 +5,10 @@ import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql";
 import styles from "./additem.module.css";
 
 type Props = {
-  stationName: string;
   id: string;
 };
 
-export default function AddItem({ stationName, id }: Props) {
+export default function AddItem({ id }: Props) {
   const [price, setPrice] = React.useState<number | null>(null);
 
   const [createGasPrice, { data, loading, error }] =
@@ -30,14 +29,11 @@ export default function AddItem({ stationName, id }: Props) {
     }
   };
 
-  console.log(id);
-  console.log(typeof id);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.elementForm}>
         <div className={styles.formHeaderText}>
-          <h3>Add new price to {stationName}</h3>
+          <h3>Legg til ny pris til stasjonen</h3>
         </div>
 
         <form
@@ -54,7 +50,11 @@ export default function AddItem({ stationName, id }: Props) {
             value={price ?? ""}
             onChange={(event) => setPrice(parseFloat(event.target.value))}
           ></input>
-          <input className={styles.submit} type="submit" value="Submit"></input>
+          <input
+            className={styles.submit}
+            type="submit"
+            value="Legg til ny pris"
+          ></input>
         </form>
       </div>
     </div>

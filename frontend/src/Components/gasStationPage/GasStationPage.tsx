@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { GET_GAS_STATION } from "../../graphql/queries.graphql";
-import { GetGasStationData } from "../../graphql/types";
+import { Datapoint, GetGasStationData, GasStation } from "../../types";
 import AddItem from "../addItem/AddItem";
 import Header from "../header/Header";
 import styles from "./gasStationPage.module.css";
+import PricesGraph from "./PricesGraph";
 
 export function GasStationPage() {
   const { id } = useParams();
@@ -20,16 +21,35 @@ export function GasStationPage() {
     }
   );
 
+  if (error) return <h1>error.message</h1>;
+
+  if (loading) return <h1> {loading && <AiOutlineLoading3Quarters />}</h1>;
+
   return (
     <div>
       <Header />
       <div className={styles.stationPageContainer}>
-        <h1>{error && error.message}</h1>
-        <h1> {loading && <AiOutlineLoading3Quarters />}</h1>
+        <Link to={"/"} className={styles.backButtonLink}>
+          <button className={styles.backButton}>
+            <h3>Tilbake</h3>
+          </button>
+        </Link>
+
+        <h1 className={styles.gasStationName}>{data?.gasStation.name}</h1>
+        <h2 className={styles.gasStationCityHeader}>{data?.gasStation.city}</h2>
+        <h2 className={styles.registeredPricesHeader}>
+          Siste registrerte priser
+        </h2>
+
+        {data && data?.gasStation && (
+          <>
+            {data.gasStation.prices && data.gasStation.prices.length > 0 && (
+              <PricesGraph data={data} />
+            )}
+            <AddItem id={data?.gasStation.id} />
+          </>
+        )}
       </div>
-      {data && data?.gasStation && (
-        <AddItem stationName={data?.gasStation.name} id={data?.gasStation.id} />
-      )}
     </div>
   );
 }

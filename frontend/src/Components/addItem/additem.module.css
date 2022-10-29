@@ -13,15 +13,12 @@
 
 .wrapper {
   display: flex;
-  justify-content: center;
-  width: calc(100% - 2px);
-  height: calc(100vh - 120px);
+  justify-content: left;
   margin-top: 50px;
 }
 
 .elementForm {
   width: 600px;
-  height: 630px;
 }
 
 .elementForm form {
