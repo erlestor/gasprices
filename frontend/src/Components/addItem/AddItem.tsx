@@ -1,18 +1,15 @@
-import { useMutation } from "@apollo/client";
-import React from "react";
-import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql";
-import styles from "./additem.module.css";
+import { useMutation } from "@apollo/client"
+import React from "react"
+import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql"
+import styles from "./additem.module.css"
 
 export default function AddItem() {
-  const [price, setPrice] = React.useState<number | null>(null);
+  const [price, setPrice] = React.useState<number | null>(null)
 
   //Temporary!!:
-  const [gasStationId, setGasStationId] = React.useState(
-    "634fb2df84b8735fd91bab08"
-  );
+  const [gasStationId, setGasStationId] = React.useState("634fb2df84b8735fd91bab08")
 
-  const [createGasPrice, { data, loading, error }] =
-    useMutation(CREATE_GAS_PRICE);
+  const [createGasPrice, { data, loading, error }] = useMutation(CREATE_GAS_PRICE)
 
   const addGasPrice = () => {
     createGasPrice({
@@ -20,14 +17,14 @@ export default function AddItem() {
         gasStation: gasStationId,
         price: price,
       },
-    });
+    })
     if (error) {
-      console.log(error);
+      console.log(error)
     }
     if (loading) {
-      return <p>Loading...</p>;
+      return <p>Loading...</p>
     }
-  };
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -37,9 +34,9 @@ export default function AddItem() {
         </div>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addGasPrice();
+          onSubmit={e => {
+            e.preventDefault()
+            addGasPrice()
           }}
         >
           <label htmlFor="price">Pris (kr)</label>
@@ -48,11 +45,11 @@ export default function AddItem() {
             name="price"
             type="number"
             value={price ?? ""}
-            onChange={(event) => setPrice(parseFloat(event.target.value))}
+            onChange={event => setPrice(parseFloat(event.target.value))}
           ></input>
           <input className={styles.submit} type="submit" value="Submit"></input>
         </form>
       </div>
     </div>
-  );
+  )
 }

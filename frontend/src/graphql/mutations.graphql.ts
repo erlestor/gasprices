@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const ADD_GAS_STATION = gql`
   mutation add_gas_station(
@@ -7,12 +7,7 @@ export const ADD_GAS_STATION = gql`
     $latestPrice: GasPrice
     $prices: [GasPrice]
   ) {
-    addGasStation(
-      name: $name
-      city: $city
-      latestPrice: $latestPrice
-      price: $price
-    ) {
+    addGasStation(name: $name, city: $city, latestPrice: $latestPrice, price: $price) {
       id
       name
       city
@@ -20,7 +15,7 @@ export const ADD_GAS_STATION = gql`
       prices
     }
   }
-`;
+`
 
 export const CREATE_GAS_PRICE = gql`
   mutation create_gas_price($gasStation: ID!, $price: Float!) {
@@ -28,4 +23,4 @@ export const CREATE_GAS_PRICE = gql`
       id
     }
   }
-`;
+`

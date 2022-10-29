@@ -1,9 +1,9 @@
-import { makeVar } from "@apollo/client";
+import { makeVar } from "@apollo/client"
 
 export interface FilterOptions {
-  cities: string[];
-  maxPrice?: number;
-  nameSearch: string;
+  cities: string[]
+  maxPrice?: number
+  nameSearch: string
 }
 
 function getDefaultFilterState(): FilterOptions {
@@ -11,11 +11,11 @@ function getDefaultFilterState(): FilterOptions {
     cities: [],
     maxPrice: undefined,
     nameSearch: "",
-  };
+  }
 }
 
 export function resetFilterState() {
-  filterStateVar(getDefaultFilterState());
+  filterStateVar(getDefaultFilterState())
 }
 
-export const filterStateVar = makeVar<FilterOptions>(getDefaultFilterState());
+export const filterStateVar = makeVar<FilterOptions>(getDefaultFilterState())
