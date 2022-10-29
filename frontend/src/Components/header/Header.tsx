@@ -1,19 +1,19 @@
-import React from "react"
-import styles from "./header.module.css"
-import { Link } from "react-router-dom"
+import React from "react";
+import styles from "./header.module.css";
+import { Link } from "react-router-dom";
 
 const headernameLink = {
   marginLeft: "40px",
   textDecoration: "none",
   color: "black",
   fontSize: "18px",
-}
+};
 
 const newElemementLink = {
   marginRight: "40px",
   textDecoration: "none",
   color: "blue",
-}
+};
 
 export default function Header() {
   return (
@@ -25,5 +25,5 @@ export default function Header() {
         Ny annonse
       </Link>
     </div>
-  )
+  );
 }

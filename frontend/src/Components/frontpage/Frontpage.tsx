@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react"
-import Sidebar from "../sidebar/Sidebar"
-import Header from "../header/Header"
-import MainContent from "../mainContent/MainContent"
-import styles from "./frontpage.module.css"
+import React, { useEffect, useState } from "react";
+import Sidebar from "../sidebar/Sidebar";
+import Header from "../header/Header";
+import MainContent from "../mainContent/MainContent";
+import styles from "./frontpage.module.css";
 
 export default function Frontpage() {
-  const mql = window.matchMedia("(max-width: 1150px)")
-  const [viewMatch, setViewMatch] = useState(mql.matches)
+  const mql = window.matchMedia("(max-width: 1150px)");
+  const [viewMatch, setViewMatch] = useState(mql.matches);
 
   useEffect(() => {
     function handleResize() {
-      setViewMatch(mql.matches)
+      setViewMatch(mql.matches);
     }
 
-    window.addEventListener("resize", handleResize)
-  })
+    window.addEventListener("resize", handleResize);
+  });
 
   return (
     <>
@@ -26,5 +26,5 @@ export default function Frontpage() {
         <MainContent />
       </div>
     </>
-  )
+  );
 }
