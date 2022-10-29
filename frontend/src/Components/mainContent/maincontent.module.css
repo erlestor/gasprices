@@ -34,7 +34,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
-  width: 100%;  
+  width: 100%;
 }
 .searchIcon {
   background-color: var(--secondary-color);
@@ -163,12 +163,11 @@
 
   .cardArea {
     font-size: 12px;
-  } 
+  }
 
   .main {
     width: 100%;
   }
-
 }
 
 .stationsContainer {
