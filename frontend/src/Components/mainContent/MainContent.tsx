@@ -6,6 +6,7 @@ import esso from "../../Images/esso.png";
 import shell from "../../Images/shell.jpg";
 import unoX from "../../Images/uno-x.png";
 import styles from "./maincontent.module.css";
+import Filter from "./filterEl"
 
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
 import { GasStation, GetGasStationsData } from "../../graphql/types";
@@ -19,11 +20,12 @@ export default function MainContent() {
   const { error, loading, data, fetchMore, refetch } =
     useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
-        city: filterState.cities[0],
+        city: filterState.city,
         maxPrice: filterState.maxPrice,
         nameSearch: filterState.nameSearch,
         limit: 12,
-        sortBy: "latestPrice",
+        sortBy: filterState.sortBy,
+        sortDirection: filterState.sortDirection
       },
     });
 
@@ -45,9 +47,12 @@ export default function MainContent() {
 
   return (
     <div className={styles.main}>
-      <div className={styles.searchDiv}>
-        <input type="text" placeholder="Search..."></input>
-        <BsSearch className={styles.searchIcon} />
+      <div className={styles.filterDiv}>
+        <div className={styles.searchDiv}>
+          <input type="text" placeholder="Search..."></input>
+          <BsSearch className={styles.searchIcon} />
+          </div>
+          <Filter />
       </div>
       <div className={styles.mainContent}>
         {data && data.gasStations.map((gasStation) => gasStationEl(gasStation))}

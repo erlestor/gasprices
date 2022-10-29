@@ -16,9 +16,8 @@
 }
 
 .main input {
-  width: 550px;
-  height: 30px;
-  margin-bottom: 70px;
+  width: 500px;
+  height: 37px;
   border-radius: 0px;
   border: 1px solid var(--third-color);
   padding-left: 20px;
@@ -29,18 +28,25 @@
   outline: none;
 }
 
+.filterDiv {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 80px;
+  margin-bottom: 40px;
+}
 .searchIcon {
   background-color: var(--secondary-color);
   color: white;
-  padding: 7px 8px;
+  padding: 10.6px 9px;
   vertical-align: middle;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
 
+
 .mainContent {
   display: grid;
-  margin: 0 50px;
+  margin: 0 80px;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   justify-items: stretch;
   gap: 1rem;
@@ -116,9 +122,26 @@
   font-size: 16px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1150px) {
   .main input {
     width: 350px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .filterDiv {
+    flex-wrap: wrap;
+  }
+
+  .searchDiv {
+    width: 100%;
+  }
+  .main input {
+    width: calc(100% - 35px);
+  }
+
+  .filters {
+    width: 100%;
   }
 }
 
@@ -126,10 +149,9 @@
   .main {
     margin-left: 57px;
   }
-  .searchDiv {
-    margin-bottom: 30px;
-  }
 }
+
+
 @media only screen and (max-width: 550px) {
   .main {
     margin-left: 40px;
@@ -157,13 +179,12 @@
   .main {
     width: 100%;
   }
-}
 
-@media only screen and (max-width: 500px) {
-  .main input {
-    width: 200px;
+  .filterDiv {
+    margin: 0px 20px 30px 20px;
   }
 }
+
 
 .stationsContainer {
   display: flex;

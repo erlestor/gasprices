@@ -7,7 +7,7 @@ import { GasStationModel, GasPriceModel } from "./dbService";
 const resolvers = {
   Query: {
     gasStations: async (_, args) => {
-      const { maxPrice, minPrice, city, limit, sortBy, nameSearch, skip } = args;
+      const { maxPrice, minPrice, city, limit, sortBy, sortDirection, nameSearch, skip } = args;
       const priceQuery = {
         ...(maxPrice && { $lte: maxPrice }),
         ...(minPrice && { $gte: minPrice }),
@@ -18,7 +18,7 @@ const resolvers = {
         ...(nameSearch && { name: { $regex: nameSearch, $options: "i" } }),
       };
       return GasStationModel.find(query)
-        .sort({ [sortBy]: "asc" })
+        .sort({ [sortBy]: sortDirection })
         .skip(skip)
         .limit(limit) as any;
     },
