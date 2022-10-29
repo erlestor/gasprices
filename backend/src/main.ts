@@ -44,7 +44,11 @@ const resolvers = {
     createGasPrice: async (_, args) => {
       const { gasStation } = args
       // TODO: make it a transaction
-      const gasPrice = new GasPriceModel(args)
+      const gasPrice = new GasPriceModel({
+        ...args,
+        // get current milliseconds since epoch
+        createdAt: new Date().getTime()
+      })
       await gasPrice.save()
       // update latest price on GasStation
       return GasStationModel.updateOne(

@@ -12,7 +12,7 @@ export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
   console.log(filterState);
 
-  const { error, loading, data, fetchMore, refetch } =
+  const { error, loading, data, fetchMore, refetch  } =
     useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
         city: filterState.cities[0],
