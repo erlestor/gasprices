@@ -12,6 +12,7 @@ format-check:
     - npm run prettier:check
   
 e2e-testing:
+  image: cypress/base:16
   stage: e2e
   script:
     - cd backend
