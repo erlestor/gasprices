@@ -43,14 +43,14 @@ describe("DrivstoffNetsiden filter, sort and searching", () => {
       });
       expect(prices).to.deep.equal(sortedPrices);
     };
-    cy.get(".maincontent_cardPrice__3tJ-8").then((elements) => {
+    cy.get("[data-cy='cardPrice']").then((elements) => {
       verifyOrdering("asc", elements);
 
       // change filter from pricing increasing to decreasing
       cy.get("#filters").select("latestPrice|DESC");
       // wait for the elements to be updated
       cy.wait(100);
-      cy.get(".maincontent_cardPrice__3tJ-8").then((elements) => {
+      cy.get("[data-cy='cardPrice']").then((elements) => {
         verifyOrdering("desc", elements);
       });
     });
@@ -68,7 +68,7 @@ describe("add new gas price to gas station", () => {
     cy.get("#lastPriceText").then(el => {
       const lastPrice = parseFloat(el.text())
       cy.get('#price').type((lastPrice + 1).toString())
-      cy.get('.additem_submit__7EaR7').click()
+      cy.get('[type="submit"]').click()
       cy.contains((lastPrice + 1).toString())
       cy.get('#lastPriceText').then(el => {
         expect(parseFloat(el.text())).to.equal(lastPrice + 1)

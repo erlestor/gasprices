@@ -108,7 +108,7 @@ function gasStationEl(gasStation: GasStation) {
             <span className={styles.cardArea}>{gasStation.city}</span>
           </div>
           <div className={styles.cardPriceDiv}>
-            <span className={styles.cardPrice}>
+            <span data-cy="cardPrice" className={styles.cardPrice}>
               {formatPrice(gasStation.latestPrice)}
             </span>
           </div>
