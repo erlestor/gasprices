@@ -44,7 +44,7 @@ export default function MainContent() {
   }
 
   return (
-    <div className={styles.main}>
+    <main className={styles.main}>
       <SearchInputEl />
       {data && (
         <InfiniteScroll
@@ -59,7 +59,7 @@ export default function MainContent() {
           endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
         />
       )}
-    </div>
+    </main>
   );
 }
 

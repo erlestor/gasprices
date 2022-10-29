@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+// run with a test database with generated test data
 describe("DrivstoffNetsiden", () => {
   it("it should be able to filter by city", () => {
     // clear localstorage
@@ -9,18 +10,18 @@ describe("DrivstoffNetsiden", () => {
     cy.get("#header");
 
     // get the cities of the gas stations currently displayed
-    const cities = [];
-    for (let i = 1; i <= 10; i++) {
-      cy.get(
-        ":nth-child(" +
-          i +
-          ") > .maincontent_cardInformation__RQA3X > .maincontent_cardAreaDiv__Ko6Dy > .maincontent_cardArea__Gd4Eu"
-      ).then(el => {
-        cities.push(el.text());
-      });
-    }
-    cy.wait(1000);
     cy.get("#filterIcon").click();
     cy.get("#Oslo").click();
+    ["Trondheim", "Bergen", "Stavanger", "Tromsø"].forEach((city) => {
+      cy.get("main").contains(city).should("not.exist");
+    });
+    cy.get("main").contains("Oslo")
+
+    // filter by search
+    cy.get("#searchInput").type("Shell");
+    ["Shell", "Statoil", "Circle K", "Esso"].forEach(gasStation => {
+      cy.get("main").contains(gasStation).should("not.exist");
+    })
+    cy.get("main").contains("Shell").should("exist");
   });
 });
