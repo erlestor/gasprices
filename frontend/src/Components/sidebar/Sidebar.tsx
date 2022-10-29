@@ -2,19 +2,24 @@ import { useReactiveVar } from "@apollo/client";
 import React, { useState } from "react";
 import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
 import { filterStateVar, resetFilterState } from "../../state/filterState";
+import { debounce } from "../../service/debounce";
 import styles from "./sidebar.module.css";
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
   const filterState = useReactiveVar(filterStateVar);
 
+  const updateDebouncePrice = debounce((price: number) => {
+    filterStateVar({
+      ...filterStateVar(),
+      maxPrice: price,
+    });
+  }, 100);
+
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    filterStateVar({
-      ...filterStateVar(),
-      maxPrice: parseFloat(event.target.value),
-    });
+    updateDebouncePrice(parseFloat(event.target.value));
   };
 
   const handleCityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -91,7 +96,6 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                 min="10"
                 max="30"
                 step={0.1}
-                value={filterState.maxPrice}
                 onChange={handlePriceSliderChange}
               />
             </div>

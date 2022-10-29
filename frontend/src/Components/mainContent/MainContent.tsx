@@ -1,6 +1,5 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
-import { BsSearch } from "react-icons/bs";
 import circleK from "../../Images/circleK.png";
 import esso from "../../Images/esso.png";
 import shell from "../../Images/shell.jpg";
@@ -8,13 +7,16 @@ import unoX from "../../Images/uno-x.png";
 import styles from "./maincontent.module.css";
 import Filter from "./filterEl";
 
+import InfiniteScroll from "react-infinite-scroll-component";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
 import { GasStation, GetGasStationsData } from "../../graphql/types";
+import { hasMoreVar, limit } from "../../state/endlessScrollState";
 import { filterStateVar } from "../../state/filterState";
-import { NOTFOUND } from "dns";
+import { SearchInputEl } from "./searchInputEl";
 
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
+  const hasMore = useReactiveVar(hasMoreVar);
   console.log(filterState);
 
   const { error, loading, data, fetchMore, refetch } =
@@ -23,14 +25,15 @@ export default function MainContent() {
         city: filterState.city,
         maxPrice: filterState.maxPrice,
         nameSearch: filterState.nameSearch,
-        limit: 12,
         sortBy: filterState.sortBy,
         sortDirection: filterState.sortDirection,
+        limit,
       },
     });
 
   useEffect(() => {
     refetch();
+    hasMoreVar(true);
   }, [filterState]);
 
   function loadMoreData() {
@@ -47,17 +50,21 @@ export default function MainContent() {
 
   return (
     <div className={styles.main}>
-      <div className={styles.filterDiv}>
-        <div className={styles.searchDiv}>
-          <input type="text" placeholder="Search..."></input>
-          <BsSearch className={styles.searchIcon} />
-        </div>
-        <Filter />
-      </div>
-      <div className={styles.mainContent}>
-        {data && data.gasStations.map((gasStation) => gasStationEl(gasStation))}
-      </div>
-      <button onClick={loadMoreData}>Last mer</button>
+      <SearchInputEl />
+      <Filter />
+      {data && (
+        <InfiniteScroll
+          className={styles.mainContent}
+          next={loadMoreData}
+          hasMore={hasMore}
+          children={data.gasStations.map((gasStation) =>
+            gasStationEl(gasStation)
+          )}
+          loader={<h4>Loading...</h4>}
+          dataLength={data.gasStations.length}
+          endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
+        />
+      )}
     </div>
   );
 }
@@ -66,12 +73,12 @@ function formatPrice(number: number | undefined): string {
   if (!number) {
     return "Ingen pris";
   }
-  return number.toFixed(2);
+  return number.toFixed(2) + "kr";
 }
 
 function gasStationEl(gasStation: GasStation) {
   return (
-    <div className={styles.cardStyle}>
+    <div key={gasStation.id} className={styles.cardStyle}>
       <div className={styles.imageDiv}>
         <img
           className={styles.cardStyleImage}

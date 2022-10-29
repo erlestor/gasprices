@@ -114,6 +114,7 @@
 .sideBarCategoryRange input {
   margin-top: 9px;
   width: 100%;
+  cursor: pointer;
 }
 
 .filterIcon {

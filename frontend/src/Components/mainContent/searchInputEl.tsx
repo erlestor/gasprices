@@ -1,6 +1,6 @@
 import { BsSearch } from "react-icons/bs";
 import { filterStateVar } from "../../state/filterState";
-import { debounce } from "./debounce";
+import { debounce } from "../../service/debounce";
 import styles from "./searchInputEl.module.css";
 
 export function SearchInputEl() {
@@ -11,7 +11,7 @@ export function SearchInputEl() {
     });
   }, 300);
 
-  const handleSearchElChange = (e: any) => {
+  const handleSearchElChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateDebounceText(e.target.value);
   };
 
