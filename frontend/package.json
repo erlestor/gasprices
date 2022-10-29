@@ -29,6 +29,7 @@
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check \"src/**/*.{tsx,ts,css}\"",
     "prettier:write": "prettier --write \"src/**/*.{tsx,ts,css}\"",
+    "pwgp": "npm run prettier:write && git add . && git commit -m \"prettier\" && git push",
     "gen:types": "npx apollo client:codegen --target typescript --inludes **/*.graphql.ts --excludes **/__generated__/**"
   },
   "eslintConfig": {
