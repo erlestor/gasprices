@@ -30,7 +30,8 @@
     "prettier:check": "prettier --check \"src/**/*.{tsx,ts,css}\"",
     "prettier:write": "prettier --write \"src/**/*.{tsx,ts,css}\"",
     "pwgp": "npm run prettier:write && git add . && git commit -m \"prettier\" && git push",
-    "gen:types": "npx apollo client:codegen --target typescript --inludes **/*.graphql.ts --excludes **/__generated__/**"
+    "cypress": "cypress open",
+    "e2e": "wait-on http://localhost:3000/ && wait-on http://localhost:8080/swagger-ui/index.html && cypress run --headless"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +52,8 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "cypress": "^10.11.0",
+    "prettier": "^2.7.1",
+    "wait-on": "^6.0.1"
   }
 }
