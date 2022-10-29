@@ -17,13 +17,13 @@ async function populateDb() {
     "Bodø",
   ];
 
-  const names = ["Shell", "Circle K", "Statoil", "Q8", "Agip", "Esso"];
+  const names = ["Shell", "Circle K", "Esso", "Uno-X"];
 
   // generate 500 gas stations
   for (let i = 0; i < 500; i++) {
     console.log("Creating gas station", i);
     const gasStation = new GasStationModel({
-      name: `${i} - ${pick(names)}`,
+      name: `${pick(names)}`,
       city: pick(cities),
       latestPrice: 17 + Math.random() * 10,
     });

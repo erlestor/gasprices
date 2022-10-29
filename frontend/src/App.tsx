@@ -11,6 +11,7 @@ import {
 import { onError } from "@apollo/client/link/error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddItemPage from "./Components/addItem/AddItemPage";
+import { hasMoreVar, limit } from "./state/endlessScrollState";
 
 //Error handling from the Apollo docs: Advanced Error Handling
 //https://www.apollographql.com/docs/react/data/error-handling/
@@ -40,6 +41,10 @@ const client = new ApolloClient({
           gasStations: {
             keyArgs: false,
             merge(existing: [], incoming: [], { args: { skip = 0 } }: any) {
+              // if number of items is less than limit, there are no more items to fetch
+              if (incoming.length < limit) {
+                hasMoreVar(false);
+              }
               // Slicing is necessary because the existing data is
               // immutable, and frozen in development.
               const merged = existing ? existing.slice(0) : [];
