@@ -2,19 +2,26 @@ import { useReactiveVar } from "@apollo/client";
 import React, { useState } from "react";
 import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
 import { filterStateVar, resetFilterState } from "../../state/filterState";
+import { debounce } from "../../service/debounce";
 import styles from "./sidebar.module.css";
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
+  const [sliderVal, setSliderVal] = useState<number | undefined>(undefined);
   const filterState = useReactiveVar(filterStateVar);
+
+  const updateDebouncePrice = debounce((price: number) => {
+    filterStateVar({
+      ...filterStateVar(),
+      maxPrice: price,
+    });
+  }, 1000);
 
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    filterStateVar({
-      ...filterStateVar(),
-      maxPrice: parseInt(event.target.value),
-    });
+    setSliderVal(parseInt(event.target.value));
+    updateDebouncePrice(parseInt(event.target.value));
   };
 
   const handleCityChange = (e: any) => {
@@ -86,14 +93,14 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
             </div>
             <div className={styles.sideBarCategoryRange}>
               <h5>Maks pris</h5>
-              <span>{filterState.maxPrice} kr</span>
+              <span>{sliderVal} kr</span>
               <input
                 type="range"
                 id="price"
                 name="price"
                 min="0"
                 max="100"
-                value={filterState.maxPrice}
+                value={sliderVal}
                 onChange={handlePriceSliderChange}
               />
             </div>
