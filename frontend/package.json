@@ -16,6 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "recharts": "^2.1.16",
@@ -29,7 +30,9 @@
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check \"src/**/*.{tsx,ts,css}\"",
     "prettier:write": "prettier --write \"src/**/*.{tsx,ts,css}\"",
-    "gen:types": "npx apollo client:codegen --target typescript --inludes **/*.graphql.ts --excludes **/__generated__/**"
+    "pwgp": "npm run prettier:write && git add . && git commit -m \"prettier\" && git push",
+    "cypress": "cypress open",
+    "e2e": "wait-on http://localhost:3000/ && wait-on http://localhost:8080/swagger-ui/index.html && cypress run --headless"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +53,8 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "cypress": "^10.11.0",
+    "prettier": "^2.7.1",
+    "wait-on": "^6.0.1"
   }
 }

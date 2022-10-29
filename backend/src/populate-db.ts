@@ -17,7 +17,7 @@ async function populateDb() {
     "Bodø",
   ];
 
-  const names = ["Shell", "Circle K", "Statoil", "Q8", "Agip", "Esso"];
+  const names = ["Shell", "Circle K", "Esso", "Uno-X"];
 
   // generate 500 gas stations
   for (let i = 0; i < 500; i++) {
