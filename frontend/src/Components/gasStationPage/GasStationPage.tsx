@@ -12,7 +12,7 @@ import PricesGraph from "./PricesGraph";
 export function GasStationPage() {
   const { id } = useParams();
 
-  const { error, loading, data } = useQuery<GetGasStationData>(
+  const { error, loading, data, refetch } = useQuery<GetGasStationData>(
     GET_GAS_STATION,
     {
       variables: {
@@ -46,7 +46,7 @@ export function GasStationPage() {
             {data.gasStation.prices && data.gasStation.prices.length > 0 && (
               <PricesGraph data={data} />
             )}
-            <AddItem id={data?.gasStation.id} />
+            <AddItem id={data?.gasStation.id} refetch={refetch} />
           </>
         )}
       </div>

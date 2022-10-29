@@ -10,6 +10,7 @@ import { GasStation, GetGasStationsData } from "../../types";
 import { hasMoreVar, limit } from "../../state/endlessScrollState";
 import { filterStateVar } from "../../state/filterState";
 import { SearchInputEl } from "./searchInputEl";
+import { Link } from "react-router-dom";
 
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
@@ -73,6 +74,7 @@ function formatPrice(number: number | undefined): string {
 
 function gasStationEl(gasStation: GasStation) {
   return (
+    <Link to={`/station/${gasStation.id}`} className={styles.cardLink}>
     <div key={gasStation.id} className={styles.cardStyle}>
       <div className={styles.imageDiv}>
         <img
@@ -93,5 +95,6 @@ function gasStationEl(gasStation: GasStation) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }

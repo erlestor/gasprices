@@ -5,10 +5,11 @@ import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql";
 import styles from "./additem.module.css";
 
 type Props = {
-  id: string;
+  id: string
+  refetch: (variables: {id: string}) => void
 };
 
-export default function AddItem({ id }: Props) {
+export default function AddItem({ id, refetch }: Props) {
   const [price, setPrice] = React.useState<number | null>(null);
 
   const [createGasPrice, { data, loading, error }] =
@@ -27,6 +28,8 @@ export default function AddItem({ id }: Props) {
     if (loading) {
       return <AiOutlineLoading3Quarters />;
     }
+    refetch({id: id})
+    setPrice(null)
   };
 
   return (

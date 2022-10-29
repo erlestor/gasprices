@@ -172,3 +172,8 @@
   width: 30px;
   height: 30px;
 }
+
+.cardLink {
+  text-decoration: none;
+  color: black;
+}
