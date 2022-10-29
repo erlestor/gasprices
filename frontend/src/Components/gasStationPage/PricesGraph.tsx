@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   Area,
   AreaChart,
@@ -8,15 +8,15 @@ import {
   YAxis,
   Tooltip,
   Legend,
-} from "recharts"
-import { Datapoint, GetGasStationData, GasPrice } from "../../types"
+} from "recharts";
+import { Datapoint, GetGasStationData, GasPrice } from "../../types";
 
 type Props = {
-  data: GetGasStationData | undefined
-}
+  data: GetGasStationData | undefined;
+};
 
 const PricesGraph = ({ data }: Props) => {
-  const color = "#523EE8"
+  const color = "#523EE8";
 
   const formatDate = (date: Date) => {
     return (
@@ -26,25 +26,25 @@ const PricesGraph = ({ data }: Props) => {
       (date.getMonth() + 1) +
       "/" +
       date.getFullYear()
-    )
-  }
+    );
+  };
 
   const getGraphData = (data: GetGasStationData) => {
-    const graphData: Datapoint[] = []
-    const prices = data.gasStation.prices!
+    const graphData: Datapoint[] = [];
+    const prices = data.gasStation.prices!;
 
     prices.forEach((price: GasPrice) => {
-      const date = new Date(price.createdAt)
-      const formattedDate = formatDate(date)
+      const date = new Date(price.createdAt);
+      const formattedDate = formatDate(date);
 
       graphData.push({
         name: formattedDate,
         price: parseFloat(price.price.toFixed(2)),
-      })
-    })
+      });
+    });
 
-    return graphData
-  }
+    return graphData;
+  };
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -69,7 +69,7 @@ const PricesGraph = ({ data }: Props) => {
         />
       </AreaChart>
     </ResponsiveContainer>
-  )
-}
+  );
+};
 
-export default PricesGraph
+export default PricesGraph;
