@@ -90,17 +90,14 @@ function gasStationEl(gasStation: GasStation) {
 }
 
 function findImage(brandName: string): string | undefined {
-  if(brandName == "Esso") {
-    return esso
+  if (brandName == "Esso") {
+    return esso;
+  } else if (brandName == "Shell") {
+    return shell;
+  } else if (brandName == "Circle K") {
+    return circleK;
+  } else if (brandName == "Uno-X") {
+    return unoX;
   }
-  else if(brandName == "Shell") {
-    return shell
-  }
-  else if(brandName == "Circle K") {
-    return circleK
-  }
-  else if(brandName == "Uno-X") {
-    return unoX
-  }
-  return shell
+  return shell;
 }
