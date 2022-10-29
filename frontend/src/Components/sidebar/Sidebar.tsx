@@ -56,11 +56,12 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
     >
       {menuCollapse ? (
         <BsFilterLeft
+          id="filterIcon"
           className={styles.filterIcon}
           onClick={() => setMenuCollapse(false)}
         />
       ) : (
-        <div className={styles.sideBarWrapper}>
+        <div id="sideBar" className={styles.sideBarWrapper}>
           <div
             onClick={() => setMenuCollapse(true)}
             className={styles.sideBarHeader}
@@ -82,6 +83,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                   className={styles.sideBarCategoryChoiceCheckBox}
                 >
                   <input
+                    id={city}
                     type="checkbox"
                     name={city}
                     checked={filterState.cities.includes(city)}

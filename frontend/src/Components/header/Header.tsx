@@ -17,7 +17,7 @@ const newElemementLink = {
 
 export default function Header() {
   return (
-    <div className={styles.header}>
+    <div id="header" className={styles.header}>
       <Link to="/" style={headernameLink}>
         Headername
       </Link>
