@@ -1,16 +1,20 @@
 import { makeVar } from "@apollo/client";
 
 export interface FilterOptions {
-  cities: string[];
+  city?: string;
   maxPrice?: number;
   nameSearch: string;
+  sortBy: "latestPrice" | "name";
+  sortDirection: "ASC" | "DESC";
 }
 
 function getDefaultFilterState(): FilterOptions {
   return {
-    cities: [],
-    maxPrice: undefined,
+    city: undefined,
+    maxPrice: 30,
     nameSearch: "",
+    sortBy: "latestPrice",
+    sortDirection: "ASC",
   };
 }
 

@@ -10,13 +10,16 @@
 .main {
   display: flex;
   flex-direction: column;
+  text-align: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin: 0px 80px;
+  margin-top: 40px;
 }
 
 .main input {
-  width: 550px;
-  height: 30px;
+  width: 500px;
+  height: 37px;
   border-radius: 0px;
   border: 1px solid var(--third-color);
   padding-left: 20px;
@@ -27,10 +30,16 @@
   outline: none;
 }
 
+.filterDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  width: 100%;
+}
 .searchIcon {
   background-color: var(--secondary-color);
   color: white;
-  padding: 7px 8px;
+  padding: 10.6px 9px;
   vertical-align: middle;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
@@ -38,7 +47,6 @@
 
 .mainContent {
   display: grid;
-  margin: 0 50px;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   justify-items: stretch;
   gap: 1rem;
@@ -75,10 +83,9 @@
 .cardAreaDiv {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   align-self: center;
   flex-wrap: wrap;
-  width: 70px;
   height: 45px;
   margin-left: 20px;
 }
@@ -86,6 +93,8 @@
 .cardAreaDiv span {
   display: block;
   align-items: center;
+  text-align: left;
+  width: 100%;
 }
 
 .cardPriceDiv {
@@ -100,7 +109,7 @@
 
 .cardBrand {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .cardArea {
@@ -110,26 +119,35 @@
 
 .cardPrice {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1150px) {
   .main input {
     width: 350px;
   }
 }
 
-@media only screen and (max-width: 800px) {
-  .main {
-    margin-left: 57px;
+@media only screen and (max-width: 1000px) {
+  .filterDiv {
+    flex-wrap: wrap;
   }
-  .searchDiv {
-    margin-bottom: 30px;
+
+  .main input {
+    width: calc(100% - 35px);
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .main {
+    margin-left: 137px;
+  }
+}
+
 @media only screen and (max-width: 550px) {
   .main {
-    margin-left: 40px;
+    margin-left: 60px;
+    margin-right: 20px;
   }
   .mainContent {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -147,18 +165,8 @@
     font-size: 12px;
   }
 
-  .mainContent {
-    margin: 0px 20px;
-  }
-
   .main {
     width: 100%;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .main input {
-    width: 200px;
   }
 }
 

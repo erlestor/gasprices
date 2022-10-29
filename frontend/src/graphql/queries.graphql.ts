@@ -8,6 +8,7 @@ export const GET_GAS_STATIONS = gql`
     $limit: Int
     $skip: Int
     $sortBy: String
+    $sortDirection: String
     $nameSearch: String
   ) {
     gasStations(
@@ -17,6 +18,7 @@ export const GET_GAS_STATIONS = gql`
       limit: $limit
       skip: $skip
       sortBy: $sortBy
+      sortDirection: $sortDirection
       nameSearch: $nameSearch
     ) {
       id
