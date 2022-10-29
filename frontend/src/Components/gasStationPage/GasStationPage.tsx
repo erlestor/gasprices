@@ -50,7 +50,7 @@ export function GasStationPage() {
                   <span id="lastPriceText">
                     {
                       data.gasStation.prices[data.gasStation.prices?.length - 1]
-                        .price
+                        .price.toFixed(2)
                     }
                   </span>{" "}
                   kr
