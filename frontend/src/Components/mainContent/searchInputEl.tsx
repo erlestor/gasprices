@@ -9,7 +9,7 @@ export function SearchInputEl() {
       ...filterStateVar(),
       nameSearch: text,
     });
-  }, 300);
+  }, 200);
 
   const handleSearchElChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateDebounceText(e.target.value);
@@ -18,6 +18,7 @@ export function SearchInputEl() {
   return (
     <div className={styles.searchDiv}>
       <input
+        id="searchInput"
         type="text"
         placeholder="Search..."
         onChange={handleSearchElChange}

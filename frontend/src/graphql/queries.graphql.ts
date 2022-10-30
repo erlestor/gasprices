@@ -25,10 +25,6 @@ export const GET_GAS_STATIONS = gql`
       name
       city
       latestPrice
-      prices {
-        id
-        price
-      }
     }
   }
 `;

@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { GET_GAS_STATION } from "../../graphql/queries.graphql";
-import { Datapoint, GetGasStationData, GasStation } from "../../types";
+import { GetGasStationData } from "../../types";
 import AddItem from "../addItem/AddItem";
 import Header from "../header/Header";
 import styles from "./gasStationPage.module.css";
@@ -16,7 +15,7 @@ export function GasStationPage() {
     GET_GAS_STATION,
     {
       variables: {
-        id: id,
+        id,
       },
     }
   );
@@ -44,7 +43,18 @@ export function GasStationPage() {
         {data && data?.gasStation && (
           <>
             {data.gasStation.prices && data.gasStation.prices.length > 0 && (
-              <PricesGraph data={data} />
+              <>
+                <PricesGraph data={data} />
+                <h3>
+                  Siste registrerte pris:{" "}
+                  <span id="lastPriceText">
+                    {data.gasStation.prices[
+                      data.gasStation.prices?.length - 1
+                    ].price.toFixed(2)}
+                  </span>{" "}
+                  kr
+                </h3>
+              </>
             )}
             <AddItem id={data?.gasStation.id} refetch={refetch} />
           </>

@@ -5,7 +5,7 @@ import { FaGasPump } from "react-icons/fa";
 
 export default function Header() {
   return (
-    <header className={styles.header}>
+    <header id="header" className={styles.header}>
       <FaGasPump className={styles.pumpIcon} />
       <Link to="/" className={styles.headerNameLink}>
         DrivstoffNettsiden

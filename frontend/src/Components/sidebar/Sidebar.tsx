@@ -49,11 +49,12 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
     >
       {menuCollapse ? (
         <BsFilterLeft
+          id="filterIcon"
           className={styles.filterIcon}
           onClick={() => setMenuCollapse(false)}
         />
       ) : (
-        <div className={styles.sideBarWrapper}>
+        <div id="sideBar" className={styles.sideBarWrapper}>
           <div
             onClick={() => setMenuCollapse(true)}
             className={styles.sideBarHeader}
@@ -79,7 +80,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                     id={city}
                     name="cities"
                     value={city}
-                    checked={filterState.city == city}
+                    checked={filterState.city === city}
                     onChange={handleCityChange}
                   />
                   <label htmlFor={city}>{city}</label>

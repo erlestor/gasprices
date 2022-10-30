@@ -2,6 +2,7 @@ image: node:latest
 
 stages:
   - formating
+  - e2e
 
 format-check:
   stage: formating
@@ -9,3 +10,15 @@ format-check:
     - cd frontend
     - npm install
     - npm run prettier:check
+  
+e2e-testing:
+  image: cypress/base:16
+  stage: e2e
+  script:
+    - cd backend
+    - npm ci
+    - npm start &
+    - cd ../frontend
+    - npm ci
+    - npm start &
+    - npm run e2e
