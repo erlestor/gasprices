@@ -19,9 +19,8 @@ import { useEffect } from "react";
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
   const hasMore = useReactiveVar(hasMoreVar);
-  console.log(filterState);
 
-  const { error, loading, data, fetchMore, refetch } =
+  const { error, loading, data, fetchMore } =
     useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
         city: filterState.city,
@@ -92,6 +91,7 @@ function gasStationEl(gasStation: GasStation) {
       key={gasStation.id}
       to={`/station/${gasStation.id}`}
       className={styles.cardLink}
+      data-testid="gasStationEl"
     >
       <div className={styles.cardStyle}>
         <div className={styles.imageDiv}>
