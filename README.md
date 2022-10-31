@@ -27,7 +27,7 @@ Den siste prisen på en bensinstasjon er både lagret som et atttributt på GasS
 
 
 ## Testing
-- JUnit
+- Unit
 - e2e Cypress
 
 
