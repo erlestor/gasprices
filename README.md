@@ -14,4 +14,3 @@
 - cd frontend
 - npm i
 - npm test
--
