@@ -7,8 +7,7 @@ import { GasStationPage } from "../Components/gasStationPage/GasStationPage";
 import AddItem from "../Components/addItem/AddItem";
 import { CREATE_GAS_PRICE } from "../graphql/mutations.graphql";
 
-it("should find loading and updated price", () => {
-  const price = { gasStationId: "635cfcafe0c44e3883108e14", price: 15 };
+const price = { gasStationId: "635cfcafe0c44e3883108e14", price: 15 };
   const mocks = [
     {
       request: {
@@ -22,15 +21,18 @@ it("should find loading and updated price", () => {
     },
   ];
 
+
+it("should find the new price", async () => {
+
   render(
-    <MockedProvider mocks={mocks}>
+    <MockedProvider mocks={mocks} addTypename={false}>
       <AddItem id={price.gasStationId} refetch={() => {}} />
     </MockedProvider>
   );
 
-  const priceInput = screen.getByPlaceholderText("ny pris");
+  const priceInput = await screen.getByPlaceholderText("ny pris");
   userEvent.type(priceInput, "15");
-  const submitButton = screen.getByText("Legg til ny pris");
+  const submitButton = await screen.getByText("Legg til ny pris");
   userEvent.click(submitButton);
 
   // expect to have loading icon
