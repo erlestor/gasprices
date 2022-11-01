@@ -42,8 +42,7 @@ export default function MainContent() {
         sortDirection: filterState.sortDirection,
         limit,
       },
-    }
-  )
+    });
 
   useEffect(() => {
     endlessScrollHasMoreElementsVar(true);
@@ -54,11 +53,11 @@ export default function MainContent() {
       variables: {
         skip: data?.gasStations.length,
       },
-    })
+    });
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>
+    return <div>Error: {error.message}</div>;
   }
 
   return (
@@ -88,7 +87,7 @@ export default function MainContent() {
         <h4 className="center margin">Ingen flere bensinstasjoner ⛽</h4>
       )}
     </main>
-  )
+  );
 }
 
 /**
@@ -99,9 +98,9 @@ export default function MainContent() {
 
 function formatPrice(number: number | undefined): string {
   if (!number) {
-    return "Ingen pris"
+    return "Ingen pris";
   }
-  return number.toFixed(2) + "kr"
+  return number.toFixed(2) + "kr";
 }
 
 /**
@@ -141,7 +140,7 @@ function gasStationEl(gasStation: GasStation) {
         </div>
       </div>
     </Link>
-  )
+  );
 }
 
 /**
@@ -151,13 +150,13 @@ function gasStationEl(gasStation: GasStation) {
  */
 function findImage(brandName: string): string | undefined {
   if (brandName === "Esso") {
-    return esso
+    return esso;
   } else if (brandName === "Shell") {
-    return shell
+    return shell;
   } else if (brandName === "Circle K") {
-    return circleK
+    return circleK;
   } else if (brandName === "Uno-X") {
-    return unoX
+    return unoX;
   }
   return noimage;
 }

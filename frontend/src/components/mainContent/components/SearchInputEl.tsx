@@ -37,5 +37,5 @@ export function SearchInputEl() {
         <BsSearch className={styles.searchIcon} />
       </div>
     </div>
-  )
+  );
 }

@@ -1,19 +1,19 @@
-import { MockedProvider } from "@apollo/client/testing"
-import MainContent from "../components/mainContent/MainContent"
-import { render, screen, waitFor } from "@testing-library/react"
-import { GET_GAS_STATIONS } from "../graphql/queries.graphql"
-import { limit } from "../state/endlessScrollState"
-import { GasStation } from "../types"
-import { BrowserRouter } from "react-router-dom"
+import { MockedProvider } from "@apollo/client/testing";
+import MainContent from "../components/mainContent/MainContent";
+import { render, screen, waitFor } from "@testing-library/react";
+import { GET_GAS_STATIONS } from "../graphql/queries.graphql";
+import { limit } from "../state/endlessScrollState";
+import { GasStation } from "../types";
+import { BrowserRouter } from "react-router-dom";
 
-const gasStationMocks: GasStation[] = []
+const gasStationMocks: GasStation[] = [];
 for (let i = 0; i < limit; i++) {
   gasStationMocks.push({
     id: i.toString(),
     name: "name",
     city: "city",
     latestPrice: 1,
-  })
+  });
 }
 
 describe("Data fetching", () => {
@@ -30,7 +30,7 @@ describe("Data fetching", () => {
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
       })),
-    })
+    });
     render(
       <MockedProvider
         mocks={[
@@ -59,11 +59,11 @@ describe("Data fetching", () => {
           <MainContent />
         </BrowserRouter>
       </MockedProvider>
-    )
+    );
 
     // expect to have n items
     await waitFor(() =>
       expect(screen.getAllByTestId("gasStationEl")).toHaveLength(limit)
-    )
-  })
-})
+    );
+  });
+});
