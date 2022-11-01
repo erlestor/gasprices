@@ -1,6 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import React from "react";
-import { filterStateVar } from "../../state/filterState";
+import { filterStateVar } from "../../../state/filterState";
 import styles from "./filterEl.module.css";
 
 /**

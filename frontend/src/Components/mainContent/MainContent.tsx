@@ -5,7 +5,6 @@ import esso from "../../Images/esso.png";
 import shell from "../../Images/shell.jpg";
 import unoX from "../../Images/uno-x.png";
 import noimage from "../../Images/noimage.jpg";
-import Filter from "./filterEl";
 import styles from "./maincontent.module.css";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -17,8 +16,11 @@ import {
 } from "../../state/endlessScrollState";
 import { filterStateVar } from "../../state/filterState";
 import { GasStation, GetGasStationsData } from "../../types";
-import { SearchInputEl } from "./searchInputEl";
 import { useEffect } from "react";
+import FilterEl from "./components/FilterEl";
+import { SearchInputEl } from "./components/SearchInputEl";
+
+
 
 export default function MainContent() {
   // Reactive variable used to track filter state
@@ -65,7 +67,7 @@ export default function MainContent() {
     <main className={styles.main}>
       <div className={styles.filterDiv}>
         <SearchInputEl />
-        <Filter />
+        <FilterEl/>
       </div>
       {data && !loading ? (
         <InfiniteScroll

@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { Datapoint, GetGasStationData, GasPrice } from "../../types";
+import { Datapoint, GetGasStationData, GasPrice } from "../../../types";
 
 type Props = {
   data: GetGasStationData | undefined;

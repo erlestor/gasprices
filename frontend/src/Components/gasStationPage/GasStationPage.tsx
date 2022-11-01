@@ -3,10 +3,10 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { GET_GAS_STATION } from "../../graphql/queries.graphql";
 import { GetGasStationData } from "../../types";
-import AddPrice from "../addItem/AddPrice";
+import AddPrice from "../addPrice/AddPrice";
 import Header from "../header/Header";
 import styles from "./gasStationPage.module.css";
-import PricesGraph from "./PricesGraph";
+import PricesGraph from "./components/PricesGraph";
 
 export function GasStationPage() {
   const { id } = useParams();

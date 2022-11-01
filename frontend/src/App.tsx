@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ApolloWrapper from "./ApolloWrapper";
-import Frontpage from "./Components/frontpage/Frontpage";
-import { GasStationPage } from "./Components/gasStationPage/GasStationPage";
+import Frontpage from "./components/frontpage/Frontpage";
+import { GasStationPage } from "./components/gasStationPage/GasStationPage";
 
 function App() {
   return (

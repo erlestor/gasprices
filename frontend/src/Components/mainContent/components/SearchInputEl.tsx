@@ -1,6 +1,6 @@
 import { BsSearch } from "react-icons/bs";
-import { filterStateVar } from "../../state/filterState";
-import { debounce } from "../../service/debounce";
+import { filterStateVar } from "../../../state/filterState";
+import { debounce } from "../../../service/debounce";
 import styles from "./searchInputEl.module.css";
 import { useMemo, useState } from "react";
 
