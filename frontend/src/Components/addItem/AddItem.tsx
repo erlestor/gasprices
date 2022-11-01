@@ -50,7 +50,7 @@ export default function AddItem({ id, refetch }: Props) {
             id="price"
             name="price"
             type="number"
-            value={price ?? ""}
+            step="0.01"
             onChange={(event) => setPrice(parseFloat(event.target.value))}
             placeholder="ny pris"
           ></input>
