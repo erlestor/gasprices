@@ -59,7 +59,7 @@ describe("DrivstoffNetsiden filter, sort and searching", () => {
 
 describe("add new gas price to gas station", () => {
   it("should able to add new gas price to gas station", () => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("http://localhost:3000/project3");
 
     cy.get("#header");
 
