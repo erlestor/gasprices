@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { GasStation } from "./models";
 
 export const GasStationModel = mongoose.model(
   "GasStation",
-  new mongoose.Schema({
+  new mongoose.Schema<GasStation>({
     name: { type: String, required: true },
     city: { type: String, required: true },
     latestPrice: { type: Number, required: true },

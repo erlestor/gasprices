@@ -1,28 +1,39 @@
-import { useQuery, useReactiveVar } from "@apollo/client"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import circleK from "../../Images/circleK.png"
-import esso from "../../Images/esso.png"
-import shell from "../../Images/shell.jpg"
-import unoX from "../../Images/uno-x.png"
-import Filter from "./filterEl"
-import styles from "./maincontent.module.css"
+import { useQuery, useReactiveVar } from "@apollo/client";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import circleK from "../../Images/circleK.png";
+import esso from "../../Images/esso.png";
+import shell from "../../Images/shell.jpg";
+import unoX from "../../Images/uno-x.png";
+import noimage from "../../Images/noimage.jpg";
+import styles from "./maincontent.module.css";
 
-import InfiniteScroll from "react-infinite-scroll-component"
-import { Link } from "react-router-dom"
-import { GET_GAS_STATIONS } from "../../graphql/queries.graphql"
-import { hasMoreVar, limit } from "../../state/endlessScrollState"
-import { filterStateVar } from "../../state/filterState"
-import { GasStation, GetGasStationsData } from "../../types"
-import { SearchInputEl } from "./searchInputEl"
-import { useEffect } from "react"
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
+import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
+import {
+  hasMoreVar as endlessScrollHasMoreElementsVar,
+  limit,
+} from "../../state/endlessScrollState";
+import { filterStateVar } from "../../state/filterState";
+import { GasStation, GetGasStationsData } from "../../types";
+import { useEffect } from "react";
+import { SearchInputEl } from "./components/SearchInputEl";
+import FilterEl from "./components/FilterEl";
 
 export default function MainContent() {
-  const filterState = useReactiveVar(filterStateVar)
-  const hasMore = useReactiveVar(hasMoreVar)
+  // Reactive variable used to track filter state
+  const filterState = useReactiveVar(filterStateVar);
 
-  const { error, loading, data, fetchMore } = useQuery<GetGasStationsData>(
-    GET_GAS_STATIONS,
-    {
+  // Reactive variable which tracks if there are more elements to load
+  const endlessScrollHasMoreElements = useReactiveVar(
+    endlessScrollHasMoreElementsVar
+  );
+
+  /**
+   * Fetches data from graphql server
+   */
+  const { error, loading, data, fetchMore, refetch } =
+    useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
         city: filterState.city,
         maxPrice: filterState.maxPrice,
@@ -35,8 +46,8 @@ export default function MainContent() {
   )
 
   useEffect(() => {
-    hasMoreVar(true)
-  }, [filterState])
+    endlessScrollHasMoreElementsVar(true);
+  }, [filterState]);
 
   function loadMoreData() {
     fetchMore({
@@ -50,34 +61,41 @@ export default function MainContent() {
     return <div>Error: {error.message}</div>
   }
 
-  if (loading) {
-    return <div id="#mainContentLoading">Loading...</div>
-  }
-
   return (
     <main className={styles.main}>
       <div className={styles.filterDiv}>
         <SearchInputEl />
-        <Filter />
+        <FilterEl />
       </div>
-      {data ? (
+      {data && !loading ? (
         <InfiniteScroll
           className={styles.mainContent}
           next={loadMoreData}
-          hasMore={hasMore}
+          hasMore={endlessScrollHasMoreElements}
           children={data.gasStations.map((gasStation) =>
             gasStationEl(gasStation)
           )}
           loader={<h4>Loading...</h4>}
           dataLength={data.gasStations.length}
-          endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
         />
       ) : (
         <AiOutlineLoading3Quarters size={20} />
       )}
+      {data && data.gasStations.length === 0 && !loading && (
+        <h4 className="center margin">Ingen bensinstasjoner i valgt søk</h4>
+      )}
+      {!endlessScrollHasMoreElements && data && data.gasStations.length > 0 && (
+        <h4 className="center margin">Ingen flere bensinstasjoner ⛽</h4>
+      )}
     </main>
   )
 }
+
+/**
+ *
+ * @param number The price to be formatted
+ * @returns If not a number, return a string which clarifies that no price was found, else return the formatted price
+ */
 
 function formatPrice(number: number | undefined): string {
   if (!number) {
@@ -86,6 +104,11 @@ function formatPrice(number: number | undefined): string {
   return number.toFixed(2) + "kr"
 }
 
+/**
+ *
+ * @param gasStation The gasStation to be displayed
+ * @returns Returns the html-code for the given gasStation
+ */
 function gasStationEl(gasStation: GasStation) {
   return (
     <Link
@@ -121,6 +144,11 @@ function gasStationEl(gasStation: GasStation) {
   )
 }
 
+/**
+ *
+ * @param brandName The name of the gasStation
+ * @returns Returns the image related to the name of the gasStation
+ */
 function findImage(brandName: string): string | undefined {
   if (brandName === "Esso") {
     return esso
@@ -131,5 +159,5 @@ function findImage(brandName: string): string | undefined {
   } else if (brandName === "Uno-X") {
     return unoX
   }
-  return shell
+  return noimage;
 }

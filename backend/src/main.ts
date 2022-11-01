@@ -1,54 +1,62 @@
-import { ApolloServer } from "@apollo/server"
-import { startStandaloneServer } from "@apollo/server/standalone"
-import { readFileSync } from "fs"
-import mongoose from "mongoose"
-import { GasStationModel, GasPriceModel } from "./dbService"
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { readFileSync } from "fs";
+import mongoose, { SortOrder } from "mongoose";
+import { GasPriceModel, GasStationModel } from "./dbService";
+import { GasPrice, GasStation } from "./models";
 
 const resolvers = {
   Query: {
-    gasStations: async (_, args) => {
-      const { maxPrice, minPrice, city, limit, sortBy, sortDirection, nameSearch, skip } = args;
+    gasStations: async (
+      _: unknown,
+      args: {
+        maxPrice: number;
+        city: string;
+        limit: number;
+        skip: number;
+        sortBy: string;
+        sortDirection: SortOrder;
+        nameSearch: string;
+      }
+    ) => {
+      const { maxPrice, city, limit, sortBy, sortDirection, nameSearch, skip } =
+        args;
       const priceQuery = {
         ...(maxPrice && { $lte: maxPrice }),
-        ...(minPrice && { $gte: minPrice }),
-      }
+      };
       const query = {
         ...(city && { city }),
         ...(Object.keys(priceQuery).length && { latestPrice: priceQuery }),
         ...(nameSearch && { name: { $regex: nameSearch, $options: "i" } }),
-      }
+      };
       return GasStationModel.find(query)
         .sort({ [sortBy]: sortDirection })
         .skip(skip)
-        .limit(limit) as any
+        .limit(limit);
     },
-    gasStation: async (_, args) => {
-      const { id } = args
-      const query = {
-        ...(id && { id_: id }),
-      }
-      return GasStationModel.findById(id)
+    gasStation: async (_: unknown, args: { id: string }) => {
+      return GasStationModel.findById(args.id);
     },
   },
   GasStation: {
-    prices: async (parent, args) => {
-      return GasPriceModel.find({ gasStation: parent.id }).sort({ createdAt: -1 })
+    prices: async (parent: { id: string }) => {
+      return GasPriceModel.find({ gasStation: parent.id }).sort({ createdAt: "asc" });
     },
   },
   Mutation: {
-    createGasStation: async (_, args) => {
-      const gasStation = new GasStationModel(args)
-      return gasStation.save() as any
+    createGasStation: async (_: unknown, args: GasStation) => {
+      const gasStation = new GasStationModel(args);
+      return gasStation.save();
     },
-    createGasPrice: async (_, args) => {
-      const { gasStation } = args
+    createGasPrice: async (_: unknown, args: GasPrice) => {
+      const { gasStation } = args;
       const gasPrice = new GasPriceModel({
         ...args,
         // get current milliseconds since epoch
-        createdAt: new Date().getTime()
-      })
-      await gasPrice.save()
-      
+        createdAt: new Date().getTime(),
+      });
+      await gasPrice.save();
+
       // update latest price on GasStation
       await GasStationModel.updateOne(
         {
@@ -57,27 +65,27 @@ const resolvers = {
         {
           latestPrice: gasPrice.price,
         }
-      )
-      return gasPrice
+      ).exec();
+      return gasPrice;
     },
   },
-}
+};
 
-const typeDefs = readFileSync("./schema.graphql", { encoding: "utf-8" })
+const typeDefs = readFileSync("./schema.graphql", { encoding: "utf-8" });
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+});
 
 async function startServer() {
-  const connectionString = "mongodb://admin:admin@it2810-41.idi.ntnu.no:27017/"
-  await mongoose.connect(connectionString)
+  const connectionString = "mongodb://admin:admin@it2810-41.idi.ntnu.no:27017/";
+  await mongoose.connect(connectionString);
 
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-  })
+  });
 
-  console.log(`🚀 Server ready at: ${url}`)
+  console.log(`🚀 Server ready at: ${url}`);
 }
 
-startServer()
+startServer();

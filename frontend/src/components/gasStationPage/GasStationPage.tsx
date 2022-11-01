@@ -3,14 +3,16 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { GET_GAS_STATION } from "../../graphql/queries.graphql";
 import { GetGasStationData } from "../../types";
-import AddItem from "../addItem/AddItem";
+import AddPrice from "../addPrice/AddPrice";
 import Header from "../header/Header";
 import styles from "./gasStationPage.module.css";
-import PricesGraph from "./PricesGraph";
+import PricesGraph from "./components/PricesGraph";
 
 export function GasStationPage() {
+  //The gas station id from the url
   const { id } = useParams();
 
+  //The query that fetches the gas station with the given id
   const { error, loading, data, refetch } = useQuery<GetGasStationData>(
     GET_GAS_STATION,
     {
@@ -20,8 +22,9 @@ export function GasStationPage() {
     }
   );
 
-  if (error) return <h1>error.message</h1>;
-
+  //The error message
+  if (error) return <h1>{error.message}</h1>;
+  //Loading
   if (loading) return <h1> {loading && <AiOutlineLoading3Quarters />}</h1>;
 
   return (
@@ -48,15 +51,13 @@ export function GasStationPage() {
                 <h3>
                   Siste registrerte pris:{" "}
                   <span id="lastPriceText">
-                    {data.gasStation.prices[
-                      data.gasStation.prices?.length - 1
-                    ].price.toFixed(2)}
+                    {data.gasStation.latestPrice?.toFixed(2) ?? "- "}
                   </span>{" "}
                   kr
                 </h3>
               </>
             )}
-            <AddItem id={data?.gasStation.id} refetch={refetch} />
+            <AddPrice id={data?.gasStation.id} refetch={refetch} />
           </>
         )}
       </div>
