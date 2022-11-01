@@ -10,6 +10,7 @@ type Props = {
   refetch: (variables: { id: string }) => void;
 };
 
+
 export default function AddPrice({ id, refetch }: Props) {
   //The price that is set in the input field
   const [price, setPrice] = React.useState<number | null>(null);
@@ -18,8 +19,9 @@ export default function AddPrice({ id, refetch }: Props) {
   const [createGasPrice, { data, loading, error }] =
     useMutation(CREATE_GAS_PRICE);
 
-  //The function that is called when the user clicks the submit button
-  //It uses the mutation to add a new price
+  /**The function that is called when the user clicks the submit button
+   *It uses the mutation to add a new price
+   */
   const addGasPrice = async () => {
     await createGasPrice({
       variables: {

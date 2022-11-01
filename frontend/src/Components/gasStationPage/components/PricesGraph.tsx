@@ -20,7 +20,11 @@ const PricesGraph = ({ data }: Props) => {
   //The graph color
   const color = "#523EE8";
 
-  //Function to format the date
+  /**
+   * Formats the date for the graph
+   * @param date The date to format
+   * @returns The formated date
+   */
   const formatDate = (date: Date) => {
     return (
       "" +
@@ -32,7 +36,10 @@ const PricesGraph = ({ data }: Props) => {
     );
   };
 
-  //Format the data that is compliant with recharts
+  /**Format the data so that it is compliant with recharts
+   * @param data The data to format
+   * @returns The formatted data
+   */
   const getGraphData = (data: GetGasStationData) => {
     const graphData: Datapoint[] = [];
     const prices = data.gasStation.prices!;
@@ -42,7 +49,7 @@ const PricesGraph = ({ data }: Props) => {
     prices.forEach((price: GasPrice) => {
       const date = new Date(price.createdAt);
       const formattedDate = formatDate(date);
-
+      
       graphData.push({
         name: formattedDate,
         price: parseFloat(price.price.toFixed(2)),
