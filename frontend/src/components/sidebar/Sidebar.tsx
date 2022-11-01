@@ -6,7 +6,6 @@ import { debounce } from "../../service/debounce";
 import styles from "./sidebar.module.css";
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
-  
   // Saves the state of the sidebar (collapsed or not)
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
 
