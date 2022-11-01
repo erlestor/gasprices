@@ -42,7 +42,8 @@ export default function MainContent() {
         sortDirection: filterState.sortDirection,
         limit,
       },
-    });
+    }
+  );
 
   useEffect(() => {
     endlessScrollHasMoreElementsVar(true);
@@ -60,17 +61,13 @@ export default function MainContent() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (loading) {
-    return <div id="#mainContentLoading">Loading...</div>;
-  }
-
   return (
     <main className={styles.main}>
       <div className={styles.filterDiv}>
         <SearchInputEl />
         <Filter />
       </div>
-      {data ? (
+      {data && !loading ? (
         <InfiniteScroll
           className={styles.mainContent}
           next={loadMoreData}
@@ -80,10 +77,15 @@ export default function MainContent() {
           )}
           loader={<h4>Loading...</h4>}
           dataLength={data.gasStations.length}
-          endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
         />
       ) : (
         <AiOutlineLoading3Quarters size={20} />
+      )}
+      {data && data.gasStations.length === 0 && !loading && (
+        <h4 className="center margin">Ingen bensinstasjoner i valgt søk</h4>
+      )}
+      {!endlessScrollHasMoreElements && data && data.gasStations.length > 0 && (
+        <h4 className="center margin">Ingen flere bensinstasjoner ⛽</h4>
       )}
     </main>
   );

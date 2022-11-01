@@ -8,8 +8,8 @@
     "compile": "tsc",
     "postinstall": "npm run compile",
     "start": "npm run compile && node ./dist/main.js",
-    "gen-test-data": "npm run compile && node ./dist/populate-db.js",
-    "delete-test-data": "npm run compile && node ./dist/delete-all-db.js"
+    "gen-test-data": "npm run compile && node ./dist/generate-test-data/populate-db.js",
+    "delete-test-data": "npm run compile && node ./dist/generate-test-data/delete-all-db.js"
   },
   "keywords": [],
   "author": "",

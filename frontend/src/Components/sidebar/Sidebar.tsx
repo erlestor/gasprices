@@ -1,5 +1,5 @@
 import { useReactiveVar } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
 import { filterStateVar, resetFilterState } from "../../state/filterState";
 import { debounce } from "../../service/debounce";
@@ -11,6 +11,11 @@ export default function SideBar() {
 
   // Reactive variable which tracks filter state
   const filterState = useReactiveVar(filterStateVar);
+  
+  // used to display slider's current value
+  const [maxPriceSliderValue, setMaxPriceSliderValue] = useState<number>(
+    filterState.maxPrice
+  );
 
   /**
    * Update the reactive variable which tracks filter state with the new max price
@@ -31,7 +36,9 @@ export default function SideBar() {
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    updateDebouncePrice(parseFloat(event.target.value));
+    const value = parseFloat(event.target.value);
+    setMaxPriceSliderValue(value);
+    updateDebouncePrice(value);
   };
 
   /**
@@ -50,7 +57,6 @@ export default function SideBar() {
         ...filterStateVar(),
         city,
       });
-      return;
     }
   };
 
@@ -118,7 +124,7 @@ export default function SideBar() {
             </div>
             <div className={styles.sideBarCategoryRange}>
               <h5>Maks pris</h5>
-              <span>{filterState.maxPrice} kr</span>
+              <span>{maxPriceSliderValue} kr</span>
               <input
                 type="range"
                 id="price"
