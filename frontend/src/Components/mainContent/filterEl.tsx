@@ -3,6 +3,9 @@ import React from "react";
 import { filterStateVar } from "../../state/filterState";
 import styles from "./filterEl.module.css";
 
+/**
+ * The different options for sorting
+ */
 export enum sortByOptions {
   priceASC = "latestPrice|ASC",
   priceDESC = "latestPrice|DESC",
@@ -11,12 +14,18 @@ export enum sortByOptions {
 }
 
 export default function FilterEl() {
+  // Reactive variable for the filter state
   const filterState = useReactiveVar(filterStateVar);
+
+  // Saves the filter option and direction
   const selectedFilterOption = (filterState.sortBy +
     "|" +
     filterState.sortDirection) as sortByOptions;
-  console.log(selectedFilterOption);
 
+  /**
+   * @param e The chosen sort option
+   * Retrieves the sort value and direction and passes it to the reactive variable
+   */
   const handleSortChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     const value = e.target.value;
     const [sortBy, direction] = value.split("|");

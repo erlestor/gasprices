@@ -5,10 +5,17 @@ import { filterStateVar, resetFilterState } from "../../state/filterState";
 import { debounce } from "../../service/debounce";
 import styles from "./sidebar.module.css";
 
-export default function SideBar({ collapsed }: { collapsed: boolean }) {
-  const [menuCollapse, setMenuCollapse] = useState(collapsed);
+export default function SideBar() {
+  // Saves the state of the sidebar (collapsed or not)
+  const [menuCollapse, setMenuCollapse] = useState(true);
+
+  // Reactive variable which tracks filter state
   const filterState = useReactiveVar(filterStateVar);
 
+  /**
+   * Update the reactive variable which tracks filter state with the new max price
+   * Function has a delay of 100ms, so that it does not spam the server with requests
+   */
   const updateDebouncePrice = debounce((price: number) => {
     filterStateVar({
       ...filterStateVar(),
@@ -16,12 +23,24 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
     });
   }, 100);
 
+  /**
+   *
+   * @param event The event of changing the value of the slider
+   * Passes the value given from the event as a float to update debounce price
+   */
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     updateDebouncePrice(parseFloat(event.target.value));
   };
 
+  /**
+   *
+   * @param e The event of clicking a radio button
+   * Retrieves if the radiobutton is checked or not and the city related to the radiobutton
+   * If the radiobutton is checked, update the reactive variable that tracks filter state
+   * @returns
+   */
   const handleCityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const checked = e.target.checked;
     const city = e.target.value;
@@ -35,6 +54,9 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
     }
   };
 
+  /**
+   * Resets the state of the sidebar filter
+   */
   const clearFilter = () => {
     resetFilterState();
   };
@@ -42,20 +64,27 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
   return (
     <div
       className={styles.sideBar}
+      /**
+       * Change css based on if the sidebar is closed or not
+       */
       style={{
         width: menuCollapse ? "fit-content" : "280px",
         minWidth: menuCollapse ? "0px" : "280px",
       }}
     >
       {menuCollapse ? (
+        // To display if the sidebar is closed
         <BsFilterLeft
           id="filterIcon"
           className={styles.filterIcon}
+          // Change state of sidebar when it is clicked
           onClick={() => setMenuCollapse(false)}
         />
       ) : (
+        // To display if the sidebar is not closed
         <div id="sideBar" className={styles.sideBarWrapper}>
           <div
+            // Change state of sidebar when it is clicked
             onClick={() => setMenuCollapse(true)}
             className={styles.sideBarHeader}
           >
@@ -107,7 +136,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
   );
 }
 
-// TODO: fetch cities from backend
+// The cities available for filtering
 const cities = [
   "Oslo",
   "Trondheim",

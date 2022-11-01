@@ -4,23 +4,34 @@ import circleK from "../../Images/circleK.png";
 import esso from "../../Images/esso.png";
 import shell from "../../Images/shell.jpg";
 import unoX from "../../Images/uno-x.png";
+import noimage from "../../Images/noimage.jpg";
 import Filter from "./filterEl";
 import styles from "./maincontent.module.css";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { GET_GAS_STATIONS } from "../../graphql/queries.graphql";
-import { hasMoreVar, limit } from "../../state/endlessScrollState";
+import {
+  hasMoreVar as endlessScrollHasMoreElementsVar,
+  limit,
+} from "../../state/endlessScrollState";
 import { filterStateVar } from "../../state/filterState";
 import { GasStation, GetGasStationsData } from "../../types";
 import { SearchInputEl } from "./searchInputEl";
 import { useEffect } from "react";
 
 export default function MainContent() {
+  // Reactive variable used to track filter state
   const filterState = useReactiveVar(filterStateVar);
-  const hasMore = useReactiveVar(hasMoreVar);
-  console.log(filterState);
 
+  // Reactive variable which tracks if there are more elements to load
+  const endlessScrollHasMoreElements = useReactiveVar(
+    endlessScrollHasMoreElementsVar
+  );
+
+  /**
+   * Fetches data from graphql server
+   */
   const { error, loading, data, fetchMore, refetch } =
     useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
       variables: {
@@ -34,7 +45,7 @@ export default function MainContent() {
     });
 
   useEffect(() => {
-    hasMoreVar(true);
+    endlessScrollHasMoreElementsVar(true);
   }, [filterState]);
 
   function loadMoreData() {
@@ -63,7 +74,7 @@ export default function MainContent() {
         <InfiniteScroll
           className={styles.mainContent}
           next={loadMoreData}
-          hasMore={hasMore}
+          hasMore={endlessScrollHasMoreElements}
           children={data.gasStations.map((gasStation) =>
             gasStationEl(gasStation)
           )}
@@ -78,6 +89,12 @@ export default function MainContent() {
   );
 }
 
+/**
+ *
+ * @param number The price to be formatted
+ * @returns If not a number, return a string which clarifies that no price was found, else return the formatted price
+ */
+
 function formatPrice(number: number | undefined): string {
   if (!number) {
     return "Ingen pris";
@@ -85,6 +102,11 @@ function formatPrice(number: number | undefined): string {
   return number.toFixed(2) + "kr";
 }
 
+/**
+ *
+ * @param gasStation The gasStation to be displayed
+ * @returns Returns the html-code for the given gasStation
+ */
 function gasStationEl(gasStation: GasStation) {
   return (
     <Link
@@ -117,6 +139,11 @@ function gasStationEl(gasStation: GasStation) {
   );
 }
 
+/**
+ *
+ * @param brandName The name of the gasStation
+ * @returns Returns the image related to the name of the gasStation
+ */
 function findImage(brandName: string): string | undefined {
   if (brandName === "Esso") {
     return esso;
@@ -127,5 +154,5 @@ function findImage(brandName: string): string | undefined {
   } else if (brandName === "Uno-X") {
     return unoX;
   }
-  return shell;
+  return noimage;
 }
