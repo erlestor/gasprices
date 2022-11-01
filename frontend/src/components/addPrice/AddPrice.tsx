@@ -17,6 +17,11 @@ export default function AddPrice({ id, refetch }: Props) {
   //The mutation that add a new price to the given gas station
   const [createGasPrice, { data, loading, error }] =
     useMutation(CREATE_GAS_PRICE);
+  // contains the last updated price or null if no price is updated
+  const [successMessage, setSuccessMessage] = React.useState<{
+    price: number | null;
+    show: boolean;
+  }>({ price: null, show: false });
 
   /**The function that is called when the user clicks the submit button
    *It uses the mutation to add a new price
@@ -40,6 +45,10 @@ export default function AddPrice({ id, refetch }: Props) {
     refetch({ id: id });
     //clear the price state
     setPrice(null);
+    setSuccessMessage({ price: price, show: true });
+    new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+      setSuccessMessage((prev) => ({ ...prev, show: false }));
+    });
   };
 
   return (
@@ -57,9 +66,14 @@ export default function AddPrice({ id, refetch }: Props) {
         >
           <label htmlFor="price">Pris (kr/L)</label>
           <input
+            required
             id="price"
             name="price"
             type="number"
+            step="0.01"
+            max="50"
+            min="0"
+            data-testid="price"
             value={price ?? ""}
             onChange={(event) => setPrice(parseFloat(event.target.value))}
             placeholder="ny pris"
@@ -68,7 +82,16 @@ export default function AddPrice({ id, refetch }: Props) {
             className={styles.submit}
             type="submit"
             value="Legg til ny pris"
+            data-testid="submit"
           ></input>
+          <h3
+            className={
+              styles.successMessage +
+              (successMessage.show ? " " + styles.show : "")
+            }
+          >
+            Prisen er oppdatert til {successMessage.price}
+          </h3>
         </form>
       </div>
     </div>

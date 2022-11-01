@@ -1,8 +1,8 @@
 import { useReactiveVar } from "@apollo/client";
 import React, { useMemo, useState } from "react";
 import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
-import { filterStateVar, resetFilterState } from "../../state/filterState";
 import { debounce } from "../../service/debounce";
+import { filterStateVar, resetFilterState } from "../../state/filterState";
 import styles from "./sidebar.module.css";
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
@@ -21,12 +21,16 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
    * Update the reactive variable which tracks filter state with the new max price
    * Function has a delay of 100ms, so that it does not spam the server with requests
    */
-  const updateDebouncePrice = debounce((price: number) => {
-    filterStateVar({
-      ...filterStateVar(),
-      maxPrice: price,
-    });
-  }, 100);
+  const updateDebouncePrice = useMemo(
+    () =>
+      debounce((price: number) => {
+        filterStateVar({
+          ...filterStateVar(),
+          maxPrice: price,
+        });
+      }, 100),
+    []
+  );
 
   /**
    *
@@ -99,7 +103,9 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
           </div>
           <div className={styles.sideBarSubHeader}>
             <h5>Filter by</h5>
-            <button onClick={clearFilter}>Clear</button>
+            <button data-testid="clear" onClick={clearFilter}>
+              Clear
+            </button>
           </div>
           <div className={styles.sideBarMain}>
             <div className={styles.sideBarCategoryCheckBox}>
@@ -112,6 +118,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                 >
                   <input
                     type="radio"
+                    data-testid={city}
                     id={city}
                     name="cities"
                     value={city}
@@ -126,6 +133,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
               <h5>Maks pris</h5>
               <span>{maxPriceSliderValue} kr</span>
               <input
+                value={maxPriceSliderValue}
                 type="range"
                 id="price"
                 name="price"

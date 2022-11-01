@@ -1,7 +1,5 @@
 # Prosjekt 3
 
-Dette er prosjekt 3 i faget IT2810 Webutvikling for gruppe 41.
-
 ## Hvordan kjøre appen
 
 Følg stegene for backend og frontend ved å kjøre kommandoene under i rekkefølge. Man må være koblet til ntnu sitt nett. VPN kan brukes hvis man ikke er på ntnu sine områder.
@@ -61,6 +59,20 @@ Vi har også implementert en endless scroll-funksjon som dynamisk laster inn dat
 Dersom bruker klikker seg inn på en gitt bensinstasjon ønsker vi å presentere en oversikt over tidligere priser, slik at bruker enkelt kan orientere seg om prisendringene til bensinstasjonen. Her hadde vi primært to ulike valg til hvordan dataen kunne presenteres; enten ved hjelp av graf eller en liste med tidligere priser. Vi konkluderte med at en graf representasjon vil være mer hensiktsmessig. En graf er en visuell representasjon som kan presentere mye data på en oversiktlig måte, samt gjør den det enkelt for bruker å orientere seg om prisendringene. I motsetning vil en liste gi mindre oversiktlig fremstilling ved store datamengder. Da vil bruker måtte aktivt bla gjennom dataen og forsøke danne seg et bilde av prisendringene. 
 
 ## Testing
+
+### Run end-to-end tests
+
+- cd frontend
+- npm i
+- npm run cypress
+- click on end-to-end tests on window that pops up
+
+### Run unit tests
+
+- cd frontend
+- npm i
+- npm test
+Dette er prosjekt 3 i faget IT2810 Webutvikling for gruppe 41.
 
 ### Unit testing med jest
 

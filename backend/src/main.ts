@@ -40,7 +40,7 @@ const resolvers = {
   },
   GasStation: {
     prices: async (parent: { id: string }) => {
-      return GasPriceModel.find({ gasStation: parent.id });
+      return GasPriceModel.find({ gasStation: parent.id }).sort({ createdAt: "asc" });
     },
   },
   Mutation: {

@@ -115,6 +115,7 @@ function gasStationEl(gasStation: GasStation) {
       key={gasStation.id}
       to={`/station/${gasStation.id}`}
       className={styles.cardLink}
+      data-testid="gasStationEl"
     >
       <div className={styles.cardStyle}>
         <div className={styles.imageDiv}>
@@ -126,7 +127,9 @@ function gasStationEl(gasStation: GasStation) {
         </div>
         <div className={styles.cardInformation}>
           <div className={styles.cardAreaDiv}>
-            <span className={styles.cardBrand}>{gasStation.name}</span>
+            <span className={styles.cardBrand} data-testid="gasStationName">
+              {gasStation.name}
+            </span>
             <span className={styles.cardArea}>{gasStation.city}</span>
           </div>
           <div className={styles.cardPriceDiv}>

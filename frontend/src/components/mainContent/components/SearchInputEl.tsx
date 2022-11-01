@@ -31,6 +31,7 @@ export function SearchInputEl() {
         placeholder="Search..."
         value={searchInputValue}
         onChange={handleSearchElChange}
+        data-testid="searchBar"
       ></input>
       <div>
         <BsSearch className={styles.searchIcon} />
