@@ -32,7 +32,7 @@ const resolvers = {
   },
   GasStation: {
     prices: async (parent, args) => {
-      return GasPriceModel.find({ gasStation: parent.id }) as any
+      return GasPriceModel.find({ gasStation: parent.id }).sort({ createdAt: -1 })
     },
   },
   Mutation: {
@@ -42,7 +42,6 @@ const resolvers = {
     },
     createGasPrice: async (_, args) => {
       const { gasStation } = args
-      // TODO: make it a transaction
       const gasPrice = new GasPriceModel({
         ...args,
         // get current milliseconds since epoch

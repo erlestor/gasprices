@@ -1,11 +1,11 @@
 import { MockedProvider } from "@apollo/client/testing"
-import MainContent from "../Components/mainContent/MainContent"
 import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { GET_GAS_STATIONS } from "../graphql/queries.graphql"
 import { limit } from "../state/endlessScrollState"
 import { GasStation } from "../types"
 import { BrowserRouter } from "react-router-dom"
 import { act } from "react-dom/test-utils"
+import MainContent from "../components/mainContent/MainContent"
 
 const gasStationMocks: GasStation[] = []
 for (let i = 0; i < 12; i++) {
@@ -32,7 +32,7 @@ describe("Debounce search", () => {
         matches: false,
       })),
     })
-    const { container } = render(
+    render(
       <MockedProvider
         mocks={[
           {
@@ -53,6 +53,24 @@ describe("Debounce search", () => {
               },
             },
           },
+          {
+            request: {
+              query: GET_GAS_STATIONS,
+              variables: {
+                limit,
+                city: undefined,
+                maxPrice: 30,
+                nameSearch: "shell",
+                sortBy: "latestPrice",
+                sortDirection: "ASC",
+              }
+            },
+            result: {
+              data: {
+                gasStations: gasStationMocks.slice(12, 13),
+              }
+            }
+          }
         ]}
       >
         <BrowserRouter>
@@ -78,10 +96,11 @@ describe("Debounce search", () => {
     )
 
     // TODO: get actual
-    await new Promise((resolve, reject) => setTimeout(resolve, 100))
+    await new Promise((r) => setTimeout(r, 100))
 
-    expect(
-      screen.getAllByTestId("gasStationName")[0].innerHTML === "shell"
-    ).toEqual(true)
+    // check that the content has been updated
+    await waitFor(() => {
+      expect(screen.getAllByTestId("gasStationName")[0].innerHTML).toEqual("shell")
+    })
   })
 })
