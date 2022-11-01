@@ -3,7 +3,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import AddItem from "../Components/addItem/AddItem";
+import AddPrice from "../components/addPrice/AddPrice";
 
 import { CREATE_GAS_PRICE } from "../graphql/mutations.graphql";
 
@@ -28,7 +28,7 @@ it("should find the new price", async () => {
       addTypename={false}
       cache={new InMemoryCache()}
     >
-      <AddItem id={price.gasStationId} refetch={() => {}} />
+      <AddPrice id={price.gasStationId} refetch={() => {}} />
     </MockedProvider>
   );
 

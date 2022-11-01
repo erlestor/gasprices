@@ -17,8 +17,8 @@ import {
 import { filterStateVar } from "../../state/filterState";
 import { GasStation, GetGasStationsData } from "../../types";
 import { useEffect } from "react";
-import { SearchInputEl } from "./components/SearchInputEl";
 import FilterEl from "./components/FilterEl";
+import { SearchInputEl } from "./components/SearchInputEl";
 
 export default function MainContent() {
   // Reactive variable used to track filter state

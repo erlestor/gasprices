@@ -1,9 +1,7 @@
-import { InMemoryCache } from "@apollo/client";
-import { MockedProvider } from "@apollo/client/testing";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SideBar from "../Components/sidebar/Sidebar";
+import SideBar from "../components/sidebar/Sidebar";
 
 describe("Sidebar", () => {
   it("should check of a radio button", () => {

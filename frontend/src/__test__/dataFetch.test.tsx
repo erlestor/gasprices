@@ -1,5 +1,5 @@
 import { MockedProvider } from "@apollo/client/testing"
-import MainContent from "../Components/mainContent/MainContent"
+import MainContent from "../components/mainContent/MainContent"
 import { render, screen, waitFor } from "@testing-library/react"
 import { GET_GAS_STATIONS } from "../graphql/queries.graphql"
 import { limit } from "../state/endlessScrollState"

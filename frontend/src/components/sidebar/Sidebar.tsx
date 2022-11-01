@@ -1,8 +1,8 @@
 import { useReactiveVar } from "@apollo/client";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
-import { filterStateVar, resetFilterState } from "../../state/filterState";
 import { debounce } from "../../service/debounce";
+import { filterStateVar, resetFilterState } from "../../state/filterState";
 import styles from "./sidebar.module.css";
 
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
