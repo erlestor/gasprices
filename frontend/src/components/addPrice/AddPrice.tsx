@@ -74,7 +74,7 @@ export default function AddPrice({ id, refetch }: Props) {
             max="50"
             min="0"
             data-testid="price"
-            value={price || ""}
+            value={price ?? ""}
             onChange={(event) => setPrice(parseFloat(event.target.value))}
             placeholder="ny pris"
           ></input>
