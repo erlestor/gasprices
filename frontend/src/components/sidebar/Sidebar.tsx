@@ -5,9 +5,10 @@ import { filterStateVar, resetFilterState } from "../../state/filterState";
 import { debounce } from "../../service/debounce";
 import styles from "./sidebar.module.css";
 
-export default function SideBar() {
+export default function SideBar({ collapsed }: { collapsed: boolean }) {
+  
   // Saves the state of the sidebar (collapsed or not)
-  const [menuCollapse, setMenuCollapse] = useState(true);
+  const [menuCollapse, setMenuCollapse] = useState(collapsed);
 
   // Reactive variable which tracks filter state
   const filterState = useReactiveVar(filterStateVar);

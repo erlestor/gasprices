@@ -50,6 +50,16 @@ I API'et vårt bruker vi **graphql** fremfor REST. Et vanlig problem med REST er
 
 Den siste prisen på en bensinstasjon er både lagret som et atttributt på GasStation og som et element i GasPrices. Dette er vanlig praksis i no-sql databaser og gjør queries kjappere. Det er også en fordel at det er enkelt å hente ut den siste prisen på en bensinstasjon.
 
+### Design valg
+
+Nettsiden har som hensikt å presentere bensinpriser fra bensinstasjoner over hele Norge. Dette er svært mye data, og kan i flere tilfeller føre til at bruker må scrolle lang ned på siden før en finner ønsket data. Det er derfor hensiktsmessig å ha en sidebar som er sticky (alltid befinner seg på venstre side av skjermen), slik at bruker enkelt kan filtrere uansett hvor langt ned en har scrollet. Dette gjør det enklere for bruker å finne informasjon av interesse.
+
+Ettersom nettsiden som sagt skal fremsette mye data, er det viktig å ha et design som gjør at mye data oversiktilig kan presenteres på et lite område. Dette er grunnen til at vi har valgt å lage kortene på forsiden relativt små, men likevel store nok til å presentere den mest sentrale dataen om stasjonen. Dataen presentert er nok til at brukeren kan finne stasjoner av interesse. Dersom det ønskes ytterligere informasjon kan bruker enkelt klikke seg inn på hver stasjon. 
+
+Vi har også implementert en endless scroll-funksjon som dynamisk laster inn data avhengig av brukerscroll. Ettersom datamengden er svært stor, vil det i de aller fleste tilfeller være overflødig å laste inn all dataen samtidig. Ved bruk av endless scroll unngår vi at databasen opplever unødvendig stor pågang. 
+
+Dersom bruker klikker seg inn på en gitt bensinstasjon ønsker vi å presentere en oversikt over tidligere priser, slik at bruker enkelt kan orientere seg om prisendringene til bensinstasjonen. Her hadde vi primært to ulike valg til hvordan dataen kunne presenteres; enten ved hjelp av graf eller en liste med tidligere priser. Vi konkluderte med at en graf representasjon vil være mer hensiktsmessig. En graf er en visuell representasjon som kan presentere mye data på en oversiktlig måte, samt gjør den det enkelt for bruker å orientere seg om prisendringene. I motsetning vil en liste gi mindre oversiktlig fremstilling ved store datamengder. Da vil bruker måtte aktivt bla gjennom dataen og forsøke danne seg et bilde av prisendringene. 
+
 ## Testing
 
 ### Unit testing med jest
