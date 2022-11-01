@@ -5,7 +5,7 @@
 describe("DrivstoffNetsiden filter, sort and searching", () => {
   it("it should be able to filter by city", () => {
     // clear localstorage
-    cy.visit("http://localhost:3000/");
+    cy.visit("http://localhost:3000/project3");
 
     cy.get("#header");
 
