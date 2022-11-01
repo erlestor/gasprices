@@ -6,11 +6,9 @@ import userEvent from "@testing-library/user-event";
 import SideBar from "../Components/sidebar/Sidebar";
 
 describe("Sidebar", () => {
-  
   it("should check of a radio button", () => {
-
     render(<SideBar collapsed={false} />);
-    
+
     // check that the radio button is not checked
     // select an option in the radio group
     // select oslo

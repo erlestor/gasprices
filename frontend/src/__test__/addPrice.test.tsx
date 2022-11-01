@@ -18,7 +18,7 @@ const mocks = [
       },
     },
     result: { data: price },
-  }
+  },
 ];
 
 it("should find the new price", async () => {
@@ -38,5 +38,7 @@ it("should find the new price", async () => {
   userEvent.click(submitButton);
 
   // expect to have success message text
-  expect(await screen.findByText("Prisen er oppdatert til 15" )).toBeInTheDocument();
+  expect(
+    await screen.findByText("Prisen er oppdatert til 15")
+  ).toBeInTheDocument();
 });
