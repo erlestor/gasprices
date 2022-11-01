@@ -20,8 +20,9 @@ export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
   const hasMore = useReactiveVar(hasMoreVar);
 
-  const { error, loading, data, fetchMore } =
-    useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
+  const { error, loading, data, fetchMore } = useQuery<GetGasStationsData>(
+    GET_GAS_STATIONS,
+    {
       variables: {
         city: filterState.city,
         maxPrice: filterState.maxPrice,
@@ -30,7 +31,8 @@ export default function MainContent() {
         sortDirection: filterState.sortDirection,
         limit,
       },
-    });
+    }
+  );
 
   useEffect(() => {
     hasMoreVar(true);

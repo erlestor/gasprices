@@ -13,7 +13,6 @@ import { GasStation } from "../types";
 import App from "../App";
 import { BrowserRouter } from "react-router-dom";
 
-
 const gasStationMocks: GasStation[] = [];
 for (let i = 0; i < limit; i++) {
   gasStationMocks.push({
@@ -25,11 +24,10 @@ for (let i = 0; i < limit; i++) {
 }
 
 describe("Endless functionality", () => {
-  
   test("should initially render n items, where n is the size of limit", async () => {
-    Object.defineProperty(window, 'matchMedia', {
+    Object.defineProperty(window, "matchMedia", {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
+      value: jest.fn().mockImplementation((query) => ({
         matches: false,
         media: query,
         onchange: null,
@@ -65,7 +63,7 @@ describe("Endless functionality", () => {
       >
         {/* Must use App-component, not MainContente else Link component throw error */}
         <BrowserRouter>
-          <MainContent/>
+          <MainContent />
         </BrowserRouter>
       </MockedProvider>
     );
