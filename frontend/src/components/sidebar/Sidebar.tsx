@@ -69,6 +69,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
    */
   const clearFilter = () => {
     resetFilterState();
+    setMaxPriceSliderValue(filterStateVar().maxPrice);
   };
 
   return (
