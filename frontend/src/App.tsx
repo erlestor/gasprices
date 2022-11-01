@@ -6,7 +6,7 @@ import { GasStationPage } from "./components/gasStationPage/GasStationPage";
 function App() {
   return (
     <ApolloWrapper>
-      <BrowserRouter>
+      <BrowserRouter basename="/project3">
         <Routes>
           <Route path="/" element={<Frontpage />} />
           <Route path="/station/:id" element={<GasStationPage />} />
