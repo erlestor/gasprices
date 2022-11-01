@@ -15,8 +15,8 @@ export default function AddItem({ id, refetch }: Props) {
   const [createGasPrice, { data, loading, error }] =
     useMutation(CREATE_GAS_PRICE);
 
-  const addGasPrice = () => {
-    createGasPrice({
+  const addGasPrice = async () => {
+    await createGasPrice({
       variables: {
         gasStation: id,
         price: price,

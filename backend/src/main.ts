@@ -58,14 +58,14 @@ const resolvers = {
       await gasPrice.save();
 
       // update latest price on GasStation
-      GasStationModel.updateOne(
+      await GasStationModel.updateOne(
         {
           _id: gasStation,
         },
         {
           latestPrice: gasPrice.price,
         }
-      );
+      ).exec();
       return gasPrice;
     },
   },

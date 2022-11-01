@@ -48,9 +48,7 @@ export function GasStationPage() {
                 <h3>
                   Siste registrerte pris:{" "}
                   <span id="lastPriceText">
-                    {data.gasStation.prices[
-                      data.gasStation.prices?.length - 1
-                    ].price.toFixed(2)}
+                    {data.gasStation.latestPrice?.toFixed(2) ?? "- "}
                   </span>{" "}
                   kr
                 </h3>
