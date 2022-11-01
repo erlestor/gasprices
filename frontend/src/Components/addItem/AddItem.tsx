@@ -14,6 +14,11 @@ export default function AddItem({ id, refetch }: Props) {
 
   const [createGasPrice, { data, loading, error }] =
     useMutation(CREATE_GAS_PRICE);
+  // contains the last updated price or null if no price is updated
+  const [successMessage, setSuccessMessage] = React.useState<{
+    price: number | null;
+    show: boolean;
+  }>({ price: null, show: false });
 
   const addGasPrice = () => {
     createGasPrice({
@@ -30,6 +35,10 @@ export default function AddItem({ id, refetch }: Props) {
     }
     refetch({ id: id });
     setPrice(null);
+    setSuccessMessage({ price: price, show: true });
+    new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+      setSuccessMessage((prev) => ({ ...prev, show: false }));
+    });
   };
 
   return (
@@ -47,10 +56,15 @@ export default function AddItem({ id, refetch }: Props) {
         >
           <label htmlFor="price">Pris (kr/L)</label>
           <input
+            required
             id="price"
             name="price"
             type="number"
-            value={price ?? ""}
+            step="0.01"
+            max="50"
+            min="0"
+            data-testid="price"
+            value={price || ""}
             onChange={(event) => setPrice(parseFloat(event.target.value))}
             placeholder="ny pris"
           ></input>
@@ -58,7 +72,16 @@ export default function AddItem({ id, refetch }: Props) {
             className={styles.submit}
             type="submit"
             value="Legg til ny pris"
+            data-testid="submit"
           ></input>
+          <h3
+            className={
+              styles.successMessage +
+              (successMessage.show ? " " + styles.show : "")
+            }
+          >
+            Prisen er oppdatert til {successMessage.price}
+          </h3>
         </form>
       </div>
     </div>

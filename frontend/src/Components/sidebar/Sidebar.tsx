@@ -64,7 +64,9 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
           </div>
           <div className={styles.sideBarSubHeader}>
             <h5>Filter by</h5>
-            <button onClick={clearFilter}>Clear</button>
+            <button data-testid="clear" onClick={clearFilter}>
+              Clear
+            </button>
           </div>
           <div className={styles.sideBarMain}>
             <div className={styles.sideBarCategoryCheckBox}>
@@ -77,6 +79,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
                 >
                   <input
                     type="radio"
+                    data-testid={city}
                     id={city}
                     name="cities"
                     value={city}
