@@ -8,7 +8,7 @@ Webapplikasjonen viser brukeren drivstoffprisene på mange ulike bensinstasjoner
 
 ## Teknologi
 
-Brukergrensesnittet er skrevet i React implementert med Typescript. Backenden er også skrevet med Typescript, og databasen som er brukt er MongoDB, som er en no-SQL database Vi har brukt Apollo på klient og serversiden for å sette opp et GraphQL API. Apollo local state management er løsningen vi har benyttet for håndtering av state management.
+Brukergrensesnittet er skrevet i React implementert med Typescript. Backenden er også skrevet med Typescript, og databasen som er brukt er MongoDB, som er en no-SQL database. Vi har brukt Apollo på klient og serversiden for å sette opp et GraphQL API. Apollo local state management er løsningen vi har benyttet for håndtering av state management.
 
 ## Universell utforming
 
@@ -24,9 +24,11 @@ Vi har noen bilder og grafikk i form av en graf som kjører en animasjon ved sta
 
 ### Komponenter
 
-Vi har valgt å skrive de fleste komponentene selv, og ikke brukt eksterne biblioteker i stor grad. Det finnes derimot noen tilfeller hvor vi har brukt eksterne bibliotek for å hente komponenter. Vi har brukt react icon biblioteket for å hente noen symboler til applikasjonen, som for eksempel i sidemenyen. Eksterne biblioteker for å slippe å lage sine egene komponenter kan være et godt alternativ for å få en godt utformet nettside som er kjent for brukeren. På den andre siden kan store biblioteker føre til mye ubrukt kode.
+Vi har valgt å skrive de fleste komponentene selv, og ikke brukt eksterne biblioteker i stor grad. Det finnes derimot noen tilfeller hvor vi har brukt eksterne bibliotek for å hente komponenter. Vi har brukt react icon biblioteket for å hente noen symboler til applikasjonen, som for eksempel i sidemenyen. Recharts er brukt for å vise en graf over tidligere priser til en bensinstasjon. Eksterne biblioteker for å slippe å lage sine egene komponenter kan være et godt alternativ for å få en godt utformet nettside som er kjent for brukeren. På den andre siden kan store biblioteker føre til mye ubrukt kode.
 
 ### API
+
+I API'et vårt bruker vi **graphql** fremfor REST. Et vanlig problem med REST er at man enten henter inn for mye eller for lite data. Det kan være vanskelig å designe api'et slik at man kun henter den nødvendige dataen. Med graphql lager man queries som definerer akkurat hvilke data du ønsker å hente fra backend. Gjør man endringer på frontend som gjør at man trenger mer/mindre data enn før må man ofte skrive om endepunktet i REST. Med graphql kan man endre queriet istedenfor uten å måtte gjøre endringer på backend. Dette gjør at graphql er mer fleksibelt.
 
 ### Dobbel lagring
 
@@ -34,5 +36,10 @@ Den siste prisen på en bensinstasjon er både lagret som et atttributt på GasS
 
 ## Testing
 
-- Unit
-- e2e Cypress
+### Unit testing med jest
+
+Enhetstesting er en type testing der man tester de minste delelige komponentene i et program. For eksempel en enkelt funksjon, eller i vårt tilfelle en komponent. Dette er svært nyttig da man kan sjekke om koden fungerer mens man skriver. I tillegg kan man finne ut nøyaktig hvor bugs i appen ligger. Enhetstesting oppdager ikke alle bugs, men hvis appen ikke fungerer samtidig som enhetstestene passerer, kan man trygt anta at problemer ligger i integrasjonen. Jest er et bibliotek for testing som tilbyr nyttige funksjoner for enhetstesting, også for komponenter. Blant annet kan man mocke tilstand i appen slik at man kan enkelt kan teste en komponent uten å måtte laste inn hele komponenthierarkiet.
+
+### End-to-end testing med cypress
+
+I frontend/cypress/e2e kan du finne våre automatiske end-to-end tester. Formålet med testene er å se om appen som en helhet oppfyller ønsket funksjonalitet. Dette gjøres ved å gå igjennom realistiske brukerscenarioer. Eksempler på dette er å filterere/sortere bensinstasjonene, samt legge til nye priser. Disse testene gjøres automatisk av cypress. Cypress lar oss laste inn nettsiden og interagere med den på samme måte som en bruker ved å trykke på knapper og skrive inn i input-felter. En grunn til av vi valgte cypress er at testen kan åpnes i en nettleser der man kan se nøyaktig hva testen gjør, noe som gjør det lett å debugge. Den tar også snapshots av hvert steg slik at man kan se hvor noe gikk galt. Vi gjør også end-to-end tester manuelt ved å utføre brukerscenarioer på egenhånd. Dette lar oss oppdage bugs som ikke nødvendigvis ødelegger hovedfunksjonaliteten, men minker brukeropplevelsen.
