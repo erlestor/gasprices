@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   Area,
   AreaChart,
@@ -11,13 +10,17 @@ import {
 } from "recharts";
 import { Datapoint, GetGasStationData, GasPrice } from "../../../types";
 
+//Specify the data type for the props
 type Props = {
   data: GetGasStationData | undefined;
 };
 
+
 const PricesGraph = ({ data }: Props) => {
+  //The graph color
   const color = "#523EE8";
 
+  //Function to format the date
   const formatDate = (date: Date) => {
     return (
       "" +
@@ -29,10 +32,13 @@ const PricesGraph = ({ data }: Props) => {
     );
   };
 
+  //Format the data that is compliant with recharts
   const getGraphData = (data: GetGasStationData) => {
     const graphData: Datapoint[] = [];
     const prices = data.gasStation.prices!;
 
+    //Loop through the prices and format the dates. 
+    //Add the dates and prices to the graphData array
     prices.forEach((price: GasPrice) => {
       const date = new Date(price.createdAt);
       const formattedDate = formatDate(date);
