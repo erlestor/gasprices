@@ -1,5 +1,6 @@
 # Prosjekt 3
 
+Dette er prosjekt 3 i faget IT2810 Webutvikling for gruppe 41.
 ## Hvordan kjøre appen
 
 Følg stegene for backend og frontend ved å kjøre kommandoene under i rekkefølge. Man må være koblet til ntnu sitt nett. VPN kan brukes hvis man ikke er på ntnu sine områder.
@@ -60,19 +61,19 @@ Dersom bruker klikker seg inn på en gitt bensinstasjon ønsker vi å presentere
 
 ## Testing
 
-### Run end-to-end tests
+### Kjør end-to-end tester
 
 - cd frontend
 - npm i
 - npm run cypress
-- click on end-to-end tests on window that pops up
+- Trykk på end-to-end tests på vinduet som viser seg
 
-### Run unit tests
+### Kjør unit tester
 
 - cd frontend
 - npm i
 - npm test
-Dette er prosjekt 3 i faget IT2810 Webutvikling for gruppe 41.
+
 
 ### Unit testing med jest
 
