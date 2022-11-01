@@ -1,5 +1,17 @@
 # Prosjekt 3
 
-## Dobbelt lagring
+## Test
 
-Den siste prisen på en bensinstasjon er både lagret som et atttributt på GasStation og som et element i GasPrices. Dette er vanlig praksis i no-sql databaser og gjør queries kjappere. Det er også en fordel at det er enkelt å hente ut den siste prisen på en bensinstasjon.
+### Run end-to-end tests
+
+- cd frontend
+- npm i
+- npm run cypress
+- click on end-to-end tests on window that pops up
+
+### Run unit tests
+
+- cd frontend
+- npm i
+- npm test
+-
