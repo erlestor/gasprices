@@ -15,7 +15,6 @@ type Props = {
   data: GetGasStationData | undefined;
 };
 
-
 const PricesGraph = ({ data }: Props) => {
   //The graph color
   const color = "#523EE8";
@@ -44,12 +43,12 @@ const PricesGraph = ({ data }: Props) => {
     const graphData: Datapoint[] = [];
     const prices = data.gasStation.prices!;
 
-    //Loop through the prices and format the dates. 
+    //Loop through the prices and format the dates.
     //Add the dates and prices to the graphData array
     prices.forEach((price: GasPrice) => {
       const date = new Date(price.createdAt);
       const formattedDate = formatDate(date);
-      
+
       graphData.push({
         name: formattedDate,
         price: parseFloat(price.price.toFixed(2)),
