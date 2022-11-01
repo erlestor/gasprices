@@ -19,10 +19,10 @@ import { useEffect } from "react";
 export default function MainContent() {
   const filterState = useReactiveVar(filterStateVar);
   const hasMore = useReactiveVar(hasMoreVar);
-  console.log(filterState);
 
-  const { error, loading, data, fetchMore, refetch } =
-    useQuery<GetGasStationsData>(GET_GAS_STATIONS, {
+  const { error, loading, data, fetchMore } = useQuery<GetGasStationsData>(
+    GET_GAS_STATIONS,
+    {
       variables: {
         city: filterState.city,
         maxPrice: filterState.maxPrice,
@@ -31,7 +31,8 @@ export default function MainContent() {
         sortDirection: filterState.sortDirection,
         limit,
       },
-    });
+    }
+  );
 
   useEffect(() => {
     hasMoreVar(true);
@@ -49,17 +50,13 @@ export default function MainContent() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (loading) {
-    return <div id="#mainContentLoading">Loading...</div>;
-  }
-
   return (
     <main className={styles.main}>
       <div className={styles.filterDiv}>
         <SearchInputEl />
         <Filter />
       </div>
-      {data ? (
+      {data && !loading ? (
         <InfiniteScroll
           className={styles.mainContent}
           next={loadMoreData}
@@ -69,10 +66,15 @@ export default function MainContent() {
           )}
           loader={<h4>Loading...</h4>}
           dataLength={data.gasStations.length}
-          endMessage={<h4>Ingen flere bensinstasjoner ⛽</h4>}
         />
       ) : (
         <AiOutlineLoading3Quarters size={20} />
+      )}
+      {data && data.gasStations.length === 0 && !loading && (
+        <h4 className="center margin">Ingen bensinstasjoner i valgt søk</h4>
+      )}
+      {!hasMore && data && data.gasStations.length > 0 && (
+        <h4 className="center margin">Ingen flere bensinstasjoner ⛽</h4>
       )}
     </main>
   );

@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import { GasPriceModel, GasStationModel } from "./dbService";
+import { GasPriceModel, GasStationModel } from "../dbService";
 
 async function populateDb() {
   const connectionString = "mongodb://admin:admin@it2810-41.idi.ntnu.no:27017/";
   await mongoose.connect(connectionString);
 
-  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const pick = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
 
   const cities = [
     "Oslo",

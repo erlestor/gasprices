@@ -1,5 +1,5 @@
 import { useReactiveVar } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { BsCaretLeftFill, BsFilterLeft } from "react-icons/bs";
 import { filterStateVar, resetFilterState } from "../../state/filterState";
 import { debounce } from "../../service/debounce";
@@ -8,18 +8,28 @@ import styles from "./sidebar.module.css";
 export default function SideBar({ collapsed }: { collapsed: boolean }) {
   const [menuCollapse, setMenuCollapse] = useState(collapsed);
   const filterState = useReactiveVar(filterStateVar);
+  // used to display slider's current value
+  const [maxPriceSliderValue, setMaxPriceSliderValue] = useState<number>(
+    filterState.maxPrice
+  );
 
-  const updateDebouncePrice = debounce((price: number) => {
-    filterStateVar({
-      ...filterStateVar(),
-      maxPrice: price,
-    });
-  }, 100);
+  const updateDebouncePrice = useMemo(
+    () =>
+      debounce((price: number) => {
+        filterStateVar({
+          ...filterStateVar(),
+          maxPrice: price,
+        });
+      }, 1000),
+    []
+  );
 
   const handlePriceSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    updateDebouncePrice(parseFloat(event.target.value));
+    const value = parseFloat(event.target.value);
+    setMaxPriceSliderValue(value);
+    updateDebouncePrice(value);
   };
 
   const handleCityChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -31,7 +41,6 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
         ...filterStateVar(),
         city,
       });
-      return;
     }
   };
 
@@ -89,7 +98,7 @@ export default function SideBar({ collapsed }: { collapsed: boolean }) {
             </div>
             <div className={styles.sideBarCategoryRange}>
               <h5>Maks pris</h5>
-              <span>{filterState.maxPrice} kr</span>
+              <span>{maxPriceSliderValue} kr</span>
               <input
                 type="range"
                 id="price"

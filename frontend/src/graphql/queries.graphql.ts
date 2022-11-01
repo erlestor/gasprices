@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 export const GET_GAS_STATIONS = gql`
   query getGasStations(
     $maxPrice: Float
-    $minPrice: Float
     $city: String
     $limit: Int
     $skip: Int
@@ -13,7 +12,6 @@ export const GET_GAS_STATIONS = gql`
   ) {
     gasStations(
       maxPrice: $maxPrice
-      minPrice: $minPrice
       city: $city
       limit: $limit
       skip: $skip
