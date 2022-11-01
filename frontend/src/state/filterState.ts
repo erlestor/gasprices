@@ -2,7 +2,7 @@ import { makeVar } from "@apollo/client";
 
 export interface FilterOptions {
   city?: string;
-  maxPrice?: number;
+  maxPrice: number;
   nameSearch: string;
   sortBy: "latestPrice" | "name";
   sortDirection: "ASC" | "DESC";
