@@ -3,7 +3,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { GET_GAS_STATION } from "../../graphql/queries.graphql";
 import { GetGasStationData } from "../../types";
-import AddItem from "../addItem/AddItem";
+import AddPrice from "../addItem/AddPrice";
 import Header from "../header/Header";
 import styles from "./gasStationPage.module.css";
 import PricesGraph from "./PricesGraph";
@@ -54,7 +54,7 @@ export function GasStationPage() {
                 </h3>
               </>
             )}
-            <AddItem id={data?.gasStation.id} refetch={refetch} />
+            <AddPrice id={data?.gasStation.id} refetch={refetch} />
           </>
         )}
       </div>

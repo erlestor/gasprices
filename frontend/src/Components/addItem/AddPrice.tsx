@@ -2,14 +2,14 @@ import { useMutation } from "@apollo/client";
 import React from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CREATE_GAS_PRICE } from "../../graphql/mutations.graphql";
-import styles from "./additem.module.css";
+import styles from "./addprice.module.css";
 
 type Props = {
   id: string;
   refetch: (variables: { id: string }) => void;
 };
 
-export default function AddItem({ id, refetch }: Props) {
+export default function AddPrice({ id, refetch }: Props) {
   const [price, setPrice] = React.useState<number | null>(null);
 
   const [createGasPrice, { data, loading, error }] =
