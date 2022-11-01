@@ -18,7 +18,7 @@ Vi har noen bilder og grafikk i form av en graf som kjører en animasjon ved sta
 
 ## Fornuftige valg
 ### Komponenter
--Biblioteker
+Vi har valgt å skrive de fleste komponentene selv, og ikke brukt eksterne biblioteker i stor grad. Det finnes derimot noen tilfeller hvor vi har brukt eksterne bibliotek for å hente komponenter. Vi har brukt react icon biblioteket for å hente noen symboler til applikasjonen, som for eksempel i sidemenyen. Eksterne biblioteker for å slippe å lage sine egene komponenter kan være et godt alternativ for å få en godt utformet nettside som er kjent for brukeren. På den andre siden kan store biblioteker føre til mye ubrukt kode. 
 
 ### API
 
