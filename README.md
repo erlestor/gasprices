@@ -42,7 +42,7 @@ Vi har valgt å skrive de fleste komponentene selv, og ikke brukt eksterne bibli
 
 ### API
 
-I API'et vårt bruker vi **graphql** fremfor REST. Et vanlig problem med REST er at man enten henter inn for mye eller for lite data. Det kan være vanskelig å designe api'et slik at man kun henter den nødvendige dataen. Med graphql lager man queries som definerer akkurat hvilke data du ønsker å hente fra backend. Gjør man endringer på frontend som gjør at man trenger mer/mindre data enn før må man ofte skrive om endepunktet i REST. Med graphql kan man endre queriet istedenfor uten å måtte gjøre endringer på backend. Dette gjør at graphql er mer fleksibelt.
+I API'et vårt bruker vi **graphql** fremfor REST. Et vanlig problem med REST er at man enten henter inn for mye eller for lite data. Det kan være vanskelig å designe api'et slik at man kun henter den nødvendige dataen. Med graphql lager man queries som definerer akkurat hvilke data du ønsker å hente fra backend. Gjør man endringer på frontend som gjør at man trenger mer/mindre data enn før må man ofte skrive om endepunktet i REST. Med graphql kan man endre queriet istedenfor uten å måtte gjøre endringer på backend. Dette gjør at graphql er mer fleksibelt. Vi bruker Mongoose metoden limit som kan ha ytelsesproblemer ved ekstremt store datamengder. Med et par tusen som er kravet i oppgavebeskrivelsen, er det forøvrig ingen problem. Limit metoden kan ha ytelsesproblemer da MongoDB er en no-SQL database. 
 
 ### Dobbel lagring
 
