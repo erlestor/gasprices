@@ -9,8 +9,10 @@ import styles from "./gasStationPage.module.css";
 import PricesGraph from "./components/PricesGraph";
 
 export function GasStationPage() {
+  //The gas station id from the url
   const { id } = useParams();
 
+  //The query that fetches the gas station with the given id
   const { error, loading, data, refetch } = useQuery<GetGasStationData>(
     GET_GAS_STATION,
     {
@@ -20,8 +22,9 @@ export function GasStationPage() {
     }
   );
 
-  if (error) return <h1>error.message</h1>;
-
+  //The error message
+  if (error) return <h1>{error.message}</h1>;
+  //Loading
   if (loading) return <h1> {loading && <AiOutlineLoading3Quarters />}</h1>;
 
   return (

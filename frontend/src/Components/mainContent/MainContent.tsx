@@ -20,8 +20,6 @@ import { useEffect } from "react";
 import FilterEl from "./components/FilterEl";
 import { SearchInputEl } from "./components/SearchInputEl";
 
-
-
 export default function MainContent() {
   // Reactive variable used to track filter state
   const filterState = useReactiveVar(filterStateVar);
@@ -44,8 +42,7 @@ export default function MainContent() {
         sortDirection: filterState.sortDirection,
         limit,
       },
-    }
-  );
+    });
 
   useEffect(() => {
     endlessScrollHasMoreElementsVar(true);
@@ -67,7 +64,7 @@ export default function MainContent() {
     <main className={styles.main}>
       <div className={styles.filterDiv}>
         <SearchInputEl />
-        <FilterEl/>
+        <FilterEl />
       </div>
       {data && !loading ? (
         <InfiniteScroll

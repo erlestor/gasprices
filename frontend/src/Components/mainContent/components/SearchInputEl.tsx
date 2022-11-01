@@ -5,12 +5,16 @@ import styles from "./searchInputEl.module.css";
 import { useMemo, useState } from "react";
 
 export function SearchInputEl() {
-  const updateDebounceText = useMemo(() => debounce((text: string) => {
-    filterStateVar({
-      ...filterStateVar(),
-      nameSearch: text,
-    });
-  }, 400), []);
+  const updateDebounceText = useMemo(
+    () =>
+      debounce((text: string) => {
+        filterStateVar({
+          ...filterStateVar(),
+          nameSearch: text,
+        });
+      }, 400),
+    []
+  );
 
   const [searchInputValue, setSearchInputValue] = useState<string>("");
 

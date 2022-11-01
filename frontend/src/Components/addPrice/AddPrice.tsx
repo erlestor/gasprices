@@ -10,9 +10,7 @@ type Props = {
   refetch: (variables: { id: string }) => void;
 };
 
-
 export default function AddPrice({ id, refetch }: Props) {
-
   //The price that is set in the input field
   const [price, setPrice] = React.useState<number | null>(null);
 
@@ -42,7 +40,6 @@ export default function AddPrice({ id, refetch }: Props) {
     //clear the price state
     setPrice(null);
   };
-
 
   return (
     <div className={styles.wrapper}>

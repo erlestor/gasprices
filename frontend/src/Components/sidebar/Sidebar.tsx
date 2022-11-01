@@ -11,7 +11,7 @@ export default function SideBar() {
 
   // Reactive variable which tracks filter state
   const filterState = useReactiveVar(filterStateVar);
-  
+
   // used to display slider's current value
   const [maxPriceSliderValue, setMaxPriceSliderValue] = useState<number>(
     filterState.maxPrice
